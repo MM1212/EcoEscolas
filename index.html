@@ -79,11 +79,12 @@
 			<input type="text" placeholder="Turma" class="input" id="username_input">
 			<button class="input" id="submit_input">&rarr;</button>
 		</div>
+		    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 		    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 		<script>
 			$(function(){
 				const code = Math.floor((Math.random() * 1998) + 1); 
-			const socket = io.connect("http://localhost:3000/");	
+			const socket = io.connect();	
 			$(document).ready(function(){
 				
 	        $('#submit_input').click(function(){
@@ -95,7 +96,7 @@
 				}else{
 					socket.emit('add',{value:class_value}, code);
 					$("#username_input").val('')
-					
+					window.location = "http://localhost:3000/questions";
 					
 					//document.location.href = "http://localhost:3000/questions.html";
 					
