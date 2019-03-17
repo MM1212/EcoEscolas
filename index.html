@@ -79,7 +79,10 @@
 			<input type="text" placeholder="Turma" class="input" id="username_input">
 			<button class="input" id="submit_input">&rarr;</button>
 		</div>
+		    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 		<script>
+			$(function(){
+				const code = Math.floor((Math.random() * 1998) + 1); 
 			const socket = io.connect("http://localhost:3000/");	
 			$(document).ready(function(){
 				
@@ -90,7 +93,7 @@
 					alert("Valor Invalido")
 					$("#username_input").val('')
 				}else{
-					socket.emit('add',{value:class_value});
+					socket.emit('add',{value:class_value}, code);
 					$("#username_input").val('')
 					
 					
@@ -101,10 +104,12 @@
 				socket.on('err',function(data){
     			alert(data.err)
 				});
-			socket.on('startCourse',function(data){
-					alert("teste")
-				window.location = "http://localhost:3000/questions"
-				
+			socket.on('startCourse',function(target){
+
+				if(target == code){
+					alert("teste");
+				window.location = "http://localhost:3000/questions";
+				}
 				$("#username_input").val('')
 			});
 
@@ -122,7 +127,8 @@
 						}
 	
 					})
-			});		
+			});	
+			});	
 		</script>
 	</body>
 </html>

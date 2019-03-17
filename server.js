@@ -80,8 +80,10 @@ io.on('connection',function(socket){
 		increment("5",value)
 		
 	})
-	socket.on('add',function(data){
+	socket.on('add',function(data, code){
 		add(data.value);
+		var target = code;
+	socket.emit('startCourse', target);
 	});
 	socket.on('log',function(data){
 		console.log(data);
