@@ -73,8 +73,8 @@
 		<div class = "loading">
 			<a href="/questions"></a>
 			
-			<h1 id="big_title">R<span style="font-size: 25%">espeito </span>Ú<span style="font-size: 25%">nico </span>C<span style="font-size: 25%">omunitário </span>U<span style="font-size: 25%">niforme </span>L<span style="font-size: 25%">ivre </span>A<span style="font-size: 25%">mbiental</span></h1>
-		
+			<h1 id="big_title"><span style="font-size: 45%">Semear</span><span style="font-size: 25%"> o futuro</span></h1>
+	
 
 			<input type="text" placeholder="Turma" class="input" id="username_input">
 			<button class="input" id="submit_input">&rarr;</button>
@@ -96,7 +96,7 @@
 				}else{
 					socket.emit('add',{value:class_value}, code);
 					$("#username_input").val('')
-					window.location = "http://localhost:3000/questions";
+					window.location = "http://semearofuturo.herokuapp.com/questions";
 					
 					//document.location.href = "http://localhost:3000/questions.html";
 					
@@ -109,7 +109,7 @@
 
 				if(target == code){
 					alert("teste");
-				window.location = "http://localhost:3000/questions";
+				window.location = "http://semearofuturo.herokuapp.com/questions";
 				}
 				$("#username_input").val('')
 			});
