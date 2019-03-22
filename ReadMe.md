@@ -6,4 +6,4 @@ npm install express
 
 port 3000
 
-localhost:300
+localhost:3000
