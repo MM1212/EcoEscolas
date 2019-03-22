@@ -102,7 +102,8 @@
     			alert(data.err)
 				});
 			socket.on('startCourse',function(data){
-					alert("teste")
+				
+				socket.emit('passClass',{value:data.turma})
 				window.location = "http://localhost:3000/questions"
 				
 				$("#username_input").val('')

@@ -91,12 +91,24 @@
 		<script>
 
 			const socket = io();
+			var turma = "";
 			window.onload = function() {
-			
-					socket.emit('add',{value:"11C"});
-			}
+				socket.on('recieveClass',function(data){
+				
+				turma = data.turma || "";
 
-				var turma = "11C";
+
+				});
+			setTimeout(function(){
+					
+					if (turma == null || turma == ""){
+						window.location = "http://localhost:3000/"
+					}
+				},3000);	
+			}
+			
+
+				
 			
 			var questions = []
 			var currentQuestion = 0

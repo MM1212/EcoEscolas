@@ -32,7 +32,8 @@ function add(turma){
 
         }else{
 			con.query("INSERT IGNORE INTO main(turma,pontos) VALUES('"+turma+"','0')")
-			io.emit("startCourse")
+			var value = turma
+			io.emit("startCourse",{turma:value})
             console.log("Turma "+turma+ " adicionada com sucesso")
         }
     })
@@ -42,12 +43,12 @@ function add(turma){
 
 
 function increment(points,turma){
-	console.log(turma)
-	con.query("UPDATE main SET pontos = pontos + '"+String(points)+"' WHERE turma = '"+turma+"'")
+	
+	
     con.query("SELECT * FROM main WHERE turma = '"+turma+"'",function(err,result){
 		if (err) throw err;
         if (result[0] != null) {
-            
+			con.query("UPDATE main SET pontos = pontos + '"+String(points)+"' WHERE turma = '"+turma+"'")
         }else{
             console.log("Turma nao existe")
         }
@@ -65,7 +66,7 @@ server.listen(port, function(){
 
 //Links and stuuuff
 app.get('/', function(req, res){
-	res.sendFile('index.html', {root : __dirname})
+	res.sendFile('initialP.html', {root : __dirname})
 });
 
 
@@ -73,8 +74,14 @@ app.get('/questions', function(req, res){
 	res.sendFile(__dirname + '/questions.html')
 });
 
+app.get('/index', function(req, res){
+	res.sendFile(__dirname + '/index.html')
+});
+
 io.sockets.on('connection', newConnection);
+
 io.on('connection',function(socket){
+	
 	socket.on('points',function(value){
 		
 		increment("5",value)
@@ -83,6 +90,23 @@ io.on('connection',function(socket){
 	socket.on('add',function(data){
 		add(data.value);
 	});
+	socket.on('passClass',function(data){
+		
+		setTimeout(function(){
+			io.emit('recieveClass',{turma:data.value})
+		},2000);
+		
+	});
+	socket.on("getScoreboard",function(){
+		con.query("SELECT * FROM main ORDER BY pontos DESC",function(err,result){
+			if (err) throw err;
+			var txt = ""
+			for (var k = 0; k < 6; k++){
+				txt = txt + "Turma: " + result[k].turma + " | Pontos: " + result[k].pontos + "<br />";
+			}
+			socket.emit("recieveScoreBoard",{scoreboard:txt});
+		})
+	})
 	socket.on('log',function(data){
 		console.log(data);
 	});
