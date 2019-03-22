@@ -25,7 +25,7 @@ var io = require('socket.io').listen(server);
 
 var port = process.env.PORT || 3000;
 
-/*
+
 con.query("ALTER TABLE main ADD IF NOT EXISTS turma varchar(255) NOT NULL DEFAULT 'default'")
 
 function add(turma){
@@ -46,11 +46,6 @@ function add(turma){
     })
 
     
-}
-*/
-
-function add(turma){
-	arrayturmas.push(turma);
 }
 
 function increment(points,turma){
@@ -95,15 +90,15 @@ io.on('connection',function(socket){
 	
 	socket.on('points',function(value){
 		
-		//increment("5",value);
+		increment("5",value);
 		var index = arrayturmas.findIndex(arrayturmas => arrayturmas === turma);
 		arraypoints[index] += 1;
 		
 	})
-	socket.on('add',function(data, code){
-		//add(data.value);
-		var target = code;
-	socket.emit('startCourse', target);
+	socket.on('addClass',function(data,target){
+		add(data.value);
+		
+		socket.emit('startCourse',{},target);
 	});
 	socket.on('passClass',function(data){
 		

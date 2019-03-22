@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>RÚCULA</title>
+		<title>Semear o futuro</title>
 		
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
 		<script src="/socket.io/socket.io.js"></script>
 		
 		
@@ -80,11 +79,11 @@
 			<button class="input" id="submit_input">&rarr;</button>
 		</div>
 		    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-		    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 		<script>
 			$(function(){
 				const code = Math.floor((Math.random() * 1998) + 1); 
-			const socket = io.connect();	
+			const socket = io.connect();
+			
 			$(document).ready(function(){
 				
 	        $('#submit_input').click(function(){
@@ -93,10 +92,10 @@
 				if (class_value == "" || class_value == null){
 					alert("Valor Invalido")
 					$("#username_input").val('')
+					
 				}else{
-					socket.emit('add',{value:class_value}, code);
-					$("#username_input").val('')
-					window.location = "http://semearofuturo.herokuapp.com/questions";
+					socket.emit('addClass',{value:class_value},code);
+					
 					
 					//document.location.href = "http://localhost:3000/questions.html";
 					
@@ -105,21 +104,13 @@
 				socket.on('err',function(data){
     			alert(data.err)
 				});
-<<<<<<< HEAD
-			socket.on('startCourse',function(data){
-				
-				socket.emit('passClass',{value:data.turma})
-				window.location = "http://localhost:3000/questions"
-				
-=======
-			socket.on('startCourse',function(target){
-
-				if(target == code){
-					alert("teste");
-				window.location = "http://semearofuturo.herokuapp.com/questions";
+			socket.on('startCourse',function(data,target){
+				if (target == code){
+					socket.emit('passClass',{value:data.turma})
+					window.location = "http://localhost:3000/questions"
+					$("#username_input").val('')
 				}
->>>>>>> b7f332ec8fc54a86f168cf7bdcad5acbdf38816b
-				$("#username_input").val('')
+				
 			});
 
 
