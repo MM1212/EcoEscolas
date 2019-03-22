@@ -186,7 +186,7 @@
 					options:{
 						[0]:"Pesticidas",
 						[1]:"Agroquimicos",
-						[2]:"Não faço puta ideia",
+						[2]:"Água produzida em Chernobil",
 						[3]:"Nenhum dos outros"
 					},
 					right:2
@@ -261,9 +261,9 @@
 						
 					if (id == questions[currentlvl][currentQuestion].right) {
 						socket.emit('points',turma);
-						nextQuestion()
+						nextQuestion();
 					}else{
-						nextQuestion()
+						nextQuestion();
 					}
 
 				})

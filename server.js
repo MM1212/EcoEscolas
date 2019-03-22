@@ -8,8 +8,14 @@ var con = mysql.createConnection({
     host:"localhost",
     user:"root",
     database:"ecoescolas"
-})
+});
 
+
+// ok eu vou criar um array para guardar as coisas, mas é só até resolvermos a cena da BD
+//sorry
+
+var arraypoints = [];
+var arrayturmas = [];
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
@@ -19,6 +25,7 @@ var io = require('socket.io').listen(server);
 
 var port = process.env.PORT || 3000;
 
+/*
 con.query("ALTER TABLE main ADD IF NOT EXISTS turma varchar(255) NOT NULL DEFAULT 'default'")
 
 function add(turma){
@@ -40,7 +47,11 @@ function add(turma){
 
     
 }
+*/
 
+function add(turma){
+	arrayturmas.push(turma);
+}
 
 function increment(points,turma){
 	
@@ -84,11 +95,15 @@ io.on('connection',function(socket){
 	
 	socket.on('points',function(value){
 		
-		increment("5",value)
+		//increment("5",value);
+		var index = arrayturmas.findIndex(arrayturmas => arrayturmas === turma);
+		arraypoints[index] += 1;
 		
 	})
-	socket.on('add',function(data){
-		add(data.value);
+	socket.on('add',function(data, code){
+		//add(data.value);
+		var target = code;
+	socket.emit('startCourse', target);
 	});
 	socket.on('passClass',function(data){
 		

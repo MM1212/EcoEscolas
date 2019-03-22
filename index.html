@@ -73,14 +73,18 @@
 		<div class = "loading">
 			<a href="/questions"></a>
 			
-			<h1 id="big_title">R<span style="font-size: 25%">espeito </span>Ú<span style="font-size: 25%">nico </span>C<span style="font-size: 25%">omunitário </span>U<span style="font-size: 25%">niforme </span>L<span style="font-size: 25%">ivre </span>A<span style="font-size: 25%">mbiental</span></h1>
-		
+			<h1 id="big_title"><span style="font-size: 45%">Semear</span><span style="font-size: 25%"> o futuro</span></h1>
+	
 
 			<input type="text" placeholder="Turma" class="input" id="username_input">
 			<button class="input" id="submit_input">&rarr;</button>
 		</div>
+		    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+		    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 		<script>
-			const socket = io.connect("http://localhost:3000/");	
+			$(function(){
+				const code = Math.floor((Math.random() * 1998) + 1); 
+			const socket = io.connect();	
 			$(document).ready(function(){
 				
 	        $('#submit_input').click(function(){
@@ -90,9 +94,9 @@
 					alert("Valor Invalido")
 					$("#username_input").val('')
 				}else{
-					socket.emit('add',{value:class_value});
+					socket.emit('add',{value:class_value}, code);
 					$("#username_input").val('')
-					
+					window.location = "http://semearofuturo.herokuapp.com/questions";
 					
 					//document.location.href = "http://localhost:3000/questions.html";
 					
@@ -101,11 +105,20 @@
 				socket.on('err',function(data){
     			alert(data.err)
 				});
+<<<<<<< HEAD
 			socket.on('startCourse',function(data){
 				
 				socket.emit('passClass',{value:data.turma})
 				window.location = "http://localhost:3000/questions"
 				
+=======
+			socket.on('startCourse',function(target){
+
+				if(target == code){
+					alert("teste");
+				window.location = "http://semearofuturo.herokuapp.com/questions";
+				}
+>>>>>>> b7f332ec8fc54a86f168cf7bdcad5acbdf38816b
 				$("#username_input").val('')
 			});
 
@@ -123,7 +136,8 @@
 						}
 	
 					})
-			});		
+			});	
+			});	
 		</script>
 	</body>
 </html>
