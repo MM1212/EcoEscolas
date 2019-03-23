@@ -112,21 +112,6 @@
 				}
 				
 			});
-
-
-					$(".submit_button").click(function(){
-							
-							var id = $(this).attr('id'); // $(this) refers to button that was clicked
-							id = id.slice(7);
-							
-						if (id == questions[currentlvl][currentQuestion].right) {
-							socket.emit('points',turma);
-							nextQuestion()
-						}else{
-							nextQuestion()
-						}
-	
-					})
 			});	
 			});	
 		</script>

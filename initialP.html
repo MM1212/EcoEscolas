@@ -7,19 +7,28 @@
     <style>
 body{
     background-color:black;
+    background-image: url(http://www.fondox.net/wallpapers/bella-flor-2944.jpg);
 }
 .start-title {
     font-family: Calibri;
     position: flex;
 	font-size: 900%;
-    color: CadetBlue;
+    color: lavenderblush;
     text-align: center;
+    -webkit-text-stroke-width: 4px;
+   -webkit-text-stroke-color: black;
 }
 
 .scoreboard {
 	font-family: Calibri;
 	font-size: 2.5em;
-    color: white;
+    position: absolute;
+    left: 32%;
+    padding: 3px;
+    border: 3px solid rgba(0,0,0,0.25);
+    border-radius: 10%;
+background-color: rgba(0, 0, 0, 0.25);
+    color: lavender;
     text-align: center;
 }
 .bg {
@@ -34,7 +43,7 @@ body{
     </style>
     <body>
         <div class="bg">
-            <h1 class="start-title">SEMEAR O FUTURO</h1>
+            <h1 class="start-title"><b>SEMEAR O FUTURO</b></h1>
         
             <div class="scoreboard"TESTE></div>
         </div>
@@ -44,12 +53,19 @@ body{
     const socket = io();
     var backgrounds = [
         "http://s1.1zoom.me/b4851/342/Plants_Closeup_Drops_Foliage_512665_1920x1080.jpg",
-        "https://s2.best-wallpaper.net/wallpaper/1920x1080/1510/Plant-close-up-green-leaf-water-drops_1920x1080.jpg"
+        "https://s2.best-wallpaper.net/wallpaper/1920x1080/1510/Plant-close-up-green-leaf-water-drops_1920x1080.jpg",
+        "http://www.v3wall.com/wallpaper/1920_1080/1310/1920_1080_20131023013847858744.jpg",
+        "https://data2.1freewallpapers.com/download/dandelion-plant-stalk.jpg",
+        "http://www.fondox.net/wallpapers/bella-flor-2944.jpg",
+        "https://a-static.besthdwallpaper.com/planta-veneno-e-flor-papel-de-parede-1920x1080-9855_48.jpg"
     ]
     function background() {
         var bg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+        
         $('.bg').fadeOut('slow', function () {
         $('.bg').css({ 'background-image': 'url('+bg+')' });
+        $('body').css("background-image","url()")
+        $('body').css("background-color","Black")
         $('.bg').fadeIn('slow');
     });
     }
