@@ -5,11 +5,11 @@
 //var app = express();
 var mysql = require('mysql');
 var con = mysql.createConnection({
-	host: "ec2-54-247-85-251.eu-west-1.compute.amazonaws.com",
+	host: "ec2-54-228-243-238.eu-west-1.compute.amazonaws.com",
 	port: "5432",
-    user: "ahldhajsuiczjh",
-	password:"42c987f7205d9ac5725f053a26421a857f2c5dbc498e78d190e2358ff97e821e",
-	database:"d2slusrirabf84"
+    user: "kdrzimizeyhgdq",
+	password:"41810520867a4dadbab35340dbb518b04d7d1f41d20b26bbf761b859624c7bec",
+	database:"d1ucgtr0o6rs1r"
 });
 
 
@@ -27,7 +27,7 @@ var io = require('socket.io').listen(server);
 
 var port = process.env.PORT || 3000;
 
-con.query("CREATE TABLE IF NOT EXISTS main();")
+con.query("CREATE TABLE IF NOT EXISTS main(turma varchar(255),pontos INT);")
 con.query("CREATE TABLE IF NOT EXISTS gelados();")
 con.query("ALTER TABLE main ADD IF NOT EXISTS turma varchar(255) NOT NULL DEFAULT 'default'")
 con.query("ALTER TABLE gelados ADD IF NOT EXISTS gelados INT NOT NULL DEFAULT '0'")
