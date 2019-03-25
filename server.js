@@ -39,17 +39,17 @@ var io = require('socket.io').listen(server);
 var port = process.env.PORT || 3000;
 
 con.query("CREATE TABLE IF NOT EXISTS main(turma varchar(255),pontos INT);")
-con.close();
+con.end();
 con.query("CREATE TABLE IF NOT EXISTS gelados();")
-con.close();
+con.end();
 con.query("ALTER TABLE main ADD IF NOT EXISTS turma varchar(255) NOT NULL DEFAULT 'default'")
-con.close();
+con.end();
 con.query("ALTER TABLE gelados ADD IF NOT EXISTS gelados INT NOT NULL DEFAULT '0'")
-con.close();
+con.end();
 con.query("ALTER TABLE gelados ADD IF NOT EXISTS money INT NOT NULL DEFAULT '0'")
-con.close();
+con.end();
 con.query("ALTER TABLE gelados ADD IF NOT EXISTS type INT NOT NULL DEFAULT '0'")
-con.close();
+con.end();
 
 function add(turma,target){
 
@@ -58,14 +58,14 @@ function add(turma,target){
         if (result[0]) {
 			//alert("Turma ja adicionada")
 			io.emit('err',{err:"Turma ja adicionada!"});
-			con.close();
+			con.end();
 
         }else{
 			con.query("INSERT IGNORE INTO main(turma,pontos) VALUES('"+turma+"','0')")
 			var value = turma
 			io.emit("startCourse",{turma:value},target)
 			console.log("Turma "+turma+ " adicionada com sucesso")
-			con.close();
+			con.end();
         }
     })
 
@@ -79,10 +79,10 @@ function increment(points,turma){
 		if (err) throw err;
         if (result[0] != null) {
 			con.query("UPDATE main SET pontos = pontos + '"+String(points)+"' WHERE turma = '"+turma+"'")
-			con.close();
+			con.end();
         }else{
 			console.log("Turma nao existe")
-			con.close();
+			con.end();
         }
     })
 }
@@ -90,9 +90,9 @@ function increment(points,turma){
 
 function new_iceCream(){
 	con.query("UPDATE gelados SET gelados = gelados + '1' WHERE type = '0'")
-	con.close();
+	con.end();
 	con.query("UPDATE gelados SET money = money + '1' WHERE type = '0'")	
-	con.close();
+	con.end();
 }
 
 
@@ -154,7 +154,7 @@ io.on('connection',function(socket){
 				
 			}
 			socket.emit("recieveScoreBoard",{scoreboard:txt});
-			con.close();
+			con.end();
 		})
 	})
 	socket.on("getIceCreams",function(){
@@ -162,10 +162,10 @@ io.on('connection',function(socket){
 			if (err) throw err;
 			if (result[0]){
 				socket.emit("recieveIceCreams",{iceCreams:result[0].gelados});
-				con.close();
+				con.end();
 			}else{
 				socket.emit("recieveIceCreams",{});
-				con.close();
+				con.end();
 			}
 			
 		})
@@ -175,10 +175,10 @@ io.on('connection',function(socket){
 			if (err) throw err;
 			if (result[0]){
 				socket.emit("recieveIceCreamsMoney",{iceCreams:result[0].money});
-				con.close();
+				con.end();
 			}else{
 				socket.emit("recieveIceCreamsMoney",{});
-				con.close();
+				con.end();
 			}
 			
 		})
