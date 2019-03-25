@@ -5,9 +5,9 @@
 //var app = express();
 var mysql = require('mysql');
 var con = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    database:"ecoescolas"
+    host:"42c987f7205d9ac5725f053a26421a857f2c5dbc498e78d190e2358ff97e821e",
+    user:"ahldhajsuiczjh",
+    database:"d2slusrirabf84"
 });
 
 
