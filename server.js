@@ -3,6 +3,7 @@
 //var socket = require('socket.io')
 
 //var app = express();
+/*
 var mysql = require('mysql');
 var con = mysql.createConnection({
 	host: "ec2-54-228-243-238.eu-west-1.compute.amazonaws.com",
@@ -11,7 +12,17 @@ var con = mysql.createConnection({
 	password:"41810520867a4dadbab35340dbb518b04d7d1f41d20b26bbf761b859624c7bec",
 	database:"d1ucgtr0o6rs1r"
 });
+*/
 
+
+const { Client } = require('pg');
+
+const con = new Client({
+  connectionString: "postgres://kdrzimizeyhgdq:41810520867a4dadbab35340dbb518b04d7d1f41d20b26bbf761b859624c7bec@ec2-54-228-243-238.eu-west-1.compute.amazonaws.com:5432/d1ucgtr0o6rs1r",
+  ssl: true,
+});
+
+con.connect();
 
 // ok eu vou criar um array para guardar as coisas, mas é só até resolvermos a cena da BD
 //sorry
@@ -28,11 +39,17 @@ var io = require('socket.io').listen(server);
 var port = process.env.PORT || 3000;
 
 con.query("CREATE TABLE IF NOT EXISTS main(turma varchar(255),pontos INT);")
+con.close();
 con.query("CREATE TABLE IF NOT EXISTS gelados();")
+con.close();
 con.query("ALTER TABLE main ADD IF NOT EXISTS turma varchar(255) NOT NULL DEFAULT 'default'")
+con.close();
 con.query("ALTER TABLE gelados ADD IF NOT EXISTS gelados INT NOT NULL DEFAULT '0'")
+con.close();
 con.query("ALTER TABLE gelados ADD IF NOT EXISTS money INT NOT NULL DEFAULT '0'")
+con.close();
 con.query("ALTER TABLE gelados ADD IF NOT EXISTS type INT NOT NULL DEFAULT '0'")
+con.close();
 
 function add(turma,target){
 
@@ -41,13 +58,14 @@ function add(turma,target){
         if (result[0]) {
 			//alert("Turma ja adicionada")
 			io.emit('err',{err:"Turma ja adicionada!"});
-			
+			con.close();
 
         }else{
 			con.query("INSERT IGNORE INTO main(turma,pontos) VALUES('"+turma+"','0')")
 			var value = turma
 			io.emit("startCourse",{turma:value},target)
-            console.log("Turma "+turma+ " adicionada com sucesso")
+			console.log("Turma "+turma+ " adicionada com sucesso")
+			con.close();
         }
     })
 
@@ -61,8 +79,10 @@ function increment(points,turma){
 		if (err) throw err;
         if (result[0] != null) {
 			con.query("UPDATE main SET pontos = pontos + '"+String(points)+"' WHERE turma = '"+turma+"'")
+			con.close();
         }else{
-            console.log("Turma nao existe")
+			console.log("Turma nao existe")
+			con.close();
         }
     })
 }
@@ -70,7 +90,9 @@ function increment(points,turma){
 
 function new_iceCream(){
 	con.query("UPDATE gelados SET gelados = gelados + '1' WHERE type = '0'")
+	con.close();
 	con.query("UPDATE gelados SET money = money + '1' WHERE type = '0'")	
+	con.close();
 }
 
 
@@ -129,8 +151,10 @@ io.on('connection',function(socket){
 			var txt = ""
 			for (var k = 0; k < 6; k++){
 				txt = txt + "Turma: " + result[k].turma + " | Pontos: " + result[k].pontos + "<br />";
+				
 			}
 			socket.emit("recieveScoreBoard",{scoreboard:txt});
+			con.close();
 		})
 	})
 	socket.on("getIceCreams",function(){
@@ -138,8 +162,10 @@ io.on('connection',function(socket){
 			if (err) throw err;
 			if (result[0]){
 				socket.emit("recieveIceCreams",{iceCreams:result[0].gelados});
+				con.close();
 			}else{
 				socket.emit("recieveIceCreams",{});
+				con.close();
 			}
 			
 		})
@@ -149,8 +175,10 @@ io.on('connection',function(socket){
 			if (err) throw err;
 			if (result[0]){
 				socket.emit("recieveIceCreamsMoney",{iceCreams:result[0].money});
+				con.close();
 			}else{
 				socket.emit("recieveIceCreamsMoney",{});
+				con.close();
 			}
 			
 		})
