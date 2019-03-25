@@ -57,16 +57,16 @@ function add(turma,target){
      //   if (err) console.log(err);
       //  if (result[0]) {
 			//alert("Turma ja adicionada")
-			io.emit('err',{err:"Turma ja adicionada!"});
+//			io.emit('err',{err:"Turma ja adicionada!"});
 		//	con.end();
 
   //      }else{
 			//con.query("INSERT IGNORE INTO main(turma,pontos) VALUES('"+turma+"','0')")
-			var value = turma
-			io.emit("startCourse",{turma:value},target)
-			console.log("Turma "+turma+ " adicionada com sucesso")
-			con.end();
-        }
+	//		var value = turma
+//			io.emit("startCourse",{turma:value},target)
+//			console.log("Turma "+turma+ " adicionada com sucesso")
+		//	con.end();
+  //      }
   //  })
 
     
