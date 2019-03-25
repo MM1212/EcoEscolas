@@ -39,17 +39,17 @@ var io = require('socket.io').listen(server);
 var port = process.env.PORT || 3000;
 
 con.query("CREATE TABLE IF NOT EXISTS main(turma varchar(255),pontos INT);")
-con.end();
+
 con.query("CREATE TABLE IF NOT EXISTS gelados();")
-con.end();
+
 con.query("ALTER TABLE main ADD IF NOT EXISTS turma varchar(255) NOT NULL DEFAULT 'default'")
-con.end();
+
 con.query("ALTER TABLE gelados ADD IF NOT EXISTS gelados INT NOT NULL DEFAULT '0'")
-con.end();
+
 con.query("ALTER TABLE gelados ADD IF NOT EXISTS money INT NOT NULL DEFAULT '0'")
-con.end();
+
 con.query("ALTER TABLE gelados ADD IF NOT EXISTS type INT NOT NULL DEFAULT '0'")
-con.end();
+
 
 function add(turma,target){
 
