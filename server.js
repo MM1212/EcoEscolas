@@ -25,7 +25,8 @@ var io = require('socket.io').listen(server);
 
 var port = process.env.PORT || 3000;
 
-
+con.query("CREATE TABLE IF NOT EXISTS main();")
+con.query("CREATE TABLE IF NOT EXISTS gelados();")
 con.query("ALTER TABLE main ADD IF NOT EXISTS turma varchar(255) NOT NULL DEFAULT 'default'")
 con.query("ALTER TABLE gelados ADD IF NOT EXISTS gelados INT NOT NULL DEFAULT '0'")
 con.query("ALTER TABLE gelados ADD IF NOT EXISTS money INT NOT NULL DEFAULT '0'")
