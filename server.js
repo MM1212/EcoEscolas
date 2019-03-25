@@ -27,8 +27,11 @@ var port = process.env.PORT || 3000;
 
 
 con.query("ALTER TABLE main ADD IF NOT EXISTS turma varchar(255) NOT NULL DEFAULT 'default'")
+con.query("ALTER TABLE gelados ADD IF NOT EXISTS gelados INT NOT NULL DEFAULT '0'")
+con.query("ALTER TABLE gelados ADD IF NOT EXISTS money INT NOT NULL DEFAULT '0'")
+con.query("ALTER TABLE gelados ADD IF NOT EXISTS type INT NOT NULL DEFAULT '0'")
 
-function add(turma){
+function add(turma,target){
 
     con.query("SELECT * FROM main WHERE turma = '"+turma+"'",function(err,result){
         if (err) console.log(err);
@@ -40,7 +43,7 @@ function add(turma){
         }else{
 			con.query("INSERT IGNORE INTO main(turma,pontos) VALUES('"+turma+"','0')")
 			var value = turma
-			io.emit("startCourse",{turma:value})
+			io.emit("startCourse",{turma:value},target)
             console.log("Turma "+turma+ " adicionada com sucesso")
         }
     })
@@ -62,6 +65,10 @@ function increment(points,turma){
 }
 
 
+function new_iceCream(){
+	con.query("UPDATE gelados SET gelados = gelados + '1' WHERE type = '0'")
+	con.query("UPDATE gelados SET money = money + '1' WHERE type = '0'")	
+}
 
 
 
@@ -72,16 +79,24 @@ server.listen(port, function(){
 
 //Links and stuuuff
 app.get('/', function(req, res){
-	res.sendFile('initialP.html', {root : __dirname})
+	res.sendFile('pages/initialP.html', {root : __dirname})
 });
 
 
-app.get('/questions', function(req, res){
-	res.sendFile(__dirname + '/questions.html')
+app.get('/questoesbonitas', function(req, res){
+	res.sendFile(__dirname + '/pages/questions.html')
 });
 
-app.get('/index', function(req, res){
-	res.sendFile(__dirname + '/index.html')
+app.get('/inicio', function(req, res){
+	res.sendFile(__dirname + '/pages/index.html')
+});
+
+app.get('/gelados', function(req, res){
+	res.sendFile(__dirname + '/pages/geladosMain.html')
+});
+
+app.get('/gelados/manage', function(req, res){
+	res.sendFile(__dirname + '/pages/geladosManage.html')
 });
 
 io.sockets.on('connection', newConnection);
@@ -96,15 +111,13 @@ io.on('connection',function(socket){
 		
 	})
 	socket.on('addClass',function(data,target){
-		add(data.value);
-		
-		socket.emit('startCourse',{},target);
+		add(data.value,target);
 	});
-	socket.on('passClass',function(data){
+	socket.on('passClass',function(data,code){
 		
 		setTimeout(function(){
-			io.emit('recieveClass',{turma:data.value})
-		},2000);
+			socket.emit('recieveClass',{turma:data.value},code)
+		},20);
 		
 	});
 	socket.on("getScoreboard",function(){
@@ -116,6 +129,31 @@ io.on('connection',function(socket){
 			}
 			socket.emit("recieveScoreBoard",{scoreboard:txt});
 		})
+	})
+	socket.on("getIceCreams",function(){
+		con.query("SELECT gelados FROM gelados WHERE type = '0'",function(err,result){
+			if (err) throw err;
+			if (result[0]){
+				socket.emit("recieveIceCreams",{iceCreams:result[0].gelados});
+			}else{
+				socket.emit("recieveIceCreams",{});
+			}
+			
+		})
+	})
+	socket.on("getIceCreamsMoney",function(){
+		con.query("SELECT money FROM gelados WHERE type = '0'",function(err,result){
+			if (err) throw err;
+			if (result[0]){
+				socket.emit("recieveIceCreamsMoney",{iceCreams:result[0].money});
+			}else{
+				socket.emit("recieveIceCreamsMoney",{});
+			}
+			
+		})
+	})
+	socket.on("setIceCreamsMoney",function(){
+		new_iceCream();
 	})
 	socket.on('log',function(data){
 		console.log(data);

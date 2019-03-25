@@ -12,7 +12,7 @@ body{
 .start-title {
     font-family: Calibri;
     position: flex;
-	font-size: 900%;
+	font-size: 1000%;
     color: lavenderblush;
     text-align: center;
     -webkit-text-stroke-width: 4px;
@@ -21,13 +21,18 @@ body{
 
 .scoreboard {
 	font-family: Calibri;
-	font-size: 2.5em;
-    position: absolute;
-    left: 32%;
+    color: lavender;
+    text-align: center;
+}
+.scoreboard-txt {
+    position: flex;
+	font-family: Arial, black;
+    font-style: bold;
+	font-size: 300%;
+    
     padding: 3px;
-    border: 3px solid rgba(0,0,0,0.25);
-    border-radius: 10%;
-background-color: rgba(0, 0, 0, 0.25);
+    -webkit-text-stroke-width: 3px;
+   -webkit-text-stroke-color: black;
     color: lavender;
     text-align: center;
 }
@@ -44,8 +49,12 @@ background-color: rgba(0, 0, 0, 0.25);
     <body>
         <div class="bg">
             <h1 class="start-title"><b>SEMEAR O FUTURO</b></h1>
-        
-            <div class="scoreboard"TESTE></div>
+            <div class="scoreboard">
+                <span class="border"><h2><div class="scoreboard-txt"></div></h2></span>
+            </div>
+                
+            
+            
         </div>
  
     </body>
@@ -64,8 +73,8 @@ background-color: rgba(0, 0, 0, 0.25);
         
         $('.bg').fadeOut('slow', function () {
         $('.bg').css({ 'background-image': 'url('+bg+')' });
-        $('body').css("background-image","url()")
-        $('body').css("background-color","Black")
+        $('body').css({ 'background-image': 'url('+bg+')' });
+        
         $('.bg').fadeIn('slow');
     });
     }
@@ -78,7 +87,12 @@ background-color: rgba(0, 0, 0, 0.25);
         
             socket.emit("getScoreboard",{})
             socket.on("recieveScoreBoard",function(data){
-                $(".scoreboard").html(data.scoreboard);
+                if (data.scoreboard == null || data.scoreboard == ""){
+                    $(".scoreboard-txt").html("");
+                }else{
+                    $(".scoreboard-txt").html(data.scoreboard);
+                }
+                
             })
         })
     </script>

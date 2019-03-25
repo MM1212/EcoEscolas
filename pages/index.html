@@ -42,7 +42,6 @@
 	font-size: 1.8em;
 	font-family: Helvetica;
 	text-align: center;
-	
 }
 
 .submit_button:hover {
@@ -66,16 +65,34 @@
 #username_input {
 	border-left: 6px solid CadetBlue;
 }
+
+.info {
+	position: absolute;
+	background-color: rgb(38,38,38);
+	min-width: 1%;
+	border: 1px solid cadetblue;
+	border-right: 4px solid cadetblue;
+	border-radius: 3px;
+	color: Lavender;
+	top: 1%;
+	font-size: 1.2em;
+	font-family: Bahnschrift;
+	user-select: none;
+	text-align: left;
+	display: none;
+	transition: transform 0.3s;
+}
+
 		</style>
 	</head>
 	<body>
 		<div class = "loading">
-			<a href="/questions"></a>
 			
-			<h1 id="big_title"><span style="font-size: 45%">Semear</span><span style="font-size: 25%"> o futuro</span></h1>
-	
+			
+			<h1 id="big_title"><span style="font-size: 60%">SEMEAR</span><span style="font-size: 40%"> O FUTURO</span></h1>
+			<div class="info"></div>
 
-			<input type="text" placeholder="Turma" class="input" id="username_input">
+			<input type="text" placeholder="Turma" class="input" id="username_input" autocomplete="off">
 			<button class="input" id="submit_input">&rarr;</button>
 		</div>
 		    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -83,14 +100,33 @@
 			$(function(){
 				const code = Math.floor((Math.random() * 1998) + 1); 
 			const socket = io.connect();
-			
+				function message(msg){
+					$(".info").html(msg);
+					$(".info").css('display', 'flex');
+					$(".info").animate({
+						top: "1%",
+						opacity: "1.0"
+						},
+						1000, function() {
+							setTimeout(function(){
+								$(".info").animate({
+									top: "-50%",
+									opacity: "0.0"
+									},
+									1000, function() {
+										$(".info").css('display', 'none');
+										
+								});
+							},3000);
+						});
+					}
 			$(document).ready(function(){
 				
 	        $('#submit_input').click(function(){
 				//alert($("#username_input").val())
 				var class_value = $("#username_input").val();
 				if (class_value == "" || class_value == null){
-					alert("Valor Invalido")
+					message("Valor Invalido")
 					$("#username_input").val('')
 					
 				}else{
@@ -102,12 +138,13 @@
 				}
 			});	
 				socket.on('err',function(data){
-    			alert(data.err)
+    			message(data.err);
 				});
 			socket.on('startCourse',function(data,target){
 				if (target == code){
-					socket.emit('passClass',{value:data.turma})
-					window.location = "http://localhost:3000/questions"
+					socket.emit('passClass',{value:data.turma},code)
+					console.log("ola")
+					window.location = "http://localhost:3000/questoesbonitas"
 					$("#username_input").val('')
 				}
 				

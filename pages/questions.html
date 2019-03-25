@@ -93,9 +93,11 @@
 			const socket = io();
 			var turma = "";
 			window.onload = function() {
-				socket.on('recieveClass',function(data){
+				socket.on('recieveClass',function(data,target){
+				//if (target == code) {
+					turma = data.turma || "";
+				//}
 				
-				turma = data.turma || "";
 
 
 				});

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
+		<script src="/socket.io/socket.io.js"></script>
+    <link type="stylesheet" href="styles.css">
+    <style>
+body{
+    background-image: url("https://a-static.besthdwallpaper.com/gelado-de-morango-framboesa-papel-de-parede-1920x1080-3293_48.jpg");
+    user-select: none;
+}
+.start-title {
+    font-family: Calibri;
+    position: flex;
+	font-size: 1000%;
+    color: lavenderblush;
+    text-align: center;
+    -webkit-text-stroke-width: 4px;
+   -webkit-text-stroke-color: black;
+}
+
+.iceCreams {
+	font-family: Calibri;
+    color: lavender;
+    text-align: center;
+    position: flex;
+	font-family: Arial, black;
+    font-style: bold;
+	font-size: 300%;
+    -webkit-text-stroke-width: 2px;
+   -webkit-text-stroke-color: black;
+    padding: 3px;
+    color: lavender;
+    text-align: center;
+}
+.bg {
+	opacity: 1;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+	background-size: cover;
+	background-position: center center;
+    z-index: 1;
+}
+    </style>
+    <body>
+        <div class="bg">
+            <h1 class="start-title"><b>GELADOS</b></h1>
+            <h2><div class="iceCreams">123</div></h2>
+                
+            
+            
+        </div>
+ 
+    </body>
+    <script type="text/javascript">
+    const socket = io();
+    
+
+        $(document).ready(function(){
+            socket.emit("getIceCreams",{})
+            socket.on("recieveIceCreams",function(data){
+                if (data.iceCreams == null || data.iceCreams == ""){
+                    $(".iceCreams").html("0 Gelados");
+                }else{
+                    $(".iceCreams").html(String(data.iceCreams) + " Gelados");
+                }
+                
+            })
+        })
+    </script>
+</html>

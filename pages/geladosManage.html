@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
+		<script src="/socket.io/socket.io.js"></script>
+    <link type="stylesheet" href="styles.css">
+    <style>
+body{
+    background-color:cadetblue;
+    user-select: none;
+}
+.start-title {
+    font-family: Calibri;
+    position: flex;
+	font-size: 1000%;
+    color: lavenderblush;
+    text-align: center;
+    -webkit-text-stroke-width: 4px;
+   -webkit-text-stroke-color: black;
+}
+
+.iceCreams {
+	font-family: Calibri;
+    color: lavender;
+    text-align: center;
+    position: flex;
+	font-family: Arial, black;
+    font-style: bold;
+	font-size: 300%;
+    -webkit-text-stroke-width: 2px;
+   -webkit-text-stroke-color: black;
+    padding: 3px;
+    color: lavender;
+    text-align: center;
+}
+.bg {
+	opacity: 1;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+	background-size: cover;
+	background-position: center center;
+    z-index: 1;
+}
+#message{
+    position: flex;
+    top: 20px;
+    padding: 25px 40px;
+    font-size: 20px;
+    font-family: Calibri;
+    font-style: bold;
+    color: white;
+    display: none;
+    
+    text-align: center;
+    background-color: chartreuse;
+}
+
+.add {
+    position: absolute;
+    left: 38%;
+	width: 400px;
+	height: 100px;
+	margin: 20px;
+	cursor: pointer;
+	transition: transform 0.3s;
+	background-color: cadetblue;
+	border: 4px solid lavender;
+	padding: 10px;
+	border-radius: 4px;
+	font-size: 2.8em;
+	font-family: Calibri;
+	text-align: center;
+}
+
+.add:hover {
+	transform: scale(1.1, 1.1);
+	background-color: rgb(255, 255, 255);
+}
+    </style>
+    <body>
+        <div class="bg">
+            <div id="message"></div>
+            <h1 class="start-title"><b>GELADOS</b></h1>
+            <h2><div class="iceCreams"><span class="money-txt">0</span><span>€</span></div></h2>
+            <button class="add"><b>ADICIONAR</b></button>
+            
+            
+        </div>
+ 
+    </body>
+    <script type="text/javascript">
+    const socket = io();
+    
+
+        $(document).ready(function(){
+            socket.emit("getIceCreamsMoney",{})
+            socket.on("recieveIceCreamsMoney",function(data){
+                if (data.iceCreams == null || data.iceCreams == ""){
+                    $(".money-txt").html("0");
+                }else{
+                    $(".money-txt").html(String(data.iceCreams));
+                }
+                
+            })
+            $('.add').click(function(){
+                socket.emit("setIceCreamsMoney",{})
+                setTimeout(function(){
+                    socket.emit("getIceCreamsMoney",{})
+                    socket.emit("getIceCreams",{})
+                },100);
+                
+                
+                $("#message").html("Gelado adicionado com sucesso")
+                $("#message").fadeIn().delay(5000).fadeOut();
+            })
+        })
+    </script>
+</html>
