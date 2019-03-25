@@ -62,8 +62,8 @@ function add(turma,target){
 
   //      }else{
 			//con.query("INSERT IGNORE INTO main(turma,pontos) VALUES('"+turma+"','0')")
-	//		var value = turma
-//			io.emit("startCourse",{turma:value},target)
+			var value = turma
+			io.emit("startCourse",{turma:value},target)
 //			console.log("Turma "+turma+ " adicionada com sucesso")
 		//	con.end();
   //      }
