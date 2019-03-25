@@ -38,36 +38,36 @@ var io = require('socket.io').listen(server);
 
 var port = process.env.PORT || 3000;
 
-con.query("CREATE TABLE IF NOT EXISTS main(turma varchar(255),pontos INT);")
+//con.query("CREATE TABLE IF NOT EXISTS main(turma varchar(255),pontos INT);")
 
-con.query("CREATE TABLE IF NOT EXISTS gelados();")
+//con.query("CREATE TABLE IF NOT EXISTS gelados();")
 
-con.query("ALTER TABLE main ADD IF NOT EXISTS turma varchar(255) NOT NULL DEFAULT 'default'")
+//con.query("ALTER TABLE main ADD IF NOT EXISTS turma varchar(255) NOT NULL DEFAULT 'default'")
 
-con.query("ALTER TABLE gelados ADD IF NOT EXISTS gelados INT NOT NULL DEFAULT '0'")
+//con.query("ALTER TABLE gelados ADD IF NOT EXISTS gelados INT NOT NULL DEFAULT '0'")
 
-con.query("ALTER TABLE gelados ADD IF NOT EXISTS money INT NOT NULL DEFAULT '0'")
+//con.query("ALTER TABLE gelados ADD IF NOT EXISTS money INT NOT NULL DEFAULT '0'")
 
-con.query("ALTER TABLE gelados ADD IF NOT EXISTS type INT NOT NULL DEFAULT '0'")
+//con.query("ALTER TABLE gelados ADD IF NOT EXISTS type INT NOT NULL DEFAULT '0'")
 
 
 function add(turma,target){
 
-    con.query("SELECT * FROM main WHERE turma = '"+turma+"'",function(err,result){
-        if (err) console.log(err);
-        if (result[0]) {
+    //con.query("SELECT * FROM main WHERE turma = '"+turma+"'",function(err,result){
+     //   if (err) console.log(err);
+      //  if (result[0]) {
 			//alert("Turma ja adicionada")
 			io.emit('err',{err:"Turma ja adicionada!"});
-			con.end();
+		//	con.end();
 
-        }else{
-			con.query("INSERT IGNORE INTO main(turma,pontos) VALUES('"+turma+"','0')")
+  //      }else{
+			//con.query("INSERT IGNORE INTO main(turma,pontos) VALUES('"+turma+"','0')")
 			var value = turma
 			io.emit("startCourse",{turma:value},target)
 			console.log("Turma "+turma+ " adicionada com sucesso")
 			con.end();
         }
-    })
+  //  })
 
     
 }
@@ -75,24 +75,24 @@ function add(turma,target){
 function increment(points,turma){
 	
 	
-    con.query("SELECT * FROM main WHERE turma = '"+turma+"'",function(err,result){
-		if (err) throw err;
-        if (result[0] != null) {
-			con.query("UPDATE main SET pontos = pontos + '"+String(points)+"' WHERE turma = '"+turma+"'")
-			con.end();
-        }else{
-			console.log("Turma nao existe")
-			con.end();
-        }
-    })
+   // con.query("SELECT * FROM main WHERE turma = '"+turma+"'",function(err,result){
+//		if (err) throw err;
+ //       if (result[0] != null) {
+//			con.query("UPDATE main SET pontos = pontos + '"+String(points)+"' WHERE turma = '"+turma+"'")
+//			con.end();
+ //       }else{
+	//		console.log("Turma nao existe")
+//			con.end();
+ //       }
+  //  })
 }
 
 
 function new_iceCream(){
-	con.query("UPDATE gelados SET gelados = gelados + '1' WHERE type = '0'")
-	con.end();
-	con.query("UPDATE gelados SET money = money + '1' WHERE type = '0'")	
-	con.end();
+//	con.query("UPDATE gelados SET gelados = gelados + '1' WHERE type = '0'")
+//	con.end();
+//	con.query("UPDATE gelados SET money = money + '1' WHERE type = '0'")	
+//	con.end();
 }
 
 
@@ -146,42 +146,42 @@ io.on('connection',function(socket){
 		
 	});
 	socket.on("getScoreboard",function(){
-		con.query("SELECT * FROM main ORDER BY pontos DESC",function(err,result){
-			if (err) throw err;
-			var txt = ""
-			for (var k = 0; k < 6; k++){
-				txt = txt + "Turma: " + result[k].turma + " | Pontos: " + result[k].pontos + "<br />";
-				
-			}
-			socket.emit("recieveScoreBoard",{scoreboard:txt});
-			con.end();
-		})
+	//	con.query("SELECT * FROM main ORDER BY pontos DESC",function(err,result){
+	//		if (err) throw err;
+	//		var txt = ""
+	//		for (var k = 0; k < 6; k++){
+	//			txt = txt + "Turma: " + result[k].turma + " | Pontos: " + result[k].pontos + "<br />";
+	//			
+	//		}
+	//		socket.emit("recieveScoreBoard",{scoreboard:txt});
+	//		con.end();
+	//	})
 	})
 	socket.on("getIceCreams",function(){
-		con.query("SELECT gelados FROM gelados WHERE type = '0'",function(err,result){
-			if (err) throw err;
-			if (result[0]){
-				socket.emit("recieveIceCreams",{iceCreams:result[0].gelados});
-				con.end();
-			}else{
-				socket.emit("recieveIceCreams",{});
-				con.end();
-			}
-			
-		})
+	//	con.query("SELECT gelados FROM gelados WHERE type = '0'",function(err,result){
+	//		if (err) throw err;
+	//		if (result[0]){
+	//			socket.emit("recieveIceCreams",{iceCreams:result[0].gelados});
+	//			con.end();
+	//		}else{
+	//			socket.emit("recieveIceCreams",{});
+//				con.end();
+	////		}
+//			
+	//	})
 	})
 	socket.on("getIceCreamsMoney",function(){
-		con.query("SELECT money FROM gelados WHERE type = '0'",function(err,result){
-			if (err) throw err;
-			if (result[0]){
-				socket.emit("recieveIceCreamsMoney",{iceCreams:result[0].money});
-				con.end();
-			}else{
-				socket.emit("recieveIceCreamsMoney",{});
-				con.end();
-			}
+//		con.query("SELECT money FROM gelados WHERE type = '0'",function(err,result){
+//			if (err) throw err;
+//			if (result[0]){
+//				socket.emit("recieveIceCreamsMoney",{iceCreams:result[0].money});
+	//			con.end();
+//			}else{
+//				socket.emit("recieveIceCreamsMoney",{});
+//				con.end();
+////			}
 			
-		})
+//		})
 	})
 	socket.on("setIceCreamsMoney",function(){
 		new_iceCream();
