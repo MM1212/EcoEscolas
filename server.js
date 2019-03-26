@@ -54,7 +54,7 @@ var port = process.env.PORT || 3000;
 function add(turma,target){
 
     //con.query("SELECT * FROM main WHERE turma = '"+turma+"'",function(err,result){
-     //   if (err) console.log(err);
+       if (err) console.log(err);
       //  if (result[0]) {
 			//alert("Turma ja adicionada")
 //			io.emit('err',{err:"Turma ja adicionada!"});
@@ -89,8 +89,7 @@ function increment(points,turma){
 
 
 function new_iceCream(){
-//	con.query("UPDATE gelados SET gelados = gelados + '1' WHERE type = '0'")
-//	con.end();
+	con.query("UPDATE gelados SET gelados = gelados + '1' WHERE type = '0'")
 //	con.query("UPDATE gelados SET money = money + '1' WHERE type = '0'")	
 //	con.end();
 }
@@ -158,30 +157,30 @@ io.on('connection',function(socket){
 	//	})
 	})
 	socket.on("getIceCreams",function(){
-	//	con.query("SELECT gelados FROM gelados WHERE type = '0'",function(err,result){
-	//		if (err) throw err;
-	//		if (result[0]){
-	//			socket.emit("recieveIceCreams",{iceCreams:result[0].gelados});
-	//			con.end();
-	//		}else{
-	//			socket.emit("recieveIceCreams",{});
-//				con.end();
-	////		}
-//			
-	//	})
+		con.query("SELECT gelados FROM gelados WHERE type = '0'",function(err,result){
+			if (err) throw err;
+			if (result[0]){
+				socket.emit("recieveIceCreams",{iceCreams:result[0].gelados});
+				con.end();
+			}else{
+				socket.emit("recieveIceCreams",{});
+		con.end();
+			}
+			
+		})
 	})
 	socket.on("getIceCreamsMoney",function(){
-//		con.query("SELECT money FROM gelados WHERE type = '0'",function(err,result){
-//			if (err) throw err;
-//			if (result[0]){
-//				socket.emit("recieveIceCreamsMoney",{iceCreams:result[0].money});
-	//			con.end();
-//			}else{
-//				socket.emit("recieveIceCreamsMoney",{});
-//				con.end();
-////			}
+		con.query("SELECT money FROM gelados WHERE type = '0'",function(err,result){
+			if (err) throw err;
+			if (result[0]){
+				socket.emit("recieveIceCreamsMoney",{iceCreams:result[0].money});
+				con.end();
+			}else{
+				socket.emit("recieveIceCreamsMoney",{});
+				con.end();
+			}
 			
-//		})
+		})
 	})
 	socket.on("setIceCreamsMoney",function(){
 		new_iceCream();
