@@ -158,8 +158,8 @@ io.on('connection',function(socket){
 	socket.on("getIceCreams",function(){
 		con.query("SELECT gelados FROM gelados WHERE type = '0';",function(err,result){
 			if (err) throw err;
-			if (result[0]){
-				socket.emit("recieveIceCreams",{iceCreams:result[0].gelados});
+			if (result.rows[0]){
+				socket.emit("recieveIceCreams",{iceCreams:result.rows[0].gelados});
 				
 			}else{
 				socket.emit("recieveIceCreams",{});
@@ -171,9 +171,9 @@ io.on('connection',function(socket){
 	socket.on("getIceCreamsMoney",function(){
 		con.query("SELECT money FROM gelados WHERE type = '0';",function(err,result){
 			if (err) throw err;
-			if (result[0] != null){
-				console.log(result[0].money)
-				socket.emit("recieveIceCreamsMoney",{iceCreams:result[0].money});
+			if (result != null){
+				console.log(result.rows[0].money)
+				socket.emit("recieveIceCreamsMoney",{iceCreams:result.rows[0].money});
 				
 			}else{
 				socket.emit("recieveIceCreamsMoney",{});

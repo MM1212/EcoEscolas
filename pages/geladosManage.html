@@ -96,7 +96,7 @@ body{
         $(document).ready(function(){
             socket.emit("getIceCreamsMoney",{})
             socket.on("recieveIceCreamsMoney",function(data){
-                alert(data.iceCreams)
+               
                 if (data.iceCreams == null || data.iceCreams == ""){
                     $(".money-txt").html("0");
                 }else{
@@ -105,8 +105,6 @@ body{
                 
             })
             $('.add').click(function(){
-                count++;
-                $(".money-txt").html(count);
                 socket.emit("setIceCreamsMoney",{})
                 setTimeout(function(){
                     socket.emit("getIceCreamsMoney",{})
