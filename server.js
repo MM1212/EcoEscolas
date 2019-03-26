@@ -18,6 +18,8 @@ var con = mysql.createConnection({
 const { Client } = require('pg');
 
 const con = new Client({
+	user: "kdrzimizeyhgdq",
+	password:"41810520867a4dadbab35340dbb518b04d7d1f41d20b26bbf761b859624c7bec",
   connectionString: "postgres://kdrzimizeyhgdq:41810520867a4dadbab35340dbb518b04d7d1f41d20b26bbf761b859624c7bec@ec2-54-228-243-238.eu-west-1.compute.amazonaws.com:5432/d1ucgtr0o6rs1r",
   ssl: true,
 });
@@ -89,9 +91,9 @@ function increment(points,turma){
 
 
 function new_iceCream(){
-	con.query("UPDATE gelados SET gelados = gelados + '1' WHERE type = '0'")
-//	con.query("UPDATE gelados SET money = money + '1' WHERE type = '0'")	
-//	con.end();
+	con.query("UPDATE gelados SET gelados = gelados + '1' WHERE type = '0';")
+	con.query("UPDATE gelados SET money = money + '1' WHERE type = '0';")	
+	con.end();
 }
 
 
@@ -157,7 +159,7 @@ io.on('connection',function(socket){
 	//	})
 	})
 	socket.on("getIceCreams",function(){
-		con.query("SELECT gelados FROM gelados WHERE type = '0'",function(err,result){
+		con.query("SELECT gelados FROM gelados WHERE type = '0';",function(err,result){
 			if (err) throw err;
 			if (result[0]){
 				socket.emit("recieveIceCreams",{iceCreams:result[0].gelados});
@@ -170,7 +172,7 @@ io.on('connection',function(socket){
 		})
 	})
 	socket.on("getIceCreamsMoney",function(){
-		con.query("SELECT money FROM gelados WHERE type = '0'",function(err,result){
+		con.query("SELECT money FROM gelados WHERE type = '0';",function(err,result){
 			if (err) throw err;
 			if (result[0]){
 				socket.emit("recieveIceCreamsMoney",{iceCreams:result[0].money});
