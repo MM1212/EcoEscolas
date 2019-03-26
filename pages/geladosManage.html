@@ -100,6 +100,7 @@ body{
                 if (data.iceCreams == null || data.iceCreams == ""){
                     $(".money-txt").html("0");
                 }else{
+                    count = data.iceCreams;
                     $(".money-txt").html(String(data.iceCreams));
                 }
                 
@@ -108,7 +109,7 @@ body{
                 socket.emit("setIceCreamsMoney",{})
                 setTimeout(function(){
                     socket.emit("getIceCreamsMoney",{})
-                    socket.emit("getIceCreams",{})
+                    socket.emit("recieveIceCreams",{iceCreams:count})
                 },100);
                 
                 

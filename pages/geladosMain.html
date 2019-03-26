@@ -56,10 +56,14 @@ body{
     <script type="text/javascript">
     const socket = io();
     
-
+        window.setInterval(function(){
+            socket.emit("getIceCreams",{})
+        },5000)
         $(document).ready(function(){
             socket.emit("getIceCreams",{})
-            socket.on("recieveIceCreams",function(data){
+
+        })
+        socket.on("recieveIceCreams",function(data){
                 if (data.iceCreams == null || data.iceCreams == ""){
                     $(".iceCreams").html("0 Gelados");
                 }else{
@@ -67,6 +71,5 @@ body{
                 }
                 
             })
-        })
     </script>
 </html>
