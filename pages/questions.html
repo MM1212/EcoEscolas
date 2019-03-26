@@ -91,22 +91,29 @@
 		<script>
 
 			const socket = io();
-			var turma = "";
+			
+			
+			var turma = parent.document.URL.substring(parent.document.URL.indexOf('?'), parent.document.URL.length);
+			turma = turma.slice(7)
+			socket.emit("log",{log:" turma 2 "+String(turma)})
 			window.onload = function() {
-				socket.on('recieveClass',function(data,target){
+				setTimeout(function(){
+					socket.on('recieveClass2',function(data){
 				//if (target == code) {
-					turma = data.turma || "";
+					socket.emit("log",{log:" turma 2 "+String(data.turma)})
+					
 				//}
+				});
+				},3000);
 				
 
-
-				});
-			setTimeout(function(){
-					
-					if (turma == null || turma == ""){
-						window.location = "https://ecoescolas.herokuapp.com/inicio"
-					}
-				},3000);	
+				setTimeout(function(){
+					socket.emit("log",{log:" turma 3 "+String(turma)})
+						if (turma == null || turma == ""){
+							//window.location = "http://localhost:3000/inicio"
+							window.location = "https://ecoescolas.herokuapp.com/inicio"
+						}
+				},10000);	
 			}
 			
 
