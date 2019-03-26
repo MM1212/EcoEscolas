@@ -18,10 +18,6 @@ var con = mysql.createConnection({
 const { Client } = require('pg');
 
 const con = new Client({
-	host: "ec2-54-228-243-238.eu-west-1.compute.amazonaws.com",
-	user: "kdrzimizeyhgdq",
-	password:"41810520867a4dadbab35340dbb518b04d7d1f41d20b26bbf761b859624c7bec",
-	database:"d1ucgtr0o6rs1r",
 	connectionString: process.env.DATABASE_URL,
   ssl: true
 });
