@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Semear o Futuro</title>
+		<title>R.Ú.C.U.L.A.</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
 		<script src="/socket.io/socket.io.js"></script>
@@ -89,32 +89,25 @@
 				</div>
 		
 		<script>
+
 			const socket = io();
-			
-			
-			var classyboi = parent.document.URL.substring(parent.document.URL.indexOf('?'), parent.document.URL.length);
-			turma = classyboi.slice(7).split('-')[0];
-			route = classyboi.slice(7).split('-')[1];
+			var classyboi = parent.document.URL.substring(parent.document.URL.indexOf("?"), parent.document.URL.length);
+			turma = (classyboi.slice(7)).split('-')[0];
+			var route = (classyboi.slice(7)).split('-')[1];
 
-			socket.emit("log",{log:" turma 2 "+String(turma)})
 			window.onload = function() {
-				setTimeout(function(){
-					socket.on('recieveClass2',function(data){
-				//if (target == code) {
-					socket.emit("log",{log:" turma 2 "+String(data.turma)})
-
-				//}
-				});
-				},3000);
+				socket.on('recieveClass',function(data){
 				
+				turma = data.turma || "";
 
-				setTimeout(function(){
-					socket.emit("log",{log:" turma 3 "+String(turma)})
-						if (turma == null || turma == ""){
-							//window.location = "http://localhost:3000/inicio"
-							window.location = "https://ecoescolas.herokuapp.com/inicio"
-						}
-				},10000);	
+
+				});
+			setTimeout(function(){
+					
+					if (turma == null || turma == ""){
+						window.location = "http://localhost:3000/"
+					}
+				},3000);	
 			}
 			
 
@@ -123,108 +116,20 @@
 			var questions = []
 			var currentQuestion = 0
 			var currentlvl = 0
-		
+			
+			var str = window.location;
 
-
-
-			if(String(route) == "1"){
-
-			questions = {
-
-				[0]: {
-					banca: "Ginásio",
-						[0]: {
-							question:"Esta energia é boa porque?",
-							options:{
-								[0]:"É renovável e conseguimos produzir em casa",
-								[1]:"Não e renovável mas conseguimos produzir em casa",
-								[2]:"Não e renovável nem conseguimos produzir em casa",
-								[3]:"É renovável mas n conseguimos produzir em casa"
-							},
-							right:0
-						},
-						[1]: {
-							question:"Como possível produzir energia apartir da bicicleta?",
-							options:{
-								[0]:"A partir da energia cinética (energia associada ao movimento) da bicicleta",
-								[1]:"Usando o peso da pessoa que pedala",
-								[2]:"Montando e desmontando partes da bicicleta",
-								[3]:"Helicopetro"
-							},
-							right:0
-						},
-						[2]: {
-							question:"Qual é a energia que é mais sustentavel?",
-							options:{
-								[0]:"Carvao",
-								[1]:"Termoeletrica",
-								[2]:"Nuclear",
-								[3]:"Eólica"
-							},
-							right:3
-						},
-						[3]: {
-							question:"Será correto mandar lixo po chao?",
-							options:{
-								[0]:"Sim",
-								[1]:"Não",
-								
-							},
-							right:0
-						}
-				},
-				[1]: {
-				banca: "Espaços Verdes",
-				[0]: {
-					question:"Qual é que é a planta mais pequena?",
-					options:{
-						[0]:"Girassol",
-						[1]:"Rosa",
-						[2]:"Orquidea",
-						[3]:"Erva daninha"
-					},
-					right:3
-				},
-				[1]: {
-					question:"O que se deve usar para regar as plantas?",
-					options:{
-						[0]:"Petroleo",
-						[1]:"Detergente",
-						[2]:"Agua",
-						[3]:"Azeite"
-					},
-					right:2
-				},
-				[2]: {
-					question:"Qual o melhor sistema para tratar as plantas?",
-					options:{
-						[0]:"Pesticidas",
-						[1]:"Agroquimicos",
-						[2]:"Água produzida em Chernobil",
-						[3]:"Nenhum dos outros"
-					},
-					right:2
-				},
-				[3]: {
-					question:"Será correto poluir os jardins?",
-					options:{
-						[0]:"Sim",
-						[1]:"Não",
-						
-					},
-					right:0
-				}
-				}
-
+			alert(getRoute(str));
+			if(route == "1"){
+					//gotcha bitch
+			}else if(route == "2"){
+					//heheh bruh
 			}
-			}else if(String(route) == "2"){
-
 			questions = {
-
 				[0]: {
 				banca: "Sala",
 				[0]: {
-					question:"Qual e o ser mais preto do mundo metaforicamente?",
+					question:"Qual e o ser mais preto do mundo?",
 					options:{
 						[0]:"Zebra",
 						[1]:"Cavalo",
@@ -305,8 +210,6 @@
 					right:0
 				}
 				}
-
-			}
 			}
 			
 
@@ -361,8 +264,7 @@
 			},5000);
 
 				$(".submit_button").click(function(){
-
-
+					
 						var id = $(this).attr('id'); // $(this) refers to button that was clicked
 						id = id.slice(7);
 						

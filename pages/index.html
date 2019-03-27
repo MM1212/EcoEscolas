@@ -140,8 +140,7 @@
 				var class_value = $("#username_input").val();
 				if (class_value == "" || class_value == null){
 					message("Valor Invalido")
-					$("#username_input").val('')
-					
+					$("#username_input").val('');
 				}else{
 					socket.emit('addClass',{value:class_value},code);
 					
@@ -157,7 +156,7 @@
 				if (target == code){
 					socket.emit('passClass',{value:data.turma},code)
 					socket.emit("log",{log:"Turma "+data.turma})
-					window.location = "https://ecoescolas.herokuapp.com/questoesbonitas?class="+data.turma
+					window.location = "https://ecoescolas.herokuapp.com/questoesbonitas?class="+data.turma+"-"+$("#routes").val();
 					//window.location = "http://localhost:3000/questoesbonitas?class="+data.turma
 					$("#username_input").val('')
 				}
