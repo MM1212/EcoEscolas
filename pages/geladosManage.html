@@ -32,7 +32,7 @@
 
     
 <body>
-    <h1 class="strings"><span id="money-txt">0</span > &euro;</h1>
+    <h1 class="strings"><span id="money-txt">0</span >&euro;</h1>
     <h1 class="strings"><span id="gelados-txt">0</span> Gelados</h1>
     <button id="gelado"><b>+1 Gelado</b></button><br>
     <button id="topping"><b>+1 Topping</b></button>
@@ -73,7 +73,7 @@ $(document).ready(function(){
             socket.emit("getIceCreamsMoney",{})
             socket.emit("getIceCreams",{})
             socket.emit("recieveIceCreams",{iceCreams:count})
-        },100);
+        },10);
         $("#message").html("Gelado adicionado com sucesso")
         $("#message").fadeIn().delay(5000).fadeOut();
     })
@@ -87,7 +87,7 @@ $(document).ready(function(){
         setTimeout(function(){
             socket.emit("getIceCreamsMoney",{})
             socket.emit("recieveIceCreams",{iceCreams:count})
-        },100);
+        },10);
         $("#message").html("Gelado adicionado com sucesso")
         $("#message").fadeIn().delay(5000).fadeOut();
     })
