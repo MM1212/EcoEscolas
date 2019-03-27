@@ -31,6 +31,10 @@ var count = 0;
 $(document).ready(function(){
     socket.emit("getIceCreamsMoney",{})
     socket.emit("getIceCreams",{})
+    window.setInterval(function(){
+        socket.emit("getIceCreamsMoney",{})
+    socket.emit("getIceCreams",{})
+        },1000)
     socket.on("recieveIceCreamsMoney",function(data){
         if (data.iceCreams == null || data.iceCreams == ""){
             $("#money-txt").html("0");
