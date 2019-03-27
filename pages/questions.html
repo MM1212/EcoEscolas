@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>R.Ú.C.U.L.A.</title>
+		<title>Semear o Futuro</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
 		<script src="/socket.io/socket.io.js"></script>
@@ -89,7 +89,6 @@
 				</div>
 		
 		<script>
-
 			const socket = io();
 			
 			
@@ -127,46 +126,46 @@
 			questions = {
 
 				[0]: {
-				banca: "Sala",
-				[0]: {
-					question:"Qual e o ser mais preto do mundo?",
-					options:{
-						[0]:"Zebra",
-						[1]:"Cavalo",
-						[2]:"Esquilo",
-						[3]:"Porco"
-					},
-					right:3
-				},
-				[1]: {
-					question:"Qual e o transporte que voa mais alto?",
-					options:{
-						[0]:"Aviao",
-						[1]:"Jato",
-						[2]:"Balao de ar Quente",
-						[3]:"Helicopetro"
-					},
-					right:0
-				},
-				[2]: {
-					question:"Qual é a energia que é mais sustentavel?",
-					options:{
-						[0]:"Carvao",
-						[1]:"Termoeletrica",
-						[2]:"Nuclear",
-						[3]:"Eólica"
-					},
-					right:3
-				},
-				[3]: {
-					question:"Será correto mandar lixo po chao?",
-					options:{
-						[0]:"Sim",
-						[1]:"Não",
-						
-					},
-					right:0
-				}
+					banca: "Ginásio",
+						[0]: {
+							question:"Esta energia é boa porque?",
+							options:{
+								[0]:"É renovável e conseguimos produzir em casa",
+								[1]:"Não e renovável mas conseguimos produzir em casa",
+								[2]:"Não e renovável nem conseguimos produzir em casa",
+								[3]:"É renovável mas n conseguimos produzir em casa"
+							},
+							right:0
+						},
+						[1]: {
+							question:"Como é possível produzir energia apartir da bicicleta?",
+							options:{
+								[0]:"A partir da energia cinética (energia associada ao movimento) da bicicleta",
+								[1]:"Usando o peso da pessoa que pedala",
+								[2]:"Montando e desmontando partes da bicicleta",
+								[3]:"Tocando na buzina da bicicleta para produzir energia de ruído"
+							},
+							right:0
+						},
+						[2]: {
+							question:"Como é que possível produzir energia através de ondas?",
+							options:{
+								[0]:"Carvao",
+								[1]:"Termoeletrica",
+								[2]:"Nuclear",
+								[3]:"Eólica"
+							},
+							right:3
+						},
+						[3]: {
+							question:"Será correto mandar lixo po chao?",
+							options:{
+								[0]:"Sim",
+								[1]:"Não",
+								
+							},
+							right:0
+						}
 				},
 				[1]: {
 				banca: "Espaços Verdes",

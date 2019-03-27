@@ -8,12 +8,23 @@
     <style>
         body {
             text-align: center;
+            font-family: monospace;
+            color: darkslategray;
         }
 
         button {
             margin: 6px;
             width: 50vw;
             height: 20vh;
+            font-size: 5vw;
+            background-color: rgba(0,0,0,0);
+            border: 8px solid darkslategray;
+            font-family: monospace;
+            color: darkslategray;
+            
+        }
+        .strings {
+            font-size: 5.5vw;
         }
     </style>
 </head>
@@ -21,8 +32,8 @@
 
     
 <body>
-    <h1><span id="money-txt">0</span> &euro;</h1>
-    <h1><span id="gelados-txt">0</span> Gelados</h1>
+    <h1 class="strings"><span id="money-txt">0</span >&euro;</h1>
+    <h1 class="strings"><span id="gelados-txt">0</span> Gelados</h1>
     <button id="gelado"><b>+1 Gelado</b></button><br>
     <button id="topping"><b>+1 Topping</b></button>
 
@@ -31,12 +42,12 @@ const socket = io();
 var count = 0;
 
 $(document).ready(function(){
-    socket.emit("getIceCreamsMoney",{})
-    socket.emit("getIceCreams",{})
     window.setInterval(function(){
         socket.emit("getIceCreamsMoney",{})
     socket.emit("getIceCreams",{})
-        },1000)
+    },1000)
+    socket.emit("getIceCreamsMoney",{})
+    socket.emit("getIceCreams",{})
     socket.on("recieveIceCreamsMoney",function(data){
         if (data.iceCreams == null || data.iceCreams == ""){
             $("#money-txt").html("0");
@@ -53,22 +64,30 @@ $(document).ready(function(){
     }
 })
     $('#gelado').click(function(){
+        $("#gelado").css("background-color","Lavender");
+        setTimeout(function(){
+            $("#gelado").css("background-color","white");
+        },1000)
         socket.emit("setIceCreamsMoney",{money:1.0,type:0})
         setTimeout(function(){
             socket.emit("getIceCreamsMoney",{})
             socket.emit("getIceCreams",{})
             socket.emit("recieveIceCreams",{iceCreams:count})
-        },100);
+        },10);
         $("#message").html("Gelado adicionado com sucesso")
         $("#message").fadeIn().delay(5000).fadeOut();
     })
 
     $('#topping').click(function(){
+        $("#topping").css("background-color","Lavender");
+        setTimeout(function(){
+            $("#topping").css("background-color","white");
+        },1000)
         socket.emit("setIceCreamsMoney",{money:0.2,type:1})
         setTimeout(function(){
             socket.emit("getIceCreamsMoney",{})
             socket.emit("recieveIceCreams",{iceCreams:count})
-        },100);
+        },10);
         $("#message").html("Gelado adicionado com sucesso")
         $("#message").fadeIn().delay(5000).fadeOut();
     })
