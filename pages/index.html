@@ -82,6 +82,13 @@
 	display: none;
 	transition: transform 0.3s;
 }
+#dropdownspace{
+	font-family: Helvetica;
+	padding: 5px;
+}
+#routes{
+	border: 3px solid CadetBlue;
+}
 
 		</style>
 	</head>
@@ -94,6 +101,12 @@
 
 			<input type="text" placeholder="Turma" class="input" id="username_input" autocomplete="off">
 			<button class="input" id="submit_input">&rarr;</button>
+		</div>
+				<div id="dropdownspace">
+			  <select id="routes">
+    				<option value="1">Percurso 1</option>
+    				<option value="2">Percurso 2</option>
+  				</select>
 		</div>
 		    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 		<script>
