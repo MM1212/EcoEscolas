@@ -42,6 +42,10 @@ const socket = io();
 var count = 0;
 
 $(document).ready(function(){
+    window.setInterval(function(){
+        socket.emit("getIceCreamsMoney",{})
+    socket.emit("getIceCreams",{})
+    },1000)
     socket.emit("getIceCreamsMoney",{})
     socket.emit("getIceCreams",{})
     socket.on("recieveIceCreamsMoney",function(data){
