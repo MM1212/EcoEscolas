@@ -21,6 +21,7 @@
             border: 8px solid darkslategray;
             font-family: monospace;
             color: darkslategray;
+            
         }
         .strings {
             font-size: 5.5vw;
@@ -59,6 +60,10 @@ $(document).ready(function(){
     }
 })
     $('#gelado').click(function(){
+        $("#gelado").css("background-color","Lavender");
+        setTimeout(function(){
+            $("#gelado").css("background-color","white");
+        },1000)
         socket.emit("setIceCreamsMoney",{money:1.0,type:0})
         setTimeout(function(){
             socket.emit("getIceCreamsMoney",{})
@@ -70,6 +75,10 @@ $(document).ready(function(){
     })
 
     $('#topping').click(function(){
+        $("#topping").css("background-color","Lavender");
+        setTimeout(function(){
+            $("#topping").css("background-color","white");
+        },1000)
         socket.emit("setIceCreamsMoney",{money:0.2,type:1})
         setTimeout(function(){
             socket.emit("getIceCreamsMoney",{})
