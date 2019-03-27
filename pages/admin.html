@@ -87,7 +87,7 @@ $(document).ready(function(){
 				}else{
 					socket.emit('relative',{query:query});
 					socket.emit("getAdminInfo",{})
-					
+					$("#random_input").val('')
 					//document.location.href = "http://localhost:3000/questions.html";
 					
 				}
