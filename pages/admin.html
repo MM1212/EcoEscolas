@@ -26,6 +26,9 @@
         .strings {
             font-size: 5.5vw;
         }
+        .strings2 {
+            font-size: 2.5vw;
+        }
         .input {
             margin: 4px;
             width: 30vw;
@@ -51,7 +54,7 @@
     <h1 class="strings"><span id="semear-txt">0</span> Turmas</h1>
     <input type="text" placeholder="" class="input" id="random_input" autocomplete="off">
     <button class="input" id="submit_input">&rarr;</button>
-	
+	<h1 class="strings2"><span id="query-txt"></span ></h1>
     <script type="text/javascript">
 const socket = io();
 var count = 0;
@@ -77,6 +80,9 @@ $(document).ready(function(){
         } else {
             $("#semear-txt").html(String(data.semear));
         }
+    })
+    socket.on("getRelative",function(data){
+        $("#query-txt").html(data.query)
     })
     $('#submit_input').click(function(){
 				//alert($("#username_input").val())

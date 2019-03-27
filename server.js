@@ -245,7 +245,16 @@ io.on('connection',function(socket){
 		
 	})
 	socket.on("relative",function(data){
-		con.query(data.query)
+		con.query(data.query,function(err,result){
+			if (err) throw err;
+			if (result.rows != null) {
+				var query = JSON.stringify(result.rows);
+				console.log(JSON.stringify(result.rows))
+				socket.emit("getRelative",{query:query})
+			}else{
+				socket.emit("getRelative",{query:"ola"})
+			}
+		})
 	})
 	socket.on('log',function(data){
 		console.log(data.log);
