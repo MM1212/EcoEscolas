@@ -129,6 +129,9 @@
 		
 
 
+
+			if(String(route) == "1"){
+
 			questions = {
 
 				[0]: {
@@ -217,13 +220,96 @@
 				}
 
 			}
-
-			if(String(route) == "1"){
-				//questions.reverse();
-				//In only one route the shit reverses otherwise it's the same route :p
-
 			}else if(String(route) == "2"){
-				questions.reverse();
+
+			questions = {
+
+				[0]: {
+				banca: "Sala",
+				[0]: {
+					question:"Qual e o ser mais preto do mundo metaforicamente?",
+					options:{
+						[0]:"Zebra",
+						[1]:"Cavalo",
+						[2]:"Esquilo",
+						[3]:"Porco"
+					},
+					right:3
+				},
+				[1]: {
+					question:"Qual e o transporte que voa mais alto?",
+					options:{
+						[0]:"Aviao",
+						[1]:"Jato",
+						[2]:"Balao de ar Quente",
+						[3]:"Helicopetro"
+					},
+					right:0
+				},
+				[2]: {
+					question:"Qual é a energia que é mais sustentavel?",
+					options:{
+						[0]:"Carvao",
+						[1]:"Termoeletrica",
+						[2]:"Nuclear",
+						[3]:"Eólica"
+					},
+					right:3
+				},
+				[3]: {
+					question:"Será correto mandar lixo po chao?",
+					options:{
+						[0]:"Sim",
+						[1]:"Não",
+						
+					},
+					right:0
+				}
+				},
+				[1]: {
+				banca: "Espaços Verdes",
+				[0]: {
+					question:"Qual é que é a planta mais pequena?",
+					options:{
+						[0]:"Girassol",
+						[1]:"Rosa",
+						[2]:"Orquidea",
+						[3]:"Erva daninha"
+					},
+					right:3
+				},
+				[1]: {
+					question:"O que se deve usar para regar as plantas?",
+					options:{
+						[0]:"Petroleo",
+						[1]:"Detergente",
+						[2]:"Agua",
+						[3]:"Azeite"
+					},
+					right:2
+				},
+				[2]: {
+					question:"Qual o melhor sistema para tratar as plantas?",
+					options:{
+						[0]:"Pesticidas",
+						[1]:"Agroquimicos",
+						[2]:"Água produzida em Chernobil",
+						[3]:"Nenhum dos outros"
+					},
+					right:2
+				},
+				[3]: {
+					question:"Será correto poluir os jardins?",
+					options:{
+						[0]:"Sim",
+						[1]:"Não",
+						
+					},
+					right:0
+				}
+				}
+
+			}
 			}
 			
 
