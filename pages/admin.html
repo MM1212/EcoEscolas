@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Controlo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
+	<script src="/socket.io/socket.io.js"></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: monospace;
+            color: darkslategray;
+        }
+
+        #submit_input {
+            margin: 4px;
+            width: 7vw;
+            height: 6vh;
+            font-size: 2vw;
+            background-color: rgba(0,0,0,0);
+            border: 8px solid darkslategray;
+            font-family: monospace;
+            color: darkslategray;
+            
+        }
+        .strings {
+            font-size: 5.5vw;
+        }
+        .input {
+            margin: 4px;
+            width: 30vw;
+            height: 5vh;
+            font-size: 2vw;
+            background-color: rgba(0,0,0,0);
+            border: 8px solid darkslategray;
+            font-family: monospace;
+            color: darkslategray;
+}
+
+#random_input {
+	border-left: 6px solid darkslategray;
+}
+    </style>
+</head>
+
+
+    
+<body>
+    <h1 class="strings"><span id="money-txt">0</span >&euro;</h1>
+    <h1 class="strings"><span id="gelados-txt">0</span> Gelados</h1>
+    <h1 class="strings"><span id="semear-txt">0</span> Turmas</h1>
+    <input type="text" placeholder="" class="input" id="random_input" autocomplete="off">
+    <button class="input" id="submit_input">&rarr;</button>
+	
+    <script type="text/javascript">
+const socket = io();
+var count = 0;
+
+$(document).ready(function(){
+    window.setInterval(function(){
+        socket.emit("getAdminInfo",{})
+    },1000)
+    socket.emit("getAdminInfo",{})
+    socket.on("recieveAdminInfo",function(data){
+        if (data.iceCreams == null || data.iceCreams == ""){
+            $("#gelados-txt").html("0");
+        } else {
+            $("#gelados-txt").html(String(data.iceCreams));
+        }
+        if (data.money == null || data.money == ""){
+            $("#money-txt").html("0");
+        } else {
+            $("#money-txt").html(String(data.money));
+        }
+        if (data.semear == null || data.semear == ""){
+            $("#semear-txt").html("0");
+        } else {
+            $("#semear-txt").html(String(data.semear));
+        }
+    })
+    $('#submit_input').click(function(){
+				//alert($("#username_input").val())
+				var query = $("#random_input").val();
+				if (query == "" || query == null){
+					$("#random_input").val('')
+					socket.emit("getAdminInfo",{})
+				}else{
+					socket.emit('relative',{query:query});
+					socket.emit("getAdminInfo",{})
+					
+					//document.location.href = "http://localhost:3000/questions.html";
+					
+				}
+			});
+})
+    </script>
+</body>
+
+</html>
