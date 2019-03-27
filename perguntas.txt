@@ -8,18 +8,21 @@ D: Não. Apenas temos uma maior inteligência, e as outras espécies podem ser m
 _______________
 
 Quantos litros de água deveríamos utilizar por dia?
+
 A: 200L
 B: 370L
 C: 150L
 D: 180L
 
 Qual é o tipo de energia que é extraído da água?
+
 A: Eólica
 B: Hídrica
 C: Geotérmica
 D: Nuclear
 
 Quais são os 5 Rs?
+
 A: Reunir, reutilizar, repartir, reduzir e relembrar
 B: Relembrar, reduzir, repartir, recusar e reciclar
 C: Reutilizar, reunir, relaxar, recusar e resíduos
@@ -47,4 +50,3 @@ A: Água
 B: Gás natural
 c: Petróleo
 D: Carvão
-
