@@ -8,7 +8,8 @@
     <style>
         body {
             text-align: center;
-            
+            font-family: monospace;
+            color: darkslategray;
         }
 
         button {
@@ -16,6 +17,11 @@
             width: 50vw;
             height: 20vh;
             font-size: 5vw;
+            background-color: rgba(0,0,0,0);
+            border: 8px solid darkslategray;
+            font-family: monospace;
+            color: darkslategray;
+            
         }
         .strings {
             font-size: 5.5vw;
@@ -36,6 +42,10 @@ const socket = io();
 var count = 0;
 
 $(document).ready(function(){
+    window.setInterval(function(){
+        socket.emit("getIceCreamsMoney",{})
+    socket.emit("getIceCreams",{})
+    },1000)
     socket.emit("getIceCreamsMoney",{})
     socket.emit("getIceCreams",{})
     socket.on("recieveIceCreamsMoney",function(data){
@@ -54,6 +64,10 @@ $(document).ready(function(){
     }
 })
     $('#gelado').click(function(){
+        $("#gelado").css("background-color","Lavender");
+        setTimeout(function(){
+            $("#gelado").css("background-color","white");
+        },1000)
         socket.emit("setIceCreamsMoney",{money:1.0,type:0})
         setTimeout(function(){
             socket.emit("getIceCreamsMoney",{})
@@ -65,6 +79,10 @@ $(document).ready(function(){
     })
 
     $('#topping').click(function(){
+        $("#topping").css("background-color","Lavender");
+        setTimeout(function(){
+            $("#topping").css("background-color","white");
+        },1000)
         socket.emit("setIceCreamsMoney",{money:0.2,type:1})
         setTimeout(function(){
             socket.emit("getIceCreamsMoney",{})
