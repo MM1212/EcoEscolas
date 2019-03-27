@@ -97,7 +97,7 @@ function new_iceCream(money,type){
 
 
 server.listen(port, function(){
-  console.log('listening on port ' + port + ', time to... try not to fail...');
+  console.log('OLAAAAA, ESTOU A FUNCIONAR POR AGORA');
 });
 
 
