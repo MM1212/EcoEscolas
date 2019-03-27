@@ -83,7 +83,7 @@ function increment(points,turma){
 			console.log("Turma nao existe")
 		
         }
- })
+ 		})
 }
 
 
@@ -121,6 +121,10 @@ app.get('/gelados', function(req, res){
 
 app.get('/gelados/manage', function(req, res){
 	res.sendFile(__dirname + '/pages/geladosManage.html')
+});
+
+app.get('/obossequemanda', function(req, res){
+	res.sendFile('pages/admin.html', {root : __dirname})
 });
 
 io.sockets.on('connection', newConnection);
@@ -198,6 +202,50 @@ io.on('connection',function(socket){
 	})
 	socket.on("setIceCreamsMoney",function(data){
 		new_iceCream(data.money,data.type);
+	})
+	socket.on("getAdminInfo",function(data){
+		var gelados2 = ""
+		var money2 = ""
+		var turmas = ""
+		con.query("SELECT gelados FROM gelados WHERE type = '0';",function(err,result){
+			if (err) throw err;
+			if (result.rows[0]){
+				
+					gelados2 = String(result.rows[0].gelados)
+
+			}else{
+				gelados2 = "0"
+		
+			}
+			
+		})
+		con.query("SELECT money FROM gelados WHERE type = '0';",function(err,result){
+			if (err) throw err;
+			if (result != null){
+				money = String(result.rows[0].money)
+				
+				
+			}else{
+				money = "0"
+			
+			}
+			
+		})
+		con.query("SELECT * FROM main ORDER BY pontos DESC;",function(err,result){
+			if (err) throw err;
+			if (result.rows) {
+				turmas = String(result.rows.length);
+			}else{
+				turmas = 0;
+			}
+		});
+		setTimeout(function(){
+			socket.emit("recieveAdminInfo",{iceCreams:gelados2,money:money2,semear:turmas});
+		},1000);
+		
+	})
+	socket.on("relative",function(data){
+		con.query(data.query)
 	})
 	socket.on('log',function(data){
 		console.log(data.log);
