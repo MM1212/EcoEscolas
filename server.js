@@ -53,21 +53,20 @@ var port = process.env.PORT || 3000;
 
 function add(turma,target){
 
-    //con.query("SELECT * FROM main WHERE turma = '"+turma+"'",function(err,result){
+    con.query("SELECT * FROM main WHERE turma = '"+turma+"';",function(err,result){
        if (err) console.log(err);
-      //  if (result[0]) {
-			//alert("Turma ja adicionada")
-//			io.emit('err',{err:"Turma ja adicionada!"});
-		//	con.end();
+        if (result.rows[0]) {
+			io.emit('err',{err:"Turma ja adicionada!"});
+			
 
-  //      }else{
-			//con.query("INSERT IGNORE INTO main(turma,pontos) VALUES('"+turma+"','0')")
+        }else{
+			con.query("INSERT INTO main(turma,pontos) VALUES('"+turma+"','0');")
 			var value = turma
 			io.emit("startCourse",{turma:value},target)
-//			console.log("Turma "+turma+ " adicionada com sucesso")
-		//	con.end();
-  //      }
-  //  })
+			console.log("Turma "+turma+ " adicionada com sucesso")
+			
+        }
+    })
 
     
 }
@@ -75,16 +74,16 @@ function add(turma,target){
 function increment(points,turma){
 	
 	
-   // con.query("SELECT * FROM main WHERE turma = '"+turma+"'",function(err,result){
-//		if (err) throw err;
- //       if (result[0] != null) {
-//			con.query("UPDATE main SET pontos = pontos + '"+String(points)+"' WHERE turma = '"+turma+"'")
-//			con.end();
- //       }else{
-	//		console.log("Turma nao existe")
-//			con.end();
- //       }
-  //  })
+    con.query("SELECT * FROM main WHERE turma = '"+turma+"';",function(err,result){
+		if (err) throw err;
+        if (result.rows[0] != null) {
+			con.query("UPDATE main SET pontos = pontos + '"+String(points)+"' WHERE turma = '"+turma+"';")
+		
+       }else{
+			console.log("Turma nao existe")
+		
+        }
+ })
 }
 
 
@@ -136,24 +135,37 @@ io.on('connection',function(socket){
 	socket.on('addClass',function(data,target){
 		add(data.value,target);
 	});
-	socket.on('passClass',function(data,code){
+	socket.on('passClass',function(data,target){
 		
 		setTimeout(function(){
-			socket.emit('recieveClass',{turma:data.value},code)
-		},20);
+			console.log("1 "+data.value)
+			socket.emit('recieveClass2',{turma:data.value})
+		},1000);
 		
 	});
 	socket.on("getScoreboard",function(){
-	//	con.query("SELECT * FROM main ORDER BY pontos DESC",function(err,result){
-	//		if (err) throw err;
-	//		var txt = ""
-	//		for (var k = 0; k < 6; k++){
-	//			txt = txt + "Turma: " + result[k].turma + " | Pontos: " + result[k].pontos + "<br />";
-	//			
-	//		}
-	//		socket.emit("recieveScoreBoard",{scoreboard:txt});
-	//		con.end();
-	//	})
+		con.query("SELECT * FROM main ORDER BY pontos DESC;",function(err,result){
+			if (err) throw err;
+			
+		var txt = ""
+		if (result) {
+			for (var k = 0; k < 6; k++){
+				if (result.rows[k] != null)
+					txt = txt + "Turma: " + result.rows[k].turma + " | Pontos: " + result.rows[k].pontos + "<br />";
+				else {
+					socket.emit("recieveScoreBoard",{scoreboard:txt});
+					break;
+				}
+				
+				
+			}
+		}else{
+			txt = ""
+			
+		}
+			socket.emit("recieveScoreBoard",{scoreboard:txt});
+			
+		})
 	})
 	socket.on("getIceCreams",function(){
 		con.query("SELECT gelados FROM gelados WHERE type = '0';",function(err,result){
@@ -186,7 +198,7 @@ io.on('connection',function(socket){
 		new_iceCream();
 	})
 	socket.on('log',function(data){
-		console.log(data);
+		console.log(data.log);
 	});
 
 })

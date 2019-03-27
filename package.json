@@ -1,19 +1,25 @@
 {
   "name": "ecoescolas",
   "version": "1.0.0",
-  "main": "sql.js",
+  "description": "need node.js",
+  "main": "debounce.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MM1212/EcoEscolas.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MM1212/EcoEscolas/issues"
+  },
+  "homepage": "https://github.com/MM1212/EcoEscolas#readme",
   "dependencies": {
     "express": "^4.16.4",
-    "mysql": "^2.16.0",
     "pg": "^7.9.0",
     "socket.io": "^2.2.0"
-  },
-  "devDependencies": {},
-  "description": ""
+  }
 }
