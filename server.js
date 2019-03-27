@@ -83,7 +83,7 @@ function increment(points,turma){
 			console.log("Turma nao existe")
 		
         }
- })
+ 		})
 }
 
 
