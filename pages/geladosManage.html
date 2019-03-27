@@ -110,7 +110,7 @@ body{
                 setTimeout(function(){
                     socket.emit("getIceCreamsMoney",{})
                     socket.emit("recieveIceCreams",{iceCreams:count})
-                },100);
+                },10);
                 
                 
                 $("#message").html("Gelado adicionado com sucesso")
