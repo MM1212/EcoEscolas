@@ -222,11 +222,11 @@ io.on('connection',function(socket){
 		con.query("SELECT money FROM gelados WHERE type = '0';",function(err,result){
 			if (err) throw err;
 			if (result != null){
-				money = String(result.rows[0].money)
+				money2 = String(result.rows[0].money)
 				
 				
 			}else{
-				money = "0"
+				money2 = "0"
 			
 			}
 			
