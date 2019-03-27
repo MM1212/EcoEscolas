@@ -87,9 +87,11 @@ function increment(points,turma){
 }
 
 
-function new_iceCream(){
-	con.query("UPDATE gelados SET gelados = gelados + '1' WHERE type = '0';")
-	con.query("UPDATE gelados SET money = money + '1' WHERE type = '0';")	
+function new_iceCream(money,type){
+	if (type == 0) {
+		con.query("UPDATE gelados SET gelados = gelados + '1' WHERE type = '0';")
+	}
+	con.query("UPDATE gelados SET money = money + '"+String(money)+"' WHERE type = '0';")	
 }
 
 
@@ -184,7 +186,7 @@ io.on('connection',function(socket){
 		con.query("SELECT money FROM gelados WHERE type = '0';",function(err,result){
 			if (err) throw err;
 			if (result != null){
-				console.log(result.rows[0].money)
+			
 				socket.emit("recieveIceCreamsMoney",{iceCreams:result.rows[0].money});
 				
 			}else{
@@ -194,8 +196,8 @@ io.on('connection',function(socket){
 			
 		})
 	})
-	socket.on("setIceCreamsMoney",function(){
-		new_iceCream();
+	socket.on("setIceCreamsMoney",function(data){
+		new_iceCream(data.money,data.type);
 	})
 	socket.on('log',function(data){
 		console.log(data.log);
