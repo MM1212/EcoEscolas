@@ -4,7 +4,7 @@
 <head>
     <title>Gelados de Fruta</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
-	<!--<script src="/socket.io/socket.io.js"></script>-->
+	<script src="/socket.io/socket.io.js"></script>
     <style>
 body {
     background-color: Azure;
@@ -52,7 +52,7 @@ body {
         <h1 id="text">Número de gelados vendidos:<br><span id=iceCreams>420</span></h1>
     </div>
     
-    <!--<script type="text/javascript">
+    <script type="text/javascript">
 const socket = io();
     
 window.setInterval(function(){
@@ -70,7 +70,7 @@ socket.on("recieveIceCreams",function(data){
         $("#iceCreams").html(String(data.iceCreams));
     }
 })
-    </script>-->
+    </script>
 </body>
 
 </html>
