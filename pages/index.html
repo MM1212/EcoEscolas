@@ -164,8 +164,8 @@
 				if (target == code){
 					socket.emit('passClass',{value:data.turma},code)
 					socket.emit("log",{log:"Turma "+data.turma})
-					//window.location = "https://ecoescolas.herokuapp.com/questoesbonitas?class="+data.turma+"-"+$("#routes").val();
-					window.location = "http://localhost:3000/questoesbonitas?class="+data.turma+"-"+$("#routes").val();
+					window.location = "https://ecoescolas.herokuapp.com/questoesbonitas?class="+data.turma+"-"+$("#routes").val();
+					//window.location = "http://localhost:3000/questoesbonitas?class="+data.turma+"-"+$("#routes").val();
 					$("#username_input").val('')
 				}
 				
