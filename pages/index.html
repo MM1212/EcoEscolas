@@ -104,6 +104,7 @@
 		</div>
 				<div id="dropdownspace">
 			  <select id="routes">
+				  <option value="null">Percursos...</option>
     				<option value="1">Percurso 1</option>
     				<option value="2">Percurso 2</option>
   				</select>
@@ -138,15 +139,22 @@
 	        $('#submit_input').click(function(){
 				//alert($("#username_input").val())
 				var class_value = $("#username_input").val();
-				if (class_value == "" || class_value == null){
-					message("Valor Invalido")
+				var route = $("#routes").val();
+				if (class_value == "" || class_value == null || route == "null" || route == null){
+					if (route == "null" || route == null) {
+						message("Por favor, selecione um percurso.")
+					}
+					if (class_value == "" || class_value == null) {
+						message("Valor Invalido")
+					}
+					
 					$("#username_input").val('');
 				}else{
 					socket.emit('addClass',{value:class_value},code);
 					
 					
 					//document.location.href = "http://localhost:3000/questions.html";
-					
+				
 				}
 			});	
 				socket.on('err',function(data){
@@ -156,8 +164,8 @@
 				if (target == code){
 					socket.emit('passClass',{value:data.turma},code)
 					socket.emit("log",{log:"Turma "+data.turma})
-					window.location = "https://ecoescolas.herokuapp.com/questoesbonitas?class="+data.turma+"-"+$("#routes").val();
-					//window.location = "http://localhost:3000/questoesbonitas?class="+data.turma
+					//window.location = "https://ecoescolas.herokuapp.com/questoesbonitas?class="+data.turma+"-"+$("#routes").val();
+					window.location = "http://localhost:3000/questoesbonitas?class="+data.turma+"-"+$("#routes").val();
 					$("#username_input").val('')
 				}
 				
