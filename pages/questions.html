@@ -92,12 +92,12 @@
 			turma = classyboi.slice(7).split('-')[0];
 			route = classyboi.slice(7).split('-')[1];
 
-			socket.emit("log",{log:" turma 2 "+String(turma)})
+			
 			window.onload = function() {
 				setTimeout(function(){
 					socket.on('recieveClass2',function(data){
 				//if (target == code) {
-					socket.emit("log",{log:" turma 2 "+String(data.turma)})
+			
 
 				//}
 				});
@@ -105,7 +105,7 @@
 				
 
 				setTimeout(function(){
-					socket.emit("log",{log:" turma 3 "+String(turma)})
+			
 						if (turma == null || turma == ""){
 							//window.location = "http://localhost:3000/inicio"
 							window.location = "https://ecoescolas.herokuapp.com/inicio"

@@ -127,8 +127,10 @@ app.get('/obossequemanda', function(req, res){
 	res.sendFile('pages/admin.html', {root : __dirname})
 });
 
-io.sockets.on('connection', newConnection);
-
+io.sockets.on('connection', function (socket) {
+  var address = socket.handshake.address;
+  console.log('Nova conexão de ' + address.address + ':' + address.port);
+});
 io.on('connection',function(socket){
 	
 	socket.on('points',function(value){
@@ -261,7 +263,3 @@ io.on('connection',function(socket){
 	});
 
 })
-
-function newConnection(socket) {
-	
-}

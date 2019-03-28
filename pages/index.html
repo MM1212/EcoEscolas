@@ -145,7 +145,7 @@
 			socket.on('startCourse',function(data,target){
 				if (target == code){
 					socket.emit('passClass',{value:data.turma},code)
-					socket.emit("log",{log:"Turma "+data.turma})
+					
 					window.location = Config.questions+data.turma+"-"+$("#routes").val();
 					
 					$("#username_input").val('')
