@@ -13,45 +13,18 @@
 	text-align: center;
 	overflow: hidden;
 	background-color: Lavender;
+	user-select: none;
 }
 
-#questions_box {
-	margin: 4%;
-	text-align: center;
-	font-size: 3.5em;
-	font-family: Helvetica;
-}
-
-#options_box {
-	margin-top: 5%;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-}
-
-.submit_button {
-	width: 400px;
-	height: 100px;
-	margin: 20px;
-	cursor: pointer;
-	transition: transform 0.3s;
-	background-color: cadetblue;
-	border: 4px solid cadetblue;
-	padding: 10px;
-	border-radius: 4px;
-	font-size: 1.8em;
-	font-family: Helvetica;
-	text-align: center;
-}
-
-.submit_button:hover {
-	transform: scale(1.1, 1.1);
-	background-color: rgb(255, 255, 255);
+#submit_button {
+	background-color: white;	
 }
 
 #big_title {
+	position: relative;
+	top: -200px;
 	font-family: Calibri;
-	font-size: 900%;
+	font-size: 1500%;
 	color: CadetBlue;
 }
 
@@ -60,6 +33,8 @@
 	font-size: 200%;
 	padding: 5px;
 	border: 3px solid CadetBlue;
+	position: relative;
+	top: -200px;
 }
 
 #username_input {
@@ -67,18 +42,20 @@
 }
 
 .info {
-	position: absolute;
+	position: relative;
+	top: -255px;
 	background-color: rgb(38,38,38);
-	min-width: 1%;
-	border: 1px solid cadetblue;
-	border-right: 4px solid cadetblue;
-	border-radius: 3px;
+	width: 20vw;
+	height: 6vh;
+	padding: 5px;
+	text-align: center;
+	border: 3px solid cadetblue;
 	color: Lavender;
-	top: 1%;
-	font-size: 1.2em;
-	font-family: Bahnschrift;
+	font-size: 1.5em;
+	font-weight: bold;
+	border-radius: 10px;
+	font-family: monospace;
 	user-select: none;
-	text-align: left;
 	display: none;
 	transition: transform 0.3s;
 }
@@ -87,20 +64,24 @@
 	padding: 5px;
 }
 #routes{
+	position: relative;
+	top: -200px;
+	width: 6vw;
+	height: 4vh;
 	border: 3px solid CadetBlue;
 }
 
 		</style>
 	</head>
 	<body>
+		
 		<div class = "loading">
+				
 			
-			
-			<h1 id="big_title"><span style="font-size: 60%">SEMEAR</span><span style="font-size: 40%"> O FUTURO</span></h1>
-			<div class="info"></div>
-
+			<h1 id="big_title"><span style="font-size: 60%">SEMEAR</span><span style="font-size: 40%"> O FUTURO</span></h1>	
+			<span class="info"></span><br />
 			<input type="text" placeholder="Turma" class="input" id="username_input" autocomplete="off">
-			<button class="input" id="submit_input">&rarr;</button>
+			<button class="input" id="submit_button">&rarr;</button>
 		</div>
 				<div id="dropdownspace">
 			  <select id="routes">
@@ -111,32 +92,25 @@
 		</div>
 		    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 		<script>
+			var Config = {};
+			//Test / LiveServer
+			Config.side = "LiveServer"
+			if (Config.side == "Test") {
+				Config.questions = "http://localhost:3000/questoesbonitas?class="
+			}else{
+				Config.questions = "https://ecoescolas.herokuapp.com/questoesbonitas?class="
+			}
 			$(function(){
 				const code = Math.floor((Math.random() * 1998) + 1); 
 			const socket = io.connect();
 				function message(msg){
 					$(".info").html(msg);
-					$(".info").css('display', 'flex');
-					$(".info").animate({
-						top: "1%",
-						opacity: "1.0"
-						},
-						1000, function() {
-							setTimeout(function(){
-								$(".info").animate({
-									top: "-50%",
-									opacity: "0.0"
-									},
-									1000, function() {
-										$(".info").css('display', 'none');
-										
-								});
-							},3000);
-						});
-					}
+					$(".info").fadeIn().delay(2000).fadeOut();
+					return
+				}
 			$(document).ready(function(){
 				
-	        $('#submit_input').click(function(){
+	        $('#submit_button').click(function(){
 				//alert($("#username_input").val())
 				var class_value = $("#username_input").val();
 				var route = $("#routes").val();
@@ -164,8 +138,8 @@
 				if (target == code){
 					socket.emit('passClass',{value:data.turma},code)
 					socket.emit("log",{log:"Turma "+data.turma})
-					window.location = "https://ecoescolas.herokuapp.com/questoesbonitas?class="+data.turma+"-"+$("#routes").val();
-					//window.location = "http://localhost:3000/questoesbonitas?class="+data.turma+"-"+$("#routes").val();
+					window.location = Config.questions+data.turma+"-"+$("#routes").val();
+					
 					$("#username_input").val('')
 				}
 				
