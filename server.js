@@ -128,8 +128,7 @@ app.get('/obossequemanda', function(req, res){
 });
 
 io.sockets.on('connection', function (socket) {
-  var address = socket.handshake.address;
-  console.log('Nova conexão de ' + address.address + ':' + address.port);
+	console.log('connection :', socket.request.connection._peername);
 });
 io.on('connection',function(socket){
 	
