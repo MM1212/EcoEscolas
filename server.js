@@ -111,7 +111,7 @@ app.get('/questoesbonitas', function(req, res){
 });
 
 app.get('/inicio', function(req, res){
-	res.sendFile(__dirname + '/pages/addForm.html')
+	res.sendFile(__dirname + '/pages/addform.html')
 });
 
 app.get('/inicio/grupos', function(req, res){
@@ -263,6 +263,12 @@ io.on('connection',function(socket){
 			}
 		})
 	})
+
+	socket.on('Get Points', function(turma){
+		con.query("SELECT pontos FROM main WHERE turma = '"+turma+"';", function(error, result){
+			socket.emit('Recieve Points', {points: result.rows[0].pontos});
+		});
+	});
 	socket.on('log',function(data){
 		console.log(data.log);
 	});

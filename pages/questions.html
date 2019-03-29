@@ -63,6 +63,11 @@
 #username_input {
 	border-left: 6px solid CadetBlue;
 }
+#points{
+	margin-top: 10%;
+	font-family: Helvetica;
+	font-size: 200%;
+}
 	</style>
 	<body>
 			<div id="questions_box">
@@ -82,6 +87,8 @@
 							<br/>
 							<button id="button_1" class="submit_button"><span class="special_button_1" id="1"></span></button>
 					</div>
+				</div>
+				<div id="points">
 				</div>
 		
 		<script>
@@ -233,12 +240,11 @@
 				addQuestion();
 			},3000);
 
+
+
 				$(".submit_button").click(function(){
-
-
 						var id = $(this).attr('id'); // $(this) refers to button that was clicked
 						id = id.slice(7);
-						
 					if (id == questions[group][currentQuestion].right) {
 						socket.emit('points',turma);
 						
@@ -258,8 +264,16 @@
 						
 					}
 
+					getPoints();
 				})
+
+					function getPoints(){
+						socket.emit('Get Points', turma);
+					}
 				
+					socket.on('Recieve Points', function(data){
+							$("#points").html(data.points);
+					});
 			});
 		</script>
 	</body>
