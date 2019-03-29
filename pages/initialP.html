@@ -72,18 +72,10 @@ p {
  
     <script type="text/javascript">
     const socket = io();
-
-        function getScoreboard() {
-            setTimeout(function(){
-                socket.emit("getScoreboard",{})
-                getScoreboard();
-            },5000);
-        }
-
         $(document).ready(function(){
-
+            socket.emit("getScoreboard",{})
             window.setInterval(function () {
-            getScoreboard();
+                socket.emit("getScoreboard",{})
             }, 1000);
         
             socket.emit("getScoreboard",{})
