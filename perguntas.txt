@@ -95,19 +95,19 @@ _______________
 Uma das desvantagens da utilização desta Energia é:
 A: O ruído causado pelas turbinas 
 B: O regularizar dos caudais dos rios
-C: As alterações climáticas
+C: As alterações climáticas <--
 D: Ser poluente
 
 Onde se situa a Barragem do Alqueva?
 A:  Rio Douro
 B: Rio Tejo 
 C: Rio Mondego 
-D: Rio Guadiana
+D: Rio Guadiana <--
 
 Como é gerada a Energia Hídrica?
 A: Através da força Humana
 B: Através da energia gerada pelo Vento
-C: Através do movimento das águas 
+C: Através do movimento das águas <-- 
 D: Através de aerogeradores
 
 Será que devemos contaminar a água só por que está no nosso território?
@@ -125,3 +125,30 @@ Resposta: Podemos instalar paineis fotovoltaicos no telhado da nossa casa ou min
 Porque é que é vantajoso colocar aerogeradores próximos do mar ou em altitede?
 
 Resposta: É vantajoso colocar nestes locais, porque estes locais são mais ventosos e, por isso, têm um maior aproveitamento elétrico.
+
+________________
+
+Como é que possível produzir energia através de ondas?
+
+A: Através da energia eletromagnetica do íman que foi movimentado pelas ondas.
+B: Atraves da energia térmica que a água liberta.
+C: Através da energia produzida pelo vento ao movimentar as ondas.
+D: Através da energia das ondas ao entrarem em combustao.
+
+Será que é nosso dever mora respeitar as gerações futuras?
+
+O que acham mais importante: economia ou a sustentabilidade?
+
+Esta energia é boa porque?
+
+A: E renovável e conseguimos produzir em casa.
+B: Não e renovavel mas conseguimos produzir em casa.
+C: Não e renovavel nem conseguimos produzir em casa.
+D: É renovavel mas não conseguimos produzir em casa.
+
+Como possível produzir energia apartir da bicicleta?
+
+A: A partir da energia cinética (energia associada ao movimento) da bicicleta.
+B: Usando o peso da pessoa que pedala.
+C: Montando e desmontando partes da bicicleta.
+D: Tocando na buzina da bicicleta p produzir energia de ruido.
