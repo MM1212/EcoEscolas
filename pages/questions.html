@@ -22,7 +22,9 @@
 	font-weight: bold;
 	font-family: Helvetica;
 }
-
+#points {
+	font-size: 1.5em;
+}
 #options_box {
 	margin-top: 5%;
 	margin-left: auto;
@@ -72,7 +74,9 @@
 	<body>
 			<div id="questions_box">
 					<span class="question"><span class="curquestion"></span></span>
-				</div>
+					<br>
+					<span id="points"></span>
+			</div>
 				<div id="options_box">
 					<div class="choice_buttons_1">
 						<button id="button_0" class="submit_button"><span class="quest_button_0" id="0"></span></button>
@@ -88,8 +92,7 @@
 							<button id="button_1" class="submit_button"><span class="special_button_1" id="1"></span></button>
 					</div>
 				</div>
-				<div id="points">
-				</div>
+
 		
 		<script>
 			const socket = io();
@@ -200,7 +203,7 @@
 
 			
 			$(document).ready(function(){
-				
+				getPoints();
 				function addQuestion(){
 					$('.curquestion').html(questions[group][currentQuestion].question);
 					$('.quest_button_0').html(questions[group][currentQuestion].options[0]);
@@ -230,11 +233,13 @@
 					$('.quest_button_3').html(questions[group][currentQuestion].options[3]);
 					}
 				}
+				$("#points").hide();
 				$(".special_buttons").hide();
 			$('.choice_buttons_1').hide();
 			$('.choice_buttons_2').hide();
 			$('.curquestion').html(questions[group].banca);
 			setTimeout(function(){
+				$("#points").show();
 				$('.choice_buttons_1').show();
 				$('.choice_buttons_2').show();
 				addQuestion();

@@ -159,33 +159,21 @@ io.on('connection',function(socket){
 			if (err) throw err;
 		var index = [];
 		if (result) {
-<<<<<<< HEAD
 			for (var k = 0; k < 5; k++) {
 				if (result.rows[k] != null) {
 					index[k] = result.rows[k].turma + " -> " + result.rows[k].pontos + " pontos";
 				} else {
 					index[k] = "a"
-				}	
-=======
-			for (var k = 0; k < 6; k++){
-				if (result.rows[k] != null) {
-					txt = txt + "Turma: " + result.rows[k].turma + " | Pontos: " + result.rows[k].pontos + "<br />";
-				}
-				
-				else {
-					socket.emit("recieveScoreBoard",{scoreboard:txt});
-					break;
 				}
 				
 				
->>>>>>> 6571e4b692295fa11429ca1fee1c40698d4af062
 			}
 			socket.emit("recieveScoreBoard",{pos_1:index[0], pos_2:index[1], pos_3:index[2], pos_4:index[3], pos_5:index[4]});	
 		} else {
 			socket.emit("recieveScoreBoard",{pos_1:"a", pos_2:"a", pos_3:"a", pos_4:"a", pos_5:"a"});
 		}
 		})
-	})
+	});
 	socket.on("getIceCreams",function(){
 		con.query("SELECT gelados FROM gelados WHERE type = '0';",function(err,result){
 			if (err) throw err;
