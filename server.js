@@ -259,7 +259,13 @@ io.on('connection',function(socket){
 
 	socket.on('Get Points', function(turma){
 		con.query("SELECT pontos FROM main WHERE turma = '"+turma+"';", function(error, result){
-			socket.emit('Recieve Points', {points: result.rows[0].pontos});
+			if (error) throw error;
+			if (result.rows[0]) {
+				socket.emit('Recieve Points', {points: result.rows[0].pontos});
+			}else{
+				socket.emit('Recieve Points', {points: 0});
+			}
+			
 		});
 	});
 	socket.on('log',function(data){
