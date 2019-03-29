@@ -64,6 +64,8 @@ function add(turma,target){
 			var value = turma
 			io.emit("startCourse",{turma:value},target)
 			console.log("Turma "+turma+ " adicionada com sucesso")
+						io.emit('err',{err:"Turma "+turma+" adicionada com sucesso!"});
+
 			
         }
     })
