@@ -155,19 +155,18 @@ io.on('connection',function(socket){
 		})
 	})
 	socket.on("getScoreboard",function(){
-		con.query("SELECT * FROM main ORDER BY pontos DESC;",function(err,result){
+		con.query("SELECT * FROM main ORDER BY pontos DESC",function(err,result){
 			if (err) throw err;
-		var index = [];
+		var index = []
 		if (result) {
 			for (var k = 0; k < 5; k++) {
 				if (result.rows[k] != null) {
 					index[k] = result.rows[k].turma + " -> " + result.rows[k].pontos + " pontos";
 				} else {
 					index[k] = "a"
-				}
-				
-				
+				}	
 			}
+			
 			socket.emit("recieveScoreBoard",{pos_1:index[0], pos_2:index[1], pos_3:index[2], pos_4:index[3], pos_5:index[4]});	
 		} else {
 			socket.emit("recieveScoreBoard",{pos_1:"a", pos_2:"a", pos_3:"a", pos_4:"a", pos_5:"a"});

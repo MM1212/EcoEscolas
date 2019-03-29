@@ -2,9 +2,8 @@
 <html>
 <head>
     <title>Semear o Futuro</title>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
 	<script src="/socket.io/socket.io.js"></script>
-    <style>-->
     <style>
 body {
     background-color: LightBlue;
@@ -64,14 +63,14 @@ p {
 <body>
         <h1 id="start-title"><b>Semear o Futuro</b></h1>
         <div class="scoreboard">
-            <p id="p1"><span class="score">1º &nbsp;</span>Lorem ipsum</p>
-            <p id="p2"><span class="score">2º &nbsp;</span>Lorem ipsum</p>
-            <p id="p3"><span class="score">3º &nbsp;</span>Lorem ipsum</p>
-            <p id="p4"><span class="score">4º &nbsp;</span>Lorem ipsum</p>
-            <p id="p5"><span class="score">5º &nbsp;</span>Lorem ipsum</p>
+            <p id="p1"><span class="score">1º &nbsp;</span></p>
+            <p id="p2"><span class="score">2º &nbsp;</span></p>
+            <p id="p3"><span class="score">3º &nbsp;</span></p>
+            <p id="p4"><span class="score">4º &nbsp;</span></p>
+            <p id="p5"><span class="score">5º &nbsp;</span></p>
         </div>
  
-    <!--<script type="text/javascript">
+    <script type="text/javascript">
     const socket = io();
 
         function getScoreboard() {
@@ -85,7 +84,7 @@ p {
 
             window.setInterval(function () {
             getScoreboard();
-            }, 100);
+            }, 1000);
         
             socket.emit("getScoreboard",{})
             socket.on("recieveScoreBoard",function(data){
@@ -96,6 +95,6 @@ p {
                 $("#p5").html(data.pos_5);
             })
         })
-    </script>-->
+    </script>
 </body>
 </html>
