@@ -61,11 +61,8 @@ function add(turma,target){
 
         }else{
 			con.query("INSERT INTO main(turma,pontos) VALUES('"+turma+"','0');")
-			var value = turma
-			io.emit("startCourse",{turma:value},target)
-			console.log("Turma "+turma+ " adicionada com sucesso")
-						io.emit('err',{err:"Turma "+turma+" adicionada com sucesso!"});
-
+				io.emit("err",{err:"Turma "+turma+" adicionada com sucesso"})
+				console.log("Turma "+turma+ " adicionada com sucesso")
 			
         }
     })
@@ -114,7 +111,11 @@ app.get('/questoesbonitas', function(req, res){
 });
 
 app.get('/inicio', function(req, res){
-	res.sendFile(__dirname + '/pages/index.html')
+	res.sendFile(__dirname + '/pages/addForm.html')
+});
+
+app.get('/inicio/grupos', function(req, res){
+	res.sendFile(__dirname + '/pages/bancas.html')
 });
 
 app.get('/gelados', function(req, res){
@@ -130,7 +131,6 @@ app.get('/obossequemanda', function(req, res){
 });
 
 io.sockets.on('connection', function (socket) {
-	console.log('connection :', socket.request.connection._peername);
 });
 io.on('connection',function(socket){
 	
@@ -144,14 +144,16 @@ io.on('connection',function(socket){
 	socket.on('addClass',function(data,target){
 		add(data.value,target);
 	});
-	socket.on('passClass',function(data,target){
-		
-		setTimeout(function(){
-			console.log("1 "+data.value)
-			socket.emit('recieveClass2',{turma:data.value})
-		},1000);
-		
-	});
+	socket.on("checkClass",function(data,target){
+		con.query("SELECT * FROM main WHERE turma = '"+data.turma+"'",function(err,result){
+			if (err) throw err;
+				if (result.rows[0]) {
+					socket.emit("startCourse",{turma:data.turma},target)
+				}else{
+					socket.emit('err',{err:"Turma não existe na base de dados, se houver algum erro fale com os cromos"});
+				}
+		})
+	})
 	socket.on("getScoreboard",function(){
 		con.query("SELECT * FROM main ORDER BY pontos DESC;",function(err,result){
 			if (err) throw err;
@@ -159,8 +161,10 @@ io.on('connection',function(socket){
 		var txt = ""
 		if (result) {
 			for (var k = 0; k < 6; k++){
-				if (result.rows[k] != null)
+				if (result.rows[k] != null) {
 					txt = txt + "Turma: " + result.rows[k].turma + " | Pontos: " + result.rows[k].pontos + "<br />";
+				}
+				
 				else {
 					socket.emit("recieveScoreBoard",{scoreboard:txt});
 					break;

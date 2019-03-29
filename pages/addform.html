@@ -48,8 +48,8 @@
 	position: relative;
 	top: -255px;
 	background-color: rgb(38,38,38);
-	width: 20vw;
-	height: 6vh;
+	min-width: 20vw;
+	min-height: 6vh;
 	padding: 5px;
 	text-align: center;
 	border: 3px solid cadetblue;
@@ -118,10 +118,10 @@
 				var route = $("#routes").val();
 				if (class_value == "" || class_value == null){
 						message("Valor Invalido")
-					$("#username_input").val('');
+						$("#username_input").val('');
 				}else{
 					socket.emit('addClass',{value:class_value},code);
-					
+					$("#username_input").val('');
 					//document.location.href = "http://localhost:3000/questions.html";
 				
 				}
