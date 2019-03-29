@@ -50,3 +50,78 @@ A: Água
 B: Gás natural
 c: Petróleo
 D: Carvão
+
+_______________
+
+Qual o material que permite um melhor isolamento térmico?
+
+A: Cortiça
+B: Poliuretano <--
+C: Poliestireno expandido
+D: Argila expandida
+
+Para um melhor aproveitamento do calor da radiação solar, as janelas devem estar viradas para:
+
+A: Noroeste
+B: Nordeste
+C: Este
+D: Sul <--
+
+Que tipo de lâmpadas que devemos utilizar?
+
+A: Fluorescentes
+B: Halogénio
+C: LED <--
+D: Incandescentes
+
+Qual tem maior eficiência energética?
+
+A: D
+B: B+++
+C: B
+D: A++ <--
+
+A produção de energia pelo nosso sistema é semelhante à produção de:
+
+A: Energia termoelétrica <--
+B: Energia eólica
+C: Energia geotérmica
+D: Energia nuclear
+
+Se nós somos da Terra e a Terra nos dá tudo, e a Terra é de todos nós, o que é que nós deveríamos fazer por ela?
+
+_______________
+
+Uma das desvantagens da utilização desta Energia é:
+A: O ruído causado pelas turbinas 
+B: O regularizar dos caudais dos rios
+C: As alterações climáticas
+D: Ser poluente
+
+Onde se situa a Barragem do Alqueva?
+A:  Rio Douro
+B: Rio Tejo 
+C: Rio Mondego 
+D: Rio Guadiana
+
+Como é gerada a Energia Hídrica?
+A: Através da força Humana
+B: Através da energia gerada pelo Vento
+C: Através do movimento das águas 
+D: Através de aerogeradores
+
+Será que devemos contaminar a água só por que está no nosso território?
+
+_______________
+
+Somos o único causador de poluição no planeta?
+
+Será que o ser humano está determinado a destruir o planeta?
+
+De que maneira podemos implementar as energias renováveis no nosso dia-a-dia?
+
+Resposta: Podemos instalar paineis fotovoltaicos no telhado da nossa casa ou mini geradores no nosso quintal para gerar energia para a nossa casa ou vender a mesma à EDP.
+
+Porque é que é vantajoso colocar aerogeradores próximos do mar ou em altitede?
+
+Resposta: É vantajoso colocar nestes locais, porque estes locais são mais ventosos e, por isso, têm um maior aproveitamento elétrico.
