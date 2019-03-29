@@ -2,7 +2,7 @@ Seremos superiores às outras espécies que partilham o planeta connosco?
 
 A: Sim, e nós é que devemos controlar o planeta.
 B: Sim, mas devemos respeitar as outras espécies.
-C: Não, somos igueis às outras espécies, e todos obedecemos às leis da natureza.
+C: Não, somos iguais às outras espécies, e todos obedecemos às leis da natureza.
 D: Não. Apenas temos uma maior inteligência, e as outras espécies podem ser melhores que nós em outros aspetos.
 
 _______________
@@ -17,7 +17,7 @@ D: 180L
 Qual é o tipo de energia que é extraído da água?
 
 A: Eólica
-B: Hídrica
+B: Hídrica <--
 C: Geotérmica
 D: Nuclear
 
@@ -32,7 +32,7 @@ _______________
 
 O que poderíamos fazer para nos tornarmos mais sustentáveis?
 
-A: Repensar nos consumos
+A: Repensar nos consumos <--
 B: Descartar o lixo de forma rápida e tudo junto
 C: Continuar com os mesmos níveis de consumo
 D: Não pensar em reciclar
