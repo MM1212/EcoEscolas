@@ -163,13 +163,13 @@ io.on('connection',function(socket){
 				if (result.rows[k] != null) {
 					index[k] = result.rows[k].turma + " -> " + result.rows[k].pontos + " pontos";
 				} else {
-					index[k] = "a"
+					index[k] = ""
 				}	
 			}
 			
 			socket.emit("recieveScoreBoard",{pos_1:index[0], pos_2:index[1], pos_3:index[2], pos_4:index[3], pos_5:index[4]});	
 		} else {
-			socket.emit("recieveScoreBoard",{pos_1:"a", pos_2:"a", pos_3:"a", pos_4:"a", pos_5:"a"});
+			socket.emit("recieveScoreBoard",{pos_1:"", pos_2:"", pos_3:"", pos_4:"", pos_5:""});
 		}
 		})
 	});
