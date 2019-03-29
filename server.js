@@ -62,7 +62,7 @@ function add(turma,target){
         }else{
 			con.query("INSERT INTO main(turma,pontos) VALUES('"+turma+"','0');")
 				io.emit("err",{err:"Turma "+turma+" adicionada com sucesso"})
-				//console.log("Turma "+turma+ " adicionada com sucesso")
+				console.log("Turma "+turma+ " adicionada com sucesso")
 			
         }
     })
