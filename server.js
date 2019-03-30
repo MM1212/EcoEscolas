@@ -261,7 +261,7 @@ io.on('connection',function(socket){
 		con.query("SELECT pontos FROM main WHERE turma = '"+turma+"';", function(error, result){
 			if (error) throw error;
 			if (result.rows[0]) {
-				socket.emit('Recieve Points', {points: result.rows[0].pontos});
+				socket.emit('Recieve Points', {points: result.rows[0].pontos,turma:turma});
 			}else{
 				socket.emit('Recieve Points', {points: 0});
 			}

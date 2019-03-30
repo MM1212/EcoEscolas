@@ -33,7 +33,7 @@
 }
 
 .submit_button {
-	width: 450px;
+	width: 400px;
 	min-height: 150px;
 	margin: 20px;
 	cursor: pointer;
@@ -42,7 +42,7 @@
 	border: 4px solid cadetblue;
 	padding: 10px;
 	border-radius: 4px;
-    font-size: 2.5em;
+    font-size: 2.0em;
 	font-family: Helvetica;
 	text-align: center;
 	
@@ -569,7 +569,7 @@
 					}
 				
 					socket.on('Recieve Points', function(data){
-							$("#points").html(data.points);
+							$("#points").html(data.turma+" - "+data.points);
 					});
 			});
 		</script>
