@@ -100,7 +100,7 @@ B: Relembrar, reduzir, repartir, recusar e reciclar
 
 C: Reutilizar, reunir, relaxar, recusar e resíduos
 
-D: Reciclar, recusar, reduzir, reutiliza e repensar
+D: Reciclar, recusar, reduzir, reutiliza e repensar |certa|
 ```
 _______________
 

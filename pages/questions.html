@@ -114,8 +114,9 @@
 				questions = {
 
 				[0]: {
-					banca: "Ginásio",
-						[0]: {
+				  banca: "Ginásio",
+				  max: 3,
+					[0]: {
 							question:"Esta energia é boa porquê?",
 							options:{
 								[0]:"É renovável e conseguimos produzir em casa",
@@ -125,17 +126,17 @@
 							},
 							right:0
 						},
-						[1]: {
-							question:"Como possível produzir energia apartir da bicicleta?",
+					[1]: {
+							question:"Como é que é possível produzir energia apartir da bicicleta?",
 							options:{
-								[0]:"A partir da energia cinética (energia associada ao movimento) da bicicleta",
+								[0]:"Montando e desmontando partes da bicicleta",
 								[1]:"Usando o peso da pessoa que pedala",
-								[2]:"Montando e desmontando partes da bicicleta",
+								[2]:"A partir da energia cinética (energia associada ao movimento) da bicicleta",
 								[3]:"Tocando na buzina da bicicleta p produzir energia de ruido."
 							},
-							right:0
+							right:2
 						},
-						[2]: {
+					[2]: {
 							question:"Como é que possível produzir energia através de ondas?",
 							options:{
 								[0]:"Através da energia eletromagnetica do íman que foi movimentado pelas ondas.",
@@ -143,186 +144,343 @@
 								[2]:"Através da energia produzida pelo vento ao movimentar as ondas.",
 								[3]:"Através da energia das ondas ao entrarem em combustao."
 							},
-							right:3
+							right:0
 						},
-						[3]: {
-							question:"O que acham mais importante: economia ou a sustentabilidade?",
+					[3]: {
+							question:"O que acham mais importante: Economia ou a sustentabilidade?",
 							options:{
 								[0]:"Economia",
 								[1]:"Sustentabilidade",
 								
 							},
-							right:0
+							right:1
 						}
 				},
+				
 				[1]: {
-				banca: "Espaços Verdes", // THIS ONE NEEDS SOME QUESTION BOIS
-				[0]: {
-					question:"Qual é que é a planta mais pequena?",
-					options:{
-						[0]:"Girassol",
-						[1]:"Rosa",
-						[2]:"Orquidea",
-						[3]:"Erva daninha"
+				  banca: "Jardim", // THIS ONE NEEDS SOME QUESTION BOIS
+				  max: 3,
+					[0]: {
+						question:"O que poderíamos fazer para nos tornarmos mais sustentáveis?",
+						options:{
+							[0]:"Repensar nos consumos",
+							[1]:"Descartar o lixo de forma rápida e tudo junto",
+							[2]:"Continuar com os mesmos níveis de consumo",
+							[3]:"Não pensar em reciclar"
+						},
+						right:0
 					},
-					right:3
-				},
-				[1]: {
-					question:"Seremos superiores às outras espécies que partilham o planeta connosco?",
-					options:{
-						[0]:"Sim, e nós é que devemos controlar o planeta.",
-						[1]:"Sim, mas devemos respeitar as outras espécies.",
-						[2]:"Não, somos iguais às outras espécies, e todos obedecemos às leis da natureza.",
-						[3]:"Não. Apenas temos uma maior inteligência, e as outras espécies podem ser melhores que nós em outros aspetos"
+					[1]: {
+						question:"Qual o composto químico utilizado na desinfeção da água?",
+						options:{
+							[0]:"Azoto",
+							[1]:"Cloro",
+							[2]:"Fosfato",
+							[3]:"Sal"
+						},
+						right:1
 					},
-					right:2
+					[2]: {
+						question:"Os recursos naturais são finitos. Qual é o menos prejudicial?",
+						options:{
+							[0]:"Água",
+							[1]:"Gás natural",
+							[2]:"Petróleo",
+							[3]:"Carvão"
+						},
+						right:0
+					},
+					[3]: {
+						question:"Seremos superiores às outras espécies que partilham o planeta connosco?",
+						options:{
+							[0]:"Sim",
+							[1]:"Não",
+							
+						},
+						right:1
+					}
 				},
+				
 				[2]: {
-					question:"Qual o melhor sistema para tratar as plantas?",
-					options:{
-						[0]:"Pesticidas",
-						[1]:"Agroquimicos",
-						[2]:"Água produzida em Chernobil",
-						[3]:"Nenhum dos outros"
+				  banca: "Cenas de sei lá quem",
+				  max: 3,
+					[0]: {
+						question:"Quantos litros de água deveríamos utilizar por dia?",
+						options:{
+							[0]:"200L",
+							[1]:"370L",
+							[2]:"150L",
+							[3]:"180L"
+						},
+						right:3
 					},
-					right:2
+					[1]: {
+						question:"Qual é o tipo de energia que é extraído da água?",
+						options:{
+							[0]:"Eólica",
+							[1]:"Hídrica",
+							[2]:"Geotérmica",
+							[3]:"Nuclear"
+						},
+						right:2
+					},
+					[2]: {
+						question:"Quais são os 5 Rs?",
+						options:{
+							[0]:"Reunir, reutilizar, repartir, reduzir e relembrar",
+							[1]:"Relembrar, reduzir, repartir, recusar e reciclar",
+							[2]:"Reutilizar, reunir, relaxar, recusar e resíduos",
+							[3]:"Reciclar, recusar, reduzir, reutilizar e repensar"
+						},
+						right:3
+					},
+					[3]: {
+						question:"Acham correto o que tem acontecido aos oceanos? (Mar de Lixo do Pacifico)", //change this
+						options:{
+							[0]:"Sim",
+							[1]:"Não",
+							
+						},
+						right:1
+					}					
 				},
+				
 				[3]: {
-					question:"Será correto poluir os jardins?",
-					options:{
-						[0]:"Sim",
-						[1]:"Não",
-						
+				  banca: "Barragem",
+				  max: 3,
+					[0]: {
+						question:"Uma das desvantagens da utilização desta Energia é:",
+						options:{
+							[0]:"O ruído causado pelas turbinas",
+							[1]:"O regularizar dos caudais dos rios",
+							[2]:"As alterações climáticas",
+							[3]:"Ser poluente"
+						},
+						right:2
 					},
-					right:0
-				}
-				},
-				[2]: {
-				banca: "Cenas de sei lá quem",
-				[0]: {
-					question:"Quantos litros de água deveríamos utilizar por dia?",
-					options:{
-						[0]:"200L",
-						[1]:"370L",
-						[2]:"150L",
-						[3]:"180L"
+					[1]: {
+						question:"Onde se situa a Barragem do Alqueva?",
+						options:{
+							[0]:"Rio Douro",
+							[1]:"Rio Tejo",
+							[2]:"Rio Mondego",
+							[3]:"Rio Guadiana"
+						},
+						right:3
 					},
-					right:3
-				},
-				[1]: {
-					question:"Qual é o tipo de energia que é extraído da água?",
-					options:{
-						[0]:"Eólica",
-						[1]:"Hídrica",
-						[2]:"Geotérmica",
-						[3]:"Nuclear"
+					[2]: {
+						question:"Como é gerada a Energia Hídrica?",
+						options:{
+							[0]:"Através da força Humana",
+							[1]:"Através da energia gerada pelo vento",
+							[2]:"Através do movimento das águas",
+							[3]:"Através de aerogeradores"
+						},
+						right:2
 					},
-					right:2
-				},
-				[2]: {
-					question:"Quais são os 5 Rs?",
-					options:{
-						[0]:"Reunir, reutilizar, repartir, reduzir e relembrar",
-						[1]:"Relembrar, reduzir, repartir, recusar e reciclar",
-						[2]:"Reutilizar, reunir, relaxar, recusar e resíduos",
-						[3]:"Reciclar, recusar, reduzir, reutilizar e repensar"
-					},
-					right:3
-				},
-				[3]: {
-					question:"Será correto poluir os jardins?", //change this
-					options:{
-						[0]:"Sim",
-						[1]:"Não",
-						
-					},
-					right:1
-				}					
-				},
-				[3]: {
-				banca: "Barragem",
-				[0]: {
-					question:"Uma das desvantagens da utilização desta Energia é:",
-					options:{
-						[0]:"O ruído causado pelas turbinas",
-						[1]:"O regularizar dos caudais dos rios",
-						[2]:"As alterações climáticas",
-						[3]:"Ser poluente"
-					},
-					right:2
-				},
-				[1]: {
-					question:"Onde se situa a Barragem do Alqueva?",
-					options:{
-						[0]:"Rio Douro",
-						[1]:"Rio Tejo",
-						[2]:"Rio Mondego",
-						[3]:"Rio Guadiana"
-					},
-					right:3
-				},
-				[2]: {
-					question:"Como é gerada a Energia Hídrica?",
-					options:{
-						[0]:"Através da força Humana",
-						[1]:"Através da energia gerada pelo vento",
-						[2]:"Através do movimento das águas",
-						[3]:"Através de aerogeradores"
-					},
-					right:2
-				},
-				[3]: {
-					question:"Será que devemos contaminar a água só por que está no nosso território?",
-					options:{
-						[0]:"Sim",
-						[1]:"Não",
-						
-					},
-					right:1
-				}					
+					[3]: {
+						question:"Será que devemos contaminar a água só por que está no nosso território?",
+						options:{
+							[0]:"Sim",
+							[1]:"Não",
+							
+						},
+						right:1
+					}					
 				},
 
 				[4]: {
-				banca: "Quarto",
-				[0]: {
-					question:"Qual é o meio energético mais usado?",
-					options:{
-						[0]:"Calor",
-						[1]:"Eletricidade",
-						[2]:"Luz",
-						[3]:"Movimento"
+				  banca: "Quarto",
+				  max: 3,
+					[0]: {
+						question:"Qual é o meio energético mais usado?",
+						options:{
+							[0]:"Calor",
+							[1]:"Eletricidade",
+							[2]:"Luz",
+							[3]:"Movimento"
+						},
+						right:1
 					},
-					right:1
+					[1]: {
+						question:"Quando se cria energia com pouco ou nenhum resíduo, como se chama a essa energia?",
+						options:{
+							[0]:"Não renovável",
+							[1]:"Mecânica",
+							[2]:"Reutilizável",
+							[3]:"Renovável"
+						},
+						right:3
+					},
+					[2]: {
+						question:"Que vantagem traz a regulação de luz em casa?",
+						options:{
+							[0]:"Aumento da luminosidade e decoração",
+							[1]:"Produção de energia extra e poupança energética",
+							[2]:"Adaptação à luz natural e poupança energética",
+							[3]:"Adaptação à luz natural e decoração"
+						},
+						right:2
+					},
+					[3]: {
+						question:"Será que a tecnologia ecológica devia ser um luxo, isto é, mais cara e inacessível?",
+						options:{
+							[0]:"Sim",
+							[1]:"Não",
+							
+						},
+						right:1
+					}					
 				},
-				[1]: {
-					question:"Quando se cria energia com pouco ou nenhum resíduo, como se chama a essa energia?",
-					options:{
-						[0]:"Não renovável",
-						[1]:"Mecânica",
-						[2]:"Reutilizável",
-						[3]:"Renovável"
+			
+				[5]: {
+				  banca: "Sala",
+				  max: 5,
+					[0]: {
+						question:"Qual o material que permite um melhor isolamento térmico?",
+						options:{
+							[0]:"Cortiça",
+							[1]:"Poliuterano",
+							[2]:"Poliestireno expandido",
+							[3]:"Argila expandida"
+						},
+						right:1
 					},
-					right:3
+					[1]: {
+						question:"Para um melhor aproveitamento do calor da radiação solar, as janelas devem estar viradas para:",
+						options:{
+							[0]:"Noroeste",
+							[1]:"Nordeste",
+							[2]:"Este",
+							[3]:"Sul"
+						},
+						right:3
+					},
+					[2]: {
+						question:"Que tipo de lâmpadas que devemos utilizar?",
+						options:{
+							[0]:"Fluorescentes",
+							[1]:"Halogénio",
+							[2]:"LED",
+							[3]:"Incandescentes"
+						},
+						right:2
+					},
+					[3]: {
+						question:"Qual tem maior eficiência energética?",
+						options:{
+							[0]:"D",
+							[1]:"B+++",
+							[2]:"B",
+							[3]:"A++"
+						},
+						right:3
+					},
+					[4]: {
+						question:"A produção de energia pelo nosso sistema é semelhante à produção de:",
+						options:{
+							[0]:"Energia Termoelétrica",
+							[1]:"Energia Eólica",
+							[2]:"Energia geotérmica",
+							[3]:"Energia nuclear"
+						},
+						right:0
+					},
+					[5]: {
+						question:"Se nós somos da Terra e a Terra nos dá tudo, e a Terra é de todos nós, o que é que nós deveríamos fazer por ela?",
+						options:{
+							[0]:"Sim (relativa)",
+							[1]:"Não (relativa)",
+							
+						},
+						right:0
+					}					
 				},
-				[2]: {
-					question:"Que vantagem traz a regulação de luz em casa?",
-					options:{
-						[0]:"Aumento da luminosidade e decoração",
-						[1]:"Produção de energia extra e poupança energética",
-						[2]:"Adaptação à luz natural e poupança energética",
-						[3]:"Adaptação à luz natural e decoração"
+			
+				[6]: {
+				  banca: "Cozinha",
+				  max: 3,
+					[0]: {
+						question:"Uma lata de alumínio, ao ser reciclada pode ser matéria-prima de que objetos?",
+						options:{
+							[0]:"Embalagens de Vidro",
+							[1]:"Peças de automóveis ou bicicletas",
+							[2]:"Embalagens de plástico",
+							[3]:"Todas as anteriores"
+						},
+						right:1
 					},
-					right:2
+					[1]: {
+						question:"Quais são os principais parâmetros a controlar no processo de compostagem?",
+						options:{
+							[0]:"Cor, cheiro e quantidade de mosquitos",
+							[1]:"Razão entre o oxigénio e carbono",
+							[2]:"Oxigénio, humidade, temperatura, e razão entre carbono e azoto",
+							[3]:"Temperatura"
+						},
+						right:2
+					},
+					[2]: {
+						question:"A reciclagem de uma tonelada de papel evita o abate de quantas árvores?",
+						options:{
+							[0]:"15 a 20 árvores",
+							[1]:"Mais de 100",
+							[2]:"40 a 60 árvores",
+							[3]:"Nenhuma das opções anteriores"
+						},
+						right:0
+					},
+					[3]: {
+						question:"Quem tem o poder de mudar o pensamento das pessoas?",
+						options:{
+							[0]:"Sim (relativo)",
+							[1]:"Não (relativo)"
+						},
+						right:0
+					}					
 				},
-				[3]: {
-					question:"Sera que a tecnologia ecológica devia ser um luxo, isto é, mais cara e inacessível?",
-					options:{
-						[0]:"Sim",
-						[1]:"Não",
-						
+
+				[7]: {
+				  banca: "Casa de Banho",
+				  max: 3,
+					[0]: {
+						question:"Para que fins podemos utilizar a água?",
+						options:{
+							[0]:"Desperdiçar",
+							[1]:"Diversão",
+							[2]:"Indústria",
+							[3]:"Higiene e consumo próprio"
+						},
+						right:3
 					},
-					right:1
-				}					
+					[1]: {
+						question:"Como podemos poupar a água",
+						options:{
+							[0]:"Tomando banhos prolongados",
+							[1]:"Regando o Jardim",
+							[2]:"Fechando a torneira quando não estamos a utilizar",
+							[3]:"Deixando a torneira aberta"
+						},
+						right:2
+					},
+					[2]: {
+						question:"Qual a quantidade média de água que uma pessoa precisa de beber por dia?",
+						options:{
+							[0]:"1.5L",
+							[1]:"0.75L",
+							[2]:"0.5L",
+							[3]:"1.0L"
+						},
+						right:0
+					},
+					[3]: {
+						question:"O ouro tem muito valor e pouca utilidade, comparado à água, que é a coisa mais útil do mundo e não lhe dão valor, porquê?",
+						options:{
+							[0]:"Sim (relativo)",
+							[1]:"Não (relativo)"
+						},
+						right:0
+					}					
 				}
 			}
 
@@ -339,7 +497,7 @@
 				}
 				function nextQuestion(){
 					
-					if (currentQuestion == 2) {
+					if (currentQuestion == questions[group].max-1) {
 						currentQuestion++;
 						$('.choice_buttons_1').hide();
 						$('.choice_buttons_2').hide();
@@ -348,9 +506,15 @@
 					$('.special_buttons').show();
 					$('.special_button_0').html(questions[group][currentQuestion].options[0]);
 					$('.special_button_1').html(questions[group][currentQuestion].options[1]);
-					}else if (currentQuestion == 3){
-							
+					}else if (currentQuestion == questions[group].max){
+						$('.choice_buttons_1').hide();
+						$('.choice_buttons_2').hide();
+						$('.special_buttons').hide();
+						$('.curquestion').html("Acabou");
+						setTimeout(function(){
 							window.location = "./inicio/grupos";
+						},3000)
+							
 					}else {
 					currentQuestion++;
 					$('.curquestion').html(questions[group][currentQuestion].question);
