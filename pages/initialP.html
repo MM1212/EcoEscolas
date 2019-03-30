@@ -64,10 +64,19 @@ p {
 .score {
     color: White;
 }
+#watermark{
+    position: absolute;
+    font-family: monospace;
+    color: darkslategray;
+    top:97.5%;
+    font-size: 1.1vw;
+    left: 0%;
+}
     </style>
 </head>
     
 <body>
+
         <h1 id="start-title"><b>Semear o Futuro</b></h1>
         <div class="scoreboard">
             <p id="p1"><span class="score">1º &nbsp;</span></p>
@@ -76,7 +85,7 @@ p {
             <p id="p4"><span class="score">4º &nbsp;</span></p>
             <p id="p5"><span class="score">5º &nbsp;</span></p>
         </div>
- 
+        <div id="watermark"><span style="font-style: italic;"> Made By:</span> Pedro Antunes | Pedro Stumpo | Martim Martins</div>
     <script type="text/javascript">
     const socket = io();
         $(document).ready(function(){
