@@ -97,16 +97,20 @@
 					<option value="null">Grupos</option>
 					  <option value="0">Ginásio</option>
 					  <option value="1">Espaços Verdes</option>
+					  <option value="2">Casa de banho</option>
+					  <option value="3">Barragem</option>
+					  <option value="4">Quarto</option>
 					</select>
 		</div>
 		    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 		<script>
 			var Config = {};
+
 			//Test / LiveServer
-			Config.side = "LiveServer"
-			if (Config.side == "Test") {
+			Config.side = "Test"
+			if (window.location == "http://localhost:3000/inicio/grupos") {
 				Config.questions = "http://localhost:3000/questoesbonitas?class="
-			}else{
+			}else if(window.location == "http://ecoescolas.herokuapp.com/inicio/grupos"){
 				Config.questions = "https://ecoescolas.herokuapp.com/questoesbonitas?class="
 			}
 			$(function(){
