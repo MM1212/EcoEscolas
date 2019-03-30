@@ -107,11 +107,16 @@
 			var Config = {};
 
 			//Test / LiveServer
+
+
 			Config.side = "Test"
+			var redir;
 			if (window.location == "http://localhost:3000/inicio/grupos") {
-				Config.questions = "http://localhost:3000/questoesbonitas?class="
+				Config.questions = "http://localhost:3000/questoesbonitas?class=";
+				redir = "http://localhost:3000/questoesbonitas?class=";
 			}else if(window.location == "http://ecoescolas.herokuapp.com/inicio/grupos"){
-				Config.questions = "https://ecoescolas.herokuapp.com/questoesbonitas?class="
+				Config.questions = "https://ecoescolas.herokuapp.com/questoesbonitas?class=";
+				redir = "https://ecoescolas.herokuapp.com/questoesbonitas?class=";
 			}
 			$(function(){
 				const code = Math.floor((Math.random() * 1998) + 1); 
@@ -151,8 +156,10 @@
 				});
 			socket.on('startCourse',function(data,target){
 				if (target == code){
+
+					console.log(Config.questions+data.turma+"-"+$("#groups").val());
 					
-					window.location = Config.questions+data.turma+"-"+$("#groups").val();
+					window.location = redir+data.turma+"-"+$("#groups").val();
 					
 
 					
