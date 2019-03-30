@@ -237,19 +237,57 @@ Será que devemos contaminar a água só por que está no nosso território?
 _______________
 
 *SEH Eólica*
-!!!
 
-Somos o único causador de poluição no planeta?
 
+
+Porque é que é vantajoso colocar aerogeradores próximos do mar ou em altitude?
+
+
+```
+A.	Porque existem melhores condições para a sua instalação 
+
+B.	Pois estes locais são ventosos 
+
+C.	Porque são locais de fácil acesso 
+
+D.	Porque são locais de difícil acesso
+```
+
+
+De que maneira podemos implementar as energias renováveis no nosso país para termos um maior aproveitamento elétrico?
+
+
+```
+A.	Investindo no carvão
+
+B.	Instalando painéis fotovoltaicos no norte 
+
+C.	Investindo no gás natural
+
+D.	Instalando parques eólicos em zonas ventosas
+```
+
+
+3-	É possível instalar turbinas eólicas em centros urbanos?
+
+
+```
+A.	Sim, se estiverem perto do continente 
+
+B.	Não, se estiverem longe do continente
+
+C.	Não, pelo facto de não existir espaço na cidade para a sua instalação
+
+D.	Sim, pelo facto de existir espaço na cidade para a sua instalação 
+```
+
+
+Filosofica:
+
+
+```
 Será que o ser humano está determinado a destruir o planeta?
-
-De que maneira podemos implementar as energias renováveis no nosso dia-a-dia?
-
-Resposta: Podemos instalar paineis fotovoltaicos no telhado da nossa casa ou mini geradores no nosso quintal para gerar energia para a nossa casa ou vender a mesma à EDP.
-
-Porque é que é vantajoso colocar aerogeradores próximos do mar ou em altitede?
-
-Resposta: É vantajoso colocar nestes locais, porque estes locais são mais ventosos e, por isso, têm um maior aproveitamento elétrico.
+```
 
 ________________
 
