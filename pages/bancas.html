@@ -134,7 +134,7 @@
  
 	        $('#submit_button').click(function(){
 				//alert($("#username_input").val())
-				var class_value = $("#username_input").val();
+				var class_value = ($("#username_input").val());
 				var group = $("#groups").val();
 				if (class_value == "" || class_value == null || group == "null" || group == null){
 					if (group == "null" || group == null){
@@ -163,7 +163,7 @@
 
 					console.log(Config.questions+data.turma+"-"+$("#groups").val());
 					
-					window.location = redir+data.turma+"-"+$("#groups").val();
+					window.location = redir+(data.turma).replace('-', '/')+"-"+$("#groups").val();
 					
 
 					
