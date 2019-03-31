@@ -161,7 +161,7 @@ io.on('connection',function(socket){
 		if (result) {
 			for (var k = 0; k < 5; k++) {
 				if (result.rows[k] != null) {
-					index[k] = result.rows[k].turma + " -> " + result.rows[k].pontos + " pontos";
+					index[k] = result.rows[k].turma + " &rarr; " + result.rows[k].pontos + " pontos";
 				} else {
 					index[k] = ""
 				}	

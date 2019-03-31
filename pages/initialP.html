@@ -10,7 +10,6 @@ body {
     text-align: center;
     margin: 0px;
 }
-
 #start-title {
     color: white;
     -webkit-text-stroke-width: 0.4vw;
@@ -19,18 +18,16 @@ body {
     font-size: 10vw;
     margin: 22px 0px 6px 0px;
 }
-
 .scoreboard {
     padding: 10px;
     position: relative;
     left: 15vw;
     background-color: Black;
     opacity: 0.5;
-    margin: 50px 0px 0px 0px;
+    margin: 50px 0px 5px 0px;
     width: 70vw;
     border-radius: 20px
 }
-
 p {
     opacity: 1.0;
     margin: 0px;
@@ -38,17 +35,14 @@ p {
     font-size: 4vw;
     color: white;
 }
-
 #p1 {
     color: Gold;
     font-weight: bold;
 }
-
 #p2 {
     color: Silver;
     font-weight: bold;
 }
-
 #p3 {
     color: #CD7F32;
     font-weight: bold;
@@ -78,13 +72,13 @@ p {
 
         <h1 id="start-title"><b>Semear o Futuro</b></h1>
         <div class="scoreboard">
-            <p id="p1"><span class="score">1º &nbsp;</span></p>
-            <p id="p2"><span class="score">2º &nbsp;</span></p>
-            <p id="p3"><span class="score">3º &nbsp;</span></p>
-            <p id="p4"><span class="score">4º &nbsp;</span></p>
-            <p id="p5"><span class="score">5º &nbsp;</span></p>
+            <p id="p1"><span class="score">1º &nbsp;</span><span id="t1"></span></p>
+            <p id="p2"><span class="score">2º &nbsp;</span><span id="t2"></span></p>
+            <p id="p3"><span class="score">3º &nbsp;</span><span id="t3"></span></p>
+            <p id="p4"><span class="score">4º &nbsp;</span><span id="t4"></span></p>
+            <p id="p5"><span class="score">5º &nbsp;</span><span id="t5"></span></p>
         </div>
-        <div id="watermark"><span style="font-style: italic;"> Made By:</span> Pedro Antunes | Pedro Stumpo | Martim Martins</div>
+        <div id="watermark"><span style="font-style: italic;"> Made By:</span> Pedro Antunes | Pedro Stumpo | Martim Martins | Diogo Ribeiro | Fábio Grifo</div>
     <script type="text/javascript">
     const socket = io();
         $(document).ready(function(){
@@ -95,11 +89,11 @@ p {
         
             socket.emit("getScoreboard",{})
             socket.on("recieveScoreBoard",function(data){
-                $("#p1").html(data.pos_1);
-                $("#p2").html(data.pos_2);
-                $("#p3").html(data.pos_3);
-                $("#p4").html(data.pos_4);
-                $("#p5").html(data.pos_5);
+                $("#t1").html(data.pos_1);
+                $("#t2").html(data.pos_2);
+                $("#t3").html(data.pos_3);
+                $("#t4").html(data.pos_4);
+                $("#t5").html(data.pos_5);
             })
         })
     </script>
