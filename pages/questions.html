@@ -4,87 +4,67 @@
 		<title>Semear o Futuro</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
-	
-		
-		
 	</head>
 	<style>
-		body {
+body {
 	text-align: center;
-	overflow: hidden;
 	background-color: lavender;
+	margin: 5vh 0vw 0vh 0vw;
 }
 
 #questions_box {
-	margin: 4%;
+	margin-left: 3vw;
+	margin-bottom: 1vh;
 	text-align: center;
-	font-size: 3.5em;
+	width: 94vw;
 	font-weight: bold;
 	font-family: Helvetica;
 }
-#points {
-	font-size: 1.5em;
-}
-#options_box {
-	margin-top: 5%;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-}
 
 .submit_button {
-	width: 400px;
-	min-height: 150px;
-	margin: 20px;
+	width: 94vw;
+	height: 12vh;
 	cursor: pointer;
-	transition: transform 0.3s;
-	background-color: cadetblue;
-	border: 4px solid cadetblue;
-	padding: 10px;
+	background-color: white;
+	border: 8px solid cadetblue;
+	padding: 0.5vw;
 	border-radius: 4px;
-    font-size: 2.0em;
+	margin: 2vh 0vw 2vh 0vw;
+    font-size: 3vh;
 	font-family: Helvetica;
 	text-align: center;
 	
 }
 
-#big_title {
-	font-family: Calibri;
-	font-size: 900%;
-	color: lavender;
+.curquestion {
+	color: Green;
+	font-family: Verdana;
+	font-size: 10vh;
 }
 
-.input {
-	font-family: Helvetica;
-	font-size: 200%;
-	padding: 5px;
-	border: 3px solid CadetBlue;
-}
-
-#username_input {
-	border-left: 6px solid CadetBlue;
-}
 #points{
-	margin-top: 10%;
+	margin-top: 3vh;
 	font-family: Helvetica;
-	font-size: 200%;
+	font-size: 3vh;
+	color: cadetBlue;
+	padding: 0vh 2vw 0vh 2vw;
+	border-left: 3px solid cadetBlue;
+	border-right: 3px solid cadetBlue;
 }
 	</style>
 	<body>
 			<div id="questions_box">
-					<span class="question"><span class="curquestion"></span></span>
-					<br>
-					<span id="points"></span>
+				<span id="points"></span>
+				<br>
+				<span class="curquestion"></span>
+					
 			</div>
 				<div id="options_box">
-					<div class="choice_buttons_1">
-						<button id="button_0" class="submit_button"><span class="quest_button_0" id="0"></span></button>
-						<button id="button_1" class="submit_button"><span class="quest_button_1" id="1"></span></button>
-					</div>
-					<div class="choice_buttons_2">
-						<button id="button_2" class="submit_button"><span class="quest_button_2" id="2"></span></button>
-						<button id="button_3" class="submit_button"><span class="quest_button_3" id="3"></span></button>
-					</div>
+					<button id="button_0" class="submit_button"><span class="quest_button_0" id="0"></span></button>
+					<button id="button_1" class="submit_button"><span class="quest_button_1" id="1"></span></button>
+					<button id="button_2" class="submit_button"><span class="quest_button_2" id="2"></span></button>
+					<button id="button_3" class="submit_button"><span class="quest_button_3" id="3"></span></button>
+				</div>
 					<div class="special_buttons">
 							<button id="button_0" class="submit_button"><span class="special_button_0" id="0"></span></button>
 							<br/>
@@ -130,21 +110,21 @@
 							question:"Como é que é possível produzir energia apartir da bicicleta?",
 							options:{
 								[0]:"Montando e desmontando partes da bicicleta",
-								[1]:"Usando o peso da pessoa que pedala",
+								[1]:"Tocando na buzina da bicicleta p produzir energia de ruido",
 								[2]:"A partir da energia cinética (energia associada ao movimento) da bicicleta",
-								[3]:"Tocando na buzina da bicicleta p produzir energia de ruido."
+								[3]:"Usando o peso da pessoa que pedala"
 							},
 							right:2
 						},
 					[2]: {
 							question:"Como é que possível produzir energia através de ondas?",
 							options:{
-								[0]:"Através da energia eletromagnetica do íman que foi movimentado pelas ondas.",
-								[1]:"Atraves da energia térmica que a água liberta.",
-								[2]:"Através da energia produzida pelo vento ao movimentar as ondas.",
-								[3]:"Através da energia das ondas ao entrarem em combustao."
+								[0]:"Através da energia das ondas ao entrarem em combustao",
+								[1]:"Atraves da energia térmica que a água liberta",
+								[2]:"Através da energia produzida pelo vento ao movimentar as ondas",
+								[3]:"Através da energia eletromagnetica do íman que foi movimentado pelas ondas"
 							},
-							right:0
+							right:3
 						},
 					[3]: {
 							question:"O que acham mais importante: Economia ou a sustentabilidade?",
@@ -543,6 +523,8 @@
 				function addQuestion(){
 					getPoints();
 					$('.curquestion').html(questions[group][currentQuestion].question);
+					$('.curquestion').css("color", "Black");
+					$('.curquestion').css("font-size", "5vh");
 					$('.quest_button_0').html(questions[group][currentQuestion].options[0]);
 					$('.quest_button_1').html(questions[group][currentQuestion].options[1]);
 					$('.quest_button_2').html(questions[group][currentQuestion].options[2]);
@@ -552,23 +534,20 @@
 					
 					if (currentQuestion == questions[group].max-1) {
 						currentQuestion++;
-						$('.choice_buttons_1').hide();
-						$('.choice_buttons_2').hide();
-
+						$('#options_box').hide();
 						$('.curquestion').html(questions[group][currentQuestion].question);
 					$('.special_buttons').show();
 					$('.special_button_0').html(questions[group][currentQuestion].options[0]);
 					$('.special_button_1').html(questions[group][currentQuestion].options[1]);
-					}else if (currentQuestion == questions[group].max){
-						$('.choice_buttons_1').hide();
-						$('.choice_buttons_2').hide();
+					} else if (currentQuestion == questions[group].max){
+						$('#options_box').hide();
 						$('.special_buttons').hide();
 						$('.curquestion').html("Acabou");
 						setTimeout(function(){
 							window.location = "./inicio/grupos";
-						},3000)
+						},2000)
 							
-					}else {
+					} else {
 					currentQuestion++;
 					$('.curquestion').html(questions[group][currentQuestion].question);
 					$('.quest_button_0').html(questions[group][currentQuestion].options[0]);
@@ -579,13 +558,11 @@
 				}
 				$("#points").hide();
 				$(".special_buttons").hide();
-			$('.choice_buttons_1').hide();
-			$('.choice_buttons_2').hide();
+			$('#options_box').hide();
 			$('.curquestion').html(questions[group].banca);
 			setTimeout(function(){
 				$("#points").show();
-				$('.choice_buttons_1').show();
-				$('.choice_buttons_2').show();
+				$('#options_box').show();
 				addQuestion();
 			},3000);
 
@@ -604,7 +581,7 @@
 							nextQuestion();
 						},1000);
 					}else{
-						$("body").css("background-color","rgb(156, 22, 22)")
+						$("body").css("background-color","#ff3300")
 						$(".curquestion").css("color","Lavender")
 						$("#points").css("color","Lavender")
 						setTimeout(function(){
@@ -624,7 +601,7 @@
 					}
 				
 					socket.on('Recieve Points', function(data){
-							$("#points").html(data.turma+" - "+data.points);
+							$("#points").html(data.turma+" &rarr; "+data.points + " pontos");
 					});
 			});
 		</script>
