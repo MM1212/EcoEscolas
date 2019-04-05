@@ -122,7 +122,7 @@ app.get('/gelados', function(req, res){
 	res.sendFile(__dirname + '/pages/geladosMain.html')
 });
 
-app.get('/gelados/manage', function(req, res){
+app.get('/gelados/controlo', function(req, res){
 	res.sendFile(__dirname + '/pages/geladosManage.html')
 });
 
