@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Felicidade no Trabalho</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+    </head>
+    <style>
+        body{
+            text-align: center;
+	        background-color: lavender;
+	        margin: 5vh 0vw 0vh 0vw;
+        }
+        .login {
+            position:relative;
+            top: 40%;
+            text-align: center;
+            margin-top: 2vh;
+            width: 20vw;
+            height: 10vh;
+            color: gray;
+            background-color: white;
+            border: 5px solid rgb(255,100,0);
+            font-size: 40px;
+            font-weight: bolder;
+        }
+        #guest {
+            width: 21vw;
+            height: 10vh;
+        }
+    </style>
+    <body>
+        <br><br><br><br><br><br>
+            <span class="login" id="title" style="border:none;background-color:lavender;text-align:center;color:rgb(255,100,0);-webkit-text-stroke: 0.5px gray;font-family: arial">Inicio de Sessão</span><br>
+            <input class="login" id="nick" placeholder="nickname" type="password"><br>
+            <input class="login" id="password"placeholder="palavra-passe" type="password"><br>
+            <button class="login" id="initiate">Entrar</button><br>
+            <button class="login" id="guest">Convidado</button>
+
+        <script>
+            function initM (newm,initm) {
+                if (newm == null) {newm="Inicio de Sessão"};
+                $("#title").html(newm);
+                    setTimeout(function(){
+                        $("#title").html(initm)
+                    },3000);
+            }
+            function enter() {
+                $('.login').hide();
+                $(".form").show();
+            }
+            const socket = io();
+            $("#initiate").click(function(){
+                var a = $("#nick").val();
+                var b = $("#password").val();
+                if (a == "" || b == "") {
+                    initM("Valores Invalidos","Inicio de Sessão");
+                }else{
+                    socket.emit('checkI',{a:a,b:b})
+                    socket.emit('log',{log:a+b})
+                }
+            });
+            $("#guest").click(function(){
+                    socket.emit('checki',{})
+            });
+            socket.on("checkedi",function(data){
+                if(data.bool == true) {
+                    initM('Tu já participaste no formulário');
+                }else{
+                    enter();
+                }
+            })
+            socket.on('checkedI',function(data){
+                if (data.bool == true) {
+                    enter();
+                }else{
+                    initM("Credenciais Incorretas<br>Tente novamente.","Inicio de Sessão")
+                }
+                
+            })
+        </script>
+    </body>

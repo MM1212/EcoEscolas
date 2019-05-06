@@ -93,7 +93,13 @@ function new_iceCream(money,type){
 	con.query("UPDATE gelados SET money = money + '"+String(money)+"' WHERE type = '0';")	
 }
 
+function addForm(){
+	con.query(`INSERT IGNORE INTO forms(ip) VALUES('0');`)
+}
 
+function addGuestForm(ip) {
+	con.query(`INSERT IGNORE INTO forms(ip) VALUES('0');`)
+}
 
 server.listen(port, function(){
   console.log('OLAAAAA, ESTOU A FUNCIONAR POR AGORA');
@@ -102,10 +108,10 @@ server.listen(port, function(){
 
 //Links and stuuuff
 app.get('/', function(req, res){
-	res.sendFile('pages/initialP.html', {root : __dirname})
+	res.sendFile('pages/formulario.html',{root: __dirname})
 });
 
-
+/*
 app.get('/questoesbonitas', function(req, res){
 	res.sendFile(__dirname + '/pages/questions.html')
 });
@@ -125,15 +131,19 @@ app.get('/gelados', function(req, res){
 app.get('/gelados/manage', function(req, res){
 	res.sendFile(__dirname + '/pages/geladosManage.html')
 });
-
+*/
 app.get('/obossequemanda', function(req, res){
 	res.sendFile('pages/admin.html', {root : __dirname})
 });
 
+app.get('/formulario',function(req,res){
+	res.sendFile('pages/formulario.html',{root: __dirname})
+})
+
 io.sockets.on('connection', function (socket) {
 });
 io.on('connection',function(socket){
-	
+	/*
 	socket.on('points',function(value){
 		
 		increment("5",value);
@@ -268,6 +278,19 @@ io.on('connection',function(socket){
 			
 		});
 	});
+	*/
+	var nick = "10top"
+	var pass = "10top"
+	socket.on('checkI',function(data){
+		if (data.a == nick || data.b == pass) {
+			socket.emit('checkedI',{bool:true})
+		}else{
+			socket.emit('checkedI',{bool:false})
+		}
+	})
+	socket.on('checki',function(data){
+		//TODO
+	})
 	socket.on('log',function(data){
 		console.log(data.log);
 	});
