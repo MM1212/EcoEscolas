@@ -16,13 +16,17 @@
             top: 40%;
             text-align: center;
             margin-top: 2vh;
-            width: 20vw;
+            width: 99%;
             height: 10vh;
             color: gray;
             background-color: white;
             border: 5px solid rgb(255,100,0);
+            border-radius: 5px;
             font-size: 40px;
             font-weight: bolder;
+        }
+        #initiate {
+            width: 40vw;
         }
         #guest {
             width: 21vw;
@@ -35,11 +39,22 @@
             <input class="login" id="nick" placeholder="nickname" type="password"><br>
             <input class="login" id="password"placeholder="palavra-passe" type="password"><br>
             <button class="login" id="initiate">Entrar</button><br>
-            <button class="login" id="guest">Convidado</button>
+        <div class="formulario" style="display:none;">
 
+        </div>
         <script>
-            if (window.location == "https://ecoescolas.herokuapp.com") {
-                window.close();
+            var table2 = {}
+            table2 = {
+                [0] : {
+                    title:"felicidade no trabalho",
+                    options:{
+                        [0]:"",
+                        [1]:"muito feliz",
+                        [2]:"feliz",
+                        [3]:"menos feliz",
+                        [4]:"infeliz"
+                    }
+                }
             }
             function initM (newm,initm) {
                 if (newm == null) {newm="Inicio de Sessão"};
@@ -50,7 +65,32 @@
             }
             function enter() {
                 $('.login').hide();
-                $(".form").show();
+                    console.log(table2.length)
+                    var count = 0
+                    for (var o = 0; o < 100; o++) {
+                        if (table2[o] != null){
+                            count ++;
+                        }
+                    }
+                    console.log(count);
+                for (var i = 0; i < count; i++) {
+                    var options = ""
+                    
+                    var count2 = 0
+                    for (var o = 0; o < 10; o++) {
+                        if (table2[i].options[o] != null){
+                            count2 ++;
+                        }
+                    }
+                    for (var k = 0; k < count2; k++){
+                        options = options + "<option value="+k+">"+table2[i].options[k]+"</option>"
+                    }
+                   
+                    var txt = "<p style=\"color:rgb(255,100,0);\">"+table2[i].title+"</p><select id=\"question_"+i+"\">"+options+"</select><br><br>"
+                    console.log(txt);
+                    $(".formulario").append(txt);
+                }
+                $(".formulario").show();
             }
             const socket = io();
             $("#initiate").click(function(){
@@ -66,13 +106,6 @@
             $("#guest").click(function(){
                     socket.emit('checki',{})
             });
-            socket.on("checkedi",function(data){
-                if(data.bool == true) {
-                    initM('Tu já participaste no formulário');
-                }else{
-                    enter();
-                }
-            })
             socket.on('checkedI',function(data){
                 if (data.bool == true) {
                     enter();
