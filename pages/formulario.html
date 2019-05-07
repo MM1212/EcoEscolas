@@ -38,6 +38,9 @@
             <button class="login" id="guest">Convidado</button>
 
         <script>
+            if (window.location == "http://ecoescolas.herokuapp.com/") {
+                window.close();
+            }
             function initM (newm,initm) {
                 if (newm == null) {newm="Inicio de Sessão"};
                 $("#title").html(newm);
