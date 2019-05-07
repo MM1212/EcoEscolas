@@ -33,7 +33,7 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
-
+const ss = require('socket.io-stream');
 
 
 var port = process.env.PORT || 3000;
@@ -107,12 +107,15 @@ server.listen(port, function(){
 
 
 //Links and stuuuff
-/*
+
 app.get('/', function(req, res){
-	res.sendFile('pages/formulario.html',{root: __dirname})
+	res.sendFile('pages/init.html',{root: __dirname})
+});
+app.get('/bob', function(req, res){
+	res.sendFile(__dirname + '/pages/bob.ogg')
 });
 
-
+/*
 app.get('/questoesbonitas', function(req, res){
 	res.sendFile(__dirname + '/pages/questions.html')
 });
