@@ -107,11 +107,12 @@ server.listen(port, function(){
 
 
 //Links and stuuuff
+/*
 app.get('/', function(req, res){
 	res.sendFile('pages/formulario.html',{root: __dirname})
 });
 
-/*
+
 app.get('/questoesbonitas', function(req, res){
 	res.sendFile(__dirname + '/pages/questions.html')
 });
@@ -136,7 +137,7 @@ app.get('/obossequemanda', function(req, res){
 	res.sendFile('pages/admin.html', {root : __dirname})
 });
 
-app.get('/formulario',function(req,res){
+app.get('/wip',function(req,res){
 	res.sendFile('pages/formulario.html',{root: __dirname})
 })
 
