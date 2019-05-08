@@ -32,6 +32,13 @@
             width: 21vw;
             height: 10vh;
         }
+
+#title {
+font-size: 20px;
+}
+.questions{
+border: 3px solid rgb(255,100,0);
+}
     </style>
     <body>
         <br><br><br><br><br><br>
@@ -95,7 +102,7 @@
                         options = options + "<option value="+k+">"+table2[i].options[k]+"</option>"
                     }
                    
-                    var txt = "<p style=\"color:rgb(255,100,0);\">"+table2[i].title+"</p><select id=\"question_"+i+"\">"+options+"</select><br><br>"
+                    var txt = "<p id="title" style=\"color:rgb(255,100,0);\">"+table2[i].title+"</p><select class="questions" id=\"question_"+i+"\">"+options+"</select><br><br>"
                     console.log(txt);
                     $(".formulario").append(txt);
                 }
