@@ -101,7 +101,7 @@ function addGuestForm(ip) {
 	con.query(`INSERT IGNORE INTO forms(ip) VALUES('0');`)
 }
 
-server.listen(port, function(){
+server.listen(port, '0.0.0.0',function(){
   console.log('OLAAAAA, ESTOU A FUNCIONAR POR AGORA');
 });
 
@@ -144,7 +144,9 @@ app.get('/wip',function(req,res){
 	res.sendFile('pages/formulario.html',{root: __dirname})
 })
 
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
+	const address = socket.handshake.address
+  console.log("new user from ip "+address);
 });
 io.on('connection',function(socket){
 	/*
