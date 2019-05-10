@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Felicidade no Trabalho</title>
+		
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!----	<script src="/socket.io/socket.io.js"></script>-->
+		
+	</head>
+	<body style="text-align:center;">
+		<p id="text">OLA</p>
+		<button onclick="change()" id="t">clica aqui</button>
+		<script>
+			var bool = false
+			function change(){
+				bool = !bool
+					
+				if (bool) {
+					$("#text").html("")
+					var interval = setInterval(loop,1)
+					function loop() {
+						var r = Math.random(0,1)*255
+						var g = Math.random(0,1)*255
+						var b = Math.random(0,1)*255
+						$("#text").append("es bue mau ")
+						$("#text").css("color",`rgb(${r},${g},${b})`)
+						$("#text").css("font-size",Math.random(0.5,1)*100+"%")
+						r = Math.random(0,1)*255
+						g = Math.random(0,1)*255
+						b = Math.random(0,1)*255
+						$("#t").css("background-color",`rgb(${r},${g},${b})`)
+						$("body").css("background-color",`rgb(${r},${g},${b})`)
+					}
+					document.onkeyup = function(data){
+					if (data.which == 27) {
+						clearInterval(interval);
+					}
+				}
+				}else{
+					$("#text").html("")
+					var interval = setInterval(loop,1)
+					function loop() {
+						var r = Math.random(0,1)*255
+						var g = Math.random(0,1)*255
+						var b = Math.random(0,1)*255
+						$("#text").append("es bue fixe")
+						$("#text").css("color",`rgb(${r},${g},${b})`)
+						r = Math.random(0,1)*255
+						g = Math.random(0,1)*255
+						b = Math.random(0,1)*255
+						$("#text").css("font-size",Math.random(0.5,1)*100+"%")
+						$("#t").css("background-color",`rgb(${r},${g},${b})`)
+						$("body").css("background-color",`rgb(${r},${g},${b})`)
+					}
+					document.onkeyup = function(data){
+					if (data.which == 27) {
+						clearInterval(interval);
+					}
+				}
+				}
+				
+			}
+		</script>
+	</body>
+</html>
