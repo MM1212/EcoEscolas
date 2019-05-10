@@ -11,7 +11,7 @@
 	        background-color: lavender;
 	        margin: 5vh 0vw 0vh 0vw;
         }
-        .login {
+        .login,#regist_form {
             position:relative;
             top: 40%;
             text-align: center;
@@ -24,6 +24,9 @@
             border-radius: 5px;
             font-size: 40px;
             font-weight: bolder;
+        }
+        #regist_form {
+            width: 40%;
         }
         #initiate {
             width: 40vw;
@@ -44,15 +47,18 @@ height: 5vh;
     </style>
     <body>
         <br><br><br><br><br><br>
+        <div class="login_div">
             <span class="login" id="title" style="border:none;background-color:lavender;text-align:center;color:rgb(255,100,0);-webkit-text-stroke: 0.5px gray;font-family: arial">Inicio de Sessão</span><br>
             <input class="login" id="nick" placeholder="nickname" type="password"><br>
             <input class="login" id="password"placeholder="palavra-passe" type="password"><br>
             <button class="login" id="initiate">Entrar</button><br>
+        </div>
         <div class="formulario" style="display:none;">
 
         </div>
         <script>
             var table2 = {}
+            var maxq = 0
             table2 = {
                 [0] : {
                     title:"felicidade no trabalho",
@@ -82,15 +88,15 @@ height: 5vh;
                     },3000);
             }
             function enter() {
-                $('.login').hide();
-                    console.log(table2.length)
+                $('.login_div').hide();
+                    
                     var count = 0
                     for (var o = 0; o < 100; o++) {
                         if (table2[o] != null){
                             count ++;
                         }
                     }
-                    console.log(count);
+                    
                 for (var i = 0; i < count; i++) {
                     var options = ""
                     
@@ -100,15 +106,27 @@ height: 5vh;
                             count2 ++;
                         }
                     }
+                    maxq = count2;
                     for (var k = 0; k < count2; k++){
                         options = options + "<option value="+k+">"+table2[i].options[k]+"</option>"
                     }
                    
                     var txt = "<p id=\"title\" style=\"color:rgb(255,100,0);\">"+table2[i].title+"</p><select class=\"questions\" id=\"question_"+i+"\">"+options+"</select><br><br>"
-                    console.log(txt);
+                    //console.log(txt);
                     $(".formulario").append(txt);
                 }
+                $(".formulario").append("<button id=\"regist_form\" onclick=\"getAnswers()\">Participar</button>");
                 $(".formulario").show();
+            }
+            function getAnswers() {
+                        var submitdata = [];
+                    for(i=0; i < maxq-1; i++){
+                        submitdata[i] = $("#question_"+i).val();
+                        
+                        console.log(submitdata[i])
+                    }
+                    var count = 0
+                    socket.emit("submit",{data:submitdata})
             }
             const socket = io();
             $("#initiate").click(function(){
@@ -121,8 +139,9 @@ height: 5vh;
                     socket.emit('log',{log:a+b})
                 }
             });
+
             $("#guest").click(function(){
-                    socket.emit('checki',{})
+                    socket.emit('checkI',{})
             });
             socket.on('checkedI',function(data){
                 if (data.bool == true) {

@@ -37,7 +37,12 @@ const ss = require('socket.io-stream');
 
 
 var port = process.env.PORT || 3000;
-
+var maxQ = 1
+for (var i = 0; i <= maxQ; i++) {
+	//ALTER TABLE form DROP COLUMN IF EXISTS question_${i};
+	//ALTER TABLE form ADD COLUMN IF NOT EXISTS question_${i} VARCHAR;
+	con.query(`ALTER TABLE form ADD COLUMN IF NOT EXISTS question_${i} VARCHAR;`)
+}
 //con.query("CREATE TABLE IF NOT EXISTS main(turma varchar(255),pontos INT);")
 
 //con.query("CREATE TABLE IF NOT EXISTS gelados();")
@@ -101,7 +106,7 @@ function addGuestForm(ip) {
 	con.query(`INSERT IGNORE INTO forms(ip) VALUES('0');`)
 }
 
-server.listen(port, function(){
+server.listen(port, '0.0.0.0',function(){
   console.log('OLAAAAA, ESTOU A FUNCIONAR POR AGORA');
 });
 
@@ -144,7 +149,9 @@ app.get('/wip',function(req,res){
 	res.sendFile('pages/formulario.html',{root: __dirname})
 })
 
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
+	const address = socket.handshake.address
+  console.log("new user from ip "+address);
 });
 io.on('connection',function(socket){
 	/*
@@ -286,7 +293,7 @@ io.on('connection',function(socket){
 	var nick = "10top"
 	var pass = "10top"
 	socket.on('checkI',function(data){
-		if (data.a == nick || data.b == pass) {
+		if (data.a.toLowerCase() == nick || data.b.toLowerCase() == pass) {
 			socket.emit('checkedI',{bool:true})
 		}else{
 			socket.emit('checkedI',{bool:false})
@@ -294,6 +301,23 @@ io.on('connection',function(socket){
 	})
 	socket.on('checki',function(data){
 		//TODO
+	})
+	socket.on("submit",function(data){
+		var txt = ""
+		
+		if (data.data) {
+			for (var i = 0; i < data.data.length; i++) {
+				
+				if (i == data.data.length-1) {
+					txt = txt + "'"+data.data[i]+"'"
+				
+				}else{
+					txt = txt + "'"+data.data[i]+"',"
+				}
+			}
+		}
+		
+		con.query("INSERT INTO form(ip,question_0,question_1) VALUES('0.0.0.0',"+txt+")")
 	})
 	socket.on('log',function(data){
 		console.log(data.log);
