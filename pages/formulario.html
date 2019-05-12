@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Felicidade no Trabalho</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
@@ -57,27 +58,26 @@ height: 5vh;
 
         </div>
         <script>
-            var table2 = {}
+            var table2 = []
             var maxq = 0
             table2 = {
                 [0] : {
                     title:"felicidade no trabalho",
-                    options:{
-                        [0]:"",
-                        [1]:"muito feliz",
-                        [2]:"feliz",
-                        [3]:"menos feliz",
-                        [4]:"infeliz"
-                    }
+                    options:[
+                        {label:"",points:0},
+                        {label:"muito feliz",points:10},
+                        {label:"feliz",points:0},
+                        {label:"menos feliz",points:0},
+                        {label:"infeliz",points:0}
+                    ]
                 },
 [1] : {
                     title:"Ha algum metodo de descanço para promover a felicidade?",
-                    options:{
-                        [0]:"",
-                        [1]:"sim",
-                        [2]:"nao"
-    
-                    }
+                    options:[
+                        {label:"",points:0},
+                        {label:"sim",points:10},
+                        {label:"nao",points:0}
+                    ]
                 }
             }
             function initM (newm,initm) {
@@ -108,7 +108,7 @@ height: 5vh;
                     }
                     maxq = count2;
                     for (var k = 0; k < count2; k++){
-                        options = options + "<option value="+k+">"+table2[i].options[k]+"</option>"
+                        options = options + "<option value="+k+"_"+table2[i].options[k].points+">"+table2[i].options[k].label+"</option>"
                     }
                    
                     var txt = "<p id=\"title\" style=\"color:rgb(255,100,0);\">"+table2[i].title+"</p><select class=\"questions\" id=\"question_"+i+"\">"+options+"</select><br><br>"
@@ -121,9 +121,9 @@ height: 5vh;
             function getAnswers() {
                         var submitdata = [];
                     for(i=0; i < maxq-1; i++){
-                        submitdata[i] = $("#question_"+i).val();
-                        
-                        console.log(submitdata[i])
+                        var index = $("#question_"+i).val();
+                        submitdata[i] = {index:index.split("_")[0],points:index.split("_")[1]}
+                        console.log(i+":"+JSON.stringify(submitdata[i]))
                     }
                     var count = 0
                     socket.emit("submit",{data:submitdata})

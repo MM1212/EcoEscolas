@@ -37,8 +37,8 @@ const ss = require('socket.io-stream');
 
 
 var port = process.env.PORT || 3000;
-var maxQ = 1
-for (var i = 0; i <= maxQ; i++) {
+var maxQ = 2
+for (var i = 0; i < maxQ; i++) {
 	//ALTER TABLE form DROP COLUMN IF EXISTS question_${i};
 	//ALTER TABLE form ADD COLUMN IF NOT EXISTS question_${i} VARCHAR;
 	con.query(`ALTER TABLE form ADD COLUMN IF NOT EXISTS question_${i} VARCHAR;`)
@@ -98,13 +98,7 @@ function new_iceCream(money,type){
 	con.query("UPDATE gelados SET money = money + '"+String(money)+"' WHERE type = '0';")	
 }
 
-function addForm(){
-	con.query(`INSERT IGNORE INTO forms(ip) VALUES('0');`)
-}
 
-function addGuestForm(ip) {
-	con.query(`INSERT IGNORE INTO forms(ip) VALUES('0');`)
-}
 
 server.listen(port, '0.0.0.0',function(){
   console.log('OLAAAAA, ESTOU A FUNCIONAR POR AGORA');
@@ -151,7 +145,48 @@ app.get('/wip',function(req,res){
 
 io.on('connection', function (socket) {
 	const address = socket.handshake.address
-  console.log("new user from ip "+address);
+	console.log("new user from ip "+address);
+	function addForm(answers,points){
+		var indexes = answers.split(",")
+		if (indexes.length == maxQ) {
+			var columns = ""
+			for (var i = 0; i < maxQ; i++) {
+				//ALTER TABLE form DROP COLUMN IF EXISTS question_${i};
+				//ALTER TABLE form ADD COLUMN IF NOT EXISTS question_${i} VARCHAR;
+				if (i == maxQ-1) {
+					columns = columns + "question_"+i
+				}else{
+					columns = columns + "question_"+i+","
+				}
+				
+			}
+			con.query("INSERT INTO form(ip,points,"+columns+") VALUES('"+socket.handshake.address+"','"+points+"',"+answers+")")
+		}else{
+			console.log("Tentando adicionar respostas para colunas que n existem | tentando adicionar "+indexes.length+" respostas para "+maxQ+" colunas")
+		}
+		
+	}
+	socket.on("submit",function(data){
+		var txt = ""
+		var points = 0
+		if (data.data) {
+			for (var i = 0; i < data.data.length; i++) {
+				
+				if (i == data.data.length-1) {
+					txt = txt + "'"+data.data[i].index+"'"
+					
+				
+				}else{
+					txt = txt + "'"+data.data[i].index+"',"
+				}
+				console.log(data.data[i].index,data.data[i].points)
+				points = points + parseInt(data.data[i].points) 
+			}
+			addForm(txt,points);
+		}
+		
+		
+	})
 });
 io.on('connection',function(socket){
 	/*
@@ -301,23 +336,6 @@ io.on('connection',function(socket){
 	})
 	socket.on('checki',function(data){
 		//TODO
-	})
-	socket.on("submit",function(data){
-		var txt = ""
-		
-		if (data.data) {
-			for (var i = 0; i < data.data.length; i++) {
-				
-				if (i == data.data.length-1) {
-					txt = txt + "'"+data.data[i]+"'"
-				
-				}else{
-					txt = txt + "'"+data.data[i]+"',"
-				}
-			}
-		}
-		
-		con.query("INSERT INTO form(ip,question_0,question_1) VALUES('0.0.0.0',"+txt+")")
 	})
 	socket.on('log',function(data){
 		console.log(data.log);
