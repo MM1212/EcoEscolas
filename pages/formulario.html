@@ -9,7 +9,7 @@
     <style>
         body{
             text-align: center;
-	        background-color: lavender;
+	        background-color: lightblue;
 	        margin: 5vh 0vw 0vh 0vw;
         }
         .login,#regist_form {
@@ -18,10 +18,10 @@
             text-align: center;
             margin-top: 2vh;
             width: 99%;
-            height: 10vh;
-            color: gray;
+            height: 10%;
+            color: rgb(50,50,50);
             background-color: white;
-            border: 5px solid rgb(255,100,0);
+            border: 5px solid lightslategray;
             border-radius: 5px;
             font-size: 40px;
             font-weight: bolder;
@@ -36,20 +36,24 @@
             width: 21vw;
             height: 10vh;
         }
-
 #title {
 font-size: 50px;
+color: darkslategray;
+font-family: cursive;
 }
 .questions{
-border: 3px solid rgb(255,100,0);
-width: 10vw;
-height: 5vh;
+border: 3px solid lightslategray;
+width: 70%;
+height: 10%;
+color: darkslategray;
+font-size: 25px;
+font-family: cursive;
 }
     </style>
     <body>
         <br><br>
         <div class="login_div">
-            <span class="login" id="title" style="border:none;background-color:lavender;text-align:center;color:rgb(255,100,0);-webkit-text-stroke: 0.5px gray;font-family: arial">Inicio de Sessão</span><br>
+            <span class="login" id="title" style="border:none;background-color:lightblue;text-align:center;color:lightslategray;-webkit-text-stroke: 0.5px rgb(50,50,50);font-family: arial">Inicio de Sessão</span><br>
             <input class="login" id="nick" placeholder="nickname" type="password"><br>
             <input class="login" id="password"placeholder="palavra-passe" type="password"><br>
             <button class="login" id="initiate">Entrar</button><br>
@@ -111,7 +115,7 @@ height: 5vh;
                         options = options + "<option value="+k+"_"+table2[i].options[k].points+">"+table2[i].options[k].label+"</option>"
                     }
                    
-                    var txt = "<p id=\"title\" style=\"color:rgb(255,100,0);\">"+table2[i].title+"</p><select class=\"questions\" id=\"question_"+i+"\">"+options+"</select><br><br>"
+                    var txt = "<p id=\"title\" >"+table2[i].title+"</p><select class=\"questions\" id=\"question_"+i+"\">"+options+"</select><br><br>"
                     //console.log(txt);
                     $(".formulario").append(txt);
                 }
