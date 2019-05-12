@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Felicidade no Trabalho</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
@@ -46,7 +47,7 @@ height: 5vh;
 }
     </style>
     <body>
-        <br><br><br><br><br><br>
+        <br><br>
         <div class="login_div">
             <span class="login" id="title" style="border:none;background-color:lavender;text-align:center;color:rgb(255,100,0);-webkit-text-stroke: 0.5px gray;font-family: arial">Inicio de Sessão</span><br>
             <input class="login" id="nick" placeholder="nickname" type="password"><br>
@@ -57,27 +58,26 @@ height: 5vh;
 
         </div>
         <script>
-            var table2 = {}
+            var table2 = []
             var maxq = 0
             table2 = {
                 [0] : {
                     title:"felicidade no trabalho",
-                    options:{
-                        [0]:"",
-                        [1]:"muito feliz",
-                        [2]:"feliz",
-                        [3]:"menos feliz",
-                        [4]:"infeliz"
-                    }
+                    options:[
+                        {label:"",points:0},
+                        {label:"muito feliz",points:10},
+                        {label:"feliz",points:0},
+                        {label:"menos feliz",points:0},
+                        {label:"infeliz",points:0}
+                    ]
                 },
-[1] : {
+                [1] : {
                     title:"Ha algum metodo de descanço para promover a felicidade?",
-                    options:{
-                        [0]:"",
-                        [1]:"sim",
-                        [2]:"nao"
-    
-                    }
+                    options:[
+                        {label:"",points:0},
+                        {label:"sim",points:10},
+                        {label:"nao",points:0}
+                    ]
                 }
             }
             function initM (newm,initm) {
@@ -108,7 +108,7 @@ height: 5vh;
                     }
                     maxq = count2;
                     for (var k = 0; k < count2; k++){
-                        options = options + "<option value="+k+">"+table2[i].options[k]+"</option>"
+                        options = options + "<option value="+k+"_"+table2[i].options[k].points+">"+table2[i].options[k].label+"</option>"
                     }
                    
                     var txt = "<p id=\"title\" style=\"color:rgb(255,100,0);\">"+table2[i].title+"</p><select class=\"questions\" id=\"question_"+i+"\">"+options+"</select><br><br>"
@@ -122,6 +122,7 @@ height: 5vh;
             function getAnswers() {
                     var submitdata = [];
                     for(i=0; i < maxq-1; i++){
+<<<<<<< HEAD
                         if($("#question_"+i).val()==0){
                             submit_error = true;
                             submitdata = [];
@@ -146,6 +147,19 @@ height: 5vh;
 
                     }
                     }
+=======
+                        var index = $("#question_"+i).val();
+                        submitdata[i] = {index:index.split("_")[0],points:index.split("_")[1]}
+                        
+                    }
+                    var count = 0
+                    $.getJSON('https://ipapi.co/json/', function(data) {
+                    
+                    if (data.ip == null)
+                        {data.ip = "0.0.0.0"};
+                    socket.emit("submit",{data:submitdata,ip:data.ip})
+                    });
+>>>>>>> c3b50c129384093d27f005e56f8d5450b9920e42
             }
             const socket = io();
             $("#initiate").click(function(){
@@ -155,13 +169,10 @@ height: 5vh;
                     initM("Valores Invalidos","Inicio de Sessão");
                 }else{
                     socket.emit('checkI',{a:a,b:b})
-                    socket.emit('log',{log:a+b})
+                    
+                    
                 }
-            });
-
-            $("#guest").click(function(){
-                    socket.emit('checkI',{})
-            });
+            })
             socket.on('checkedI',function(data){
                 if (data.bool == true) {
                     enter();
@@ -170,5 +181,10 @@ height: 5vh;
                 }
                 
             })
+            window.onload = function(){
+                $.getJSON('https://ipapi.co/json/', function(data) {
+                    socket.emit("newCInfo",{data:data});
+                });
+            };
         </script>
     </body>

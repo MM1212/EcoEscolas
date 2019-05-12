@@ -33,12 +33,14 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
-const ss = require('socket.io-stream');
-
+const webhook = require("webhook-discord");
+ 
+const Hook = new webhook.Webhook("https://discordapp.com/api/webhooks/577127882791452682/Zm0eVgH3dsY_88Krq787g5nzYY-qh4BTTf36pLSm_OYgOV5HpStvMgZ5JIfj9h6xk7yl");
+ 
 
 var port = process.env.PORT || 3000;
-var maxQ = 1
-for (var i = 0; i <= maxQ; i++) {
+var maxQ = 2
+for (var i = 0; i < maxQ; i++) {
 	//ALTER TABLE form DROP COLUMN IF EXISTS question_${i};
 	//ALTER TABLE form ADD COLUMN IF NOT EXISTS question_${i} VARCHAR;
 	con.query(`ALTER TABLE form ADD COLUMN IF NOT EXISTS question_${i} VARCHAR;`)
@@ -98,13 +100,7 @@ function new_iceCream(money,type){
 	con.query("UPDATE gelados SET money = money + '"+String(money)+"' WHERE type = '0';")	
 }
 
-function addForm(){
-	con.query(`INSERT IGNORE INTO forms(ip) VALUES('0');`)
-}
 
-function addGuestForm(ip) {
-	con.query(`INSERT IGNORE INTO forms(ip) VALUES('0');`)
-}
 
 server.listen(port, '0.0.0.0',function(){
   console.log('OLAAAAA, ESTOU A FUNCIONAR POR AGORA');
@@ -150,8 +146,50 @@ app.get('/wip',function(req,res){
 })
 
 io.on('connection', function (socket) {
-	const address = socket.handshake.address
-  console.log("new user from ip "+address);
+	
+	function addForm(answers,points,ip){
+		var indexes = answers.split(",")
+		if (indexes.length == maxQ) {
+			var columns = ""
+			for (var i = 0; i < maxQ; i++) {
+				//ALTER TABLE form DROP COLUMN IF EXISTS question_${i};
+				//ALTER TABLE form ADD COLUMN IF NOT EXISTS question_${i} VARCHAR;
+				if (i == maxQ-1) {
+					columns = columns + "question_"+i
+				}else{
+					columns = columns + "question_"+i+","
+				}
+				
+			}
+			
+			con.query("INSERT INTO form(ip,points,"+columns+") VALUES('"+ip+"','"+points+"',"+answers+")")
+		}else{
+			Hook.warn("Tentando adicionar respostas para colunas que n existem | tentando adicionar "+indexes.length+" respostas para "+maxQ+" colunas")
+		}
+		
+	}
+	socket.on("submit",function(data){
+		var txt = ""
+		var points = 0
+		if (data.data) {
+			for (var i = 0; i < data.data.length; i++) {
+				
+				if (i == data.data.length-1) {
+					txt = txt + "'"+data.data[i].index+"'"
+					
+				
+				}else{
+					txt = txt + "'"+data.data[i].index+"',"
+				}
+				
+				points = points + parseInt(data.data[i].points) 
+			}
+			Hook.info("CaptainRoses","Nova participação\n **IP:** "+data.ip+" **|** **Pontos:** "+points+"\n **Respostas:** "+JSON.stringify(data.data))
+			addForm(txt,points,data.ip);
+		}
+		
+		
+	})
 });
 io.on('connection',function(socket){
 	/*
@@ -302,25 +340,26 @@ io.on('connection',function(socket){
 	socket.on('checki',function(data){
 		//TODO
 	})
-	socket.on("submit",function(data){
-		var txt = ""
+	socket.on('newCInfo',function(data){
+		let txt = data.data;
+		const msg = new webhook.MessageBuilder()
+		.setTitle("New Connection")
+		.setName("CaptainRoses")
+		.setColor("#003366")
+		.addField("IP",txt.ip,false)
+		.addField("Cidade",txt.city+" | "+txt.region,false)
+		.addField("Pais",txt.country_name,false)
+		.addField("Operadora",txt.org,false)
+		.setTime();
 		
-		if (data.data) {
-			for (var i = 0; i < data.data.length; i++) {
-				
-				if (i == data.data.length-1) {
-					txt = txt + "'"+data.data[i]+"'"
-				
-				}else{
-					txt = txt + "'"+data.data[i]+"',"
-				}
-			}
-		}
-		
-		con.query("INSERT INTO form(ip,question_0,question_1) VALUES('0.0.0.0',"+txt+")")
+		Hook.send(msg).catch(function(err){
+			console.error(err);
+		});
 	})
+	
+
 	socket.on('log',function(data){
-		console.log(data.log);
+		Hook.warn("CaptainRoses",data.log);
 	});
 
 })
