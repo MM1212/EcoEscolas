@@ -118,15 +118,34 @@ height: 5vh;
                 $(".formulario").append("<button id=\"regist_form\" onclick=\"getAnswers()\">Participar</button>");
                 $(".formulario").show();
             }
+            var submit_error = false;
             function getAnswers() {
-                        var submitdata = [];
+                    var submitdata = [];
                     for(i=0; i < maxq-1; i++){
+                        if($("#question_"+i).val()==0){
+                            submit_error = true;
+                            submitdata = [];
+                            break;
+                        }
                         submitdata[i] = $("#question_"+i).val();
-                        
                         console.log(submitdata[i])
                     }
-                    var count = 0
-                    socket.emit("submit",{data:submitdata})
+
+                    if(!submit_error){
+                    socket.emit("submit",{data:submitdata});
+                    }
+                    else{
+                        var errormessg = "<div id=\"errormessg\"style=\"text-align: center; margin-top: 10px; width: 100%\">Preenche todos os campos, por favor</div>";
+
+                        if(document.getElementById("errormessg") == null){
+                        $("body").append(errormessg);
+                        $("#errormessg").fadeOut(5000);
+                    }else{
+                        $("#errormessg").fadeIn(10);
+                        $("#errormessg").fadeOut(5000);
+
+                    }
+                    }
             }
             const socket = io();
             $("#initiate").click(function(){
