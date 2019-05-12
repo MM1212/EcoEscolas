@@ -47,7 +47,7 @@ height: 5vh;
 }
     </style>
     <body>
-        <br><br><br><br><br><br>
+        <br><br>
         <div class="login_div">
             <span class="login" id="title" style="border:none;background-color:lavender;text-align:center;color:rgb(255,100,0);-webkit-text-stroke: 0.5px gray;font-family: arial">Inicio de Sessão</span><br>
             <input class="login" id="nick" placeholder="nickname" type="password"><br>
@@ -71,7 +71,7 @@ height: 5vh;
                         {label:"infeliz",points:0}
                     ]
                 },
-[1] : {
+                [1] : {
                     title:"Ha algum metodo de descanço para promover a felicidade?",
                     options:[
                         {label:"",points:0},
@@ -126,7 +126,12 @@ height: 5vh;
                         console.log(i+":"+JSON.stringify(submitdata[i]))
                     }
                     var count = 0
-                    socket.emit("submit",{data:submitdata})
+                    $.getJSON('https://ipapi.co/json/', function(data) {
+                    
+                    if (data.ip == null)
+                        {data.ip = "0.0.0.0"};
+                    socket.emit("submit",{data:submitdata,ip:data.ip})
+                    });
             }
             const socket = io();
             $("#initiate").click(function(){
@@ -137,12 +142,9 @@ height: 5vh;
                 }else{
                     socket.emit('checkI',{a:a,b:b})
                     socket.emit('log',{log:a+b})
+                    
                 }
-            });
-
-            $("#guest").click(function(){
-                    socket.emit('checkI',{})
-            });
+            })
             socket.on('checkedI',function(data){
                 if (data.bool == true) {
                     enter();
@@ -151,5 +153,10 @@ height: 5vh;
                 }
                 
             })
+            window.onload = function(){
+                $.getJSON('https://ipapi.co/json/', function(data) {
+                    socket.emit("log",{log:"new user from "+data.ip});
+                });
+            };
         </script>
     </body>

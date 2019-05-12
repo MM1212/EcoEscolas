@@ -144,9 +144,8 @@ app.get('/wip',function(req,res){
 })
 
 io.on('connection', function (socket) {
-	const address = socket.handshake.address
-	console.log("new user from ip "+address);
-	function addForm(answers,points){
+	
+	function addForm(answers,points,ip){
 		var indexes = answers.split(",")
 		if (indexes.length == maxQ) {
 			var columns = ""
@@ -160,7 +159,7 @@ io.on('connection', function (socket) {
 				}
 				
 			}
-			con.query("INSERT INTO form(ip,points,"+columns+") VALUES('"+socket.handshake.address+"','"+points+"',"+answers+")")
+			con.query("INSERT INTO form(ip,points,"+columns+") VALUES('"+ip+"','"+points+"',"+answers+")")
 		}else{
 			console.log("Tentando adicionar respostas para colunas que n existem | tentando adicionar "+indexes.length+" respostas para "+maxQ+" colunas")
 		}
@@ -182,7 +181,7 @@ io.on('connection', function (socket) {
 				console.log(data.data[i].index,data.data[i].points)
 				points = points + parseInt(data.data[i].points) 
 			}
-			addForm(txt,points);
+			addForm(txt,points,data.ip);
 		}
 		
 		
