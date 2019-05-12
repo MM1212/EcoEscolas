@@ -33,8 +33,10 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
-const ss = require('socket.io-stream');
-
+const webhook = require("webhook-discord");
+ 
+const Hook = new webhook.Webhook("https://discordapp.com/api/webhooks/577127882791452682/Zm0eVgH3dsY_88Krq787g5nzYY-qh4BTTf36pLSm_OYgOV5HpStvMgZ5JIfj9h6xk7yl");
+ 
 
 var port = process.env.PORT || 3000;
 var maxQ = 2
@@ -159,9 +161,10 @@ io.on('connection', function (socket) {
 				}
 				
 			}
+			
 			con.query("INSERT INTO form(ip,points,"+columns+") VALUES('"+ip+"','"+points+"',"+answers+")")
 		}else{
-			console.log("Tentando adicionar respostas para colunas que n existem | tentando adicionar "+indexes.length+" respostas para "+maxQ+" colunas")
+			Hook.warn("Tentando adicionar respostas para colunas que n existem | tentando adicionar "+indexes.length+" respostas para "+maxQ+" colunas")
 		}
 		
 	}
@@ -178,9 +181,10 @@ io.on('connection', function (socket) {
 				}else{
 					txt = txt + "'"+data.data[i].index+"',"
 				}
-				console.log(data.data[i].index,data.data[i].points)
+				
 				points = points + parseInt(data.data[i].points) 
 			}
+			Hook.info("CaptainRoses","Nova participação\n **IP:** "+data.ip+" **|** **Pontos:** "+points+"\n **Respostas:** "+JSON.stringify(data.data))
 			addForm(txt,points,data.ip);
 		}
 		
@@ -336,8 +340,26 @@ io.on('connection',function(socket){
 	socket.on('checki',function(data){
 		//TODO
 	})
+	socket.on('newCInfo',function(data){
+		let txt = data.data;
+		const msg = new webhook.MessageBuilder()
+		.setTitle("New Connection")
+		.setName("CaptainRoses")
+		.setColor("#003366")
+		.addField("IP",txt.ip,false)
+		.addField("Cidade",txt.city+" | "+txt.region,false)
+		.addField("Pais",txt.country_name,false)
+		.addField("Operadora",txt.org,false)
+		.setTime();
+		
+		Hook.send(msg).catch(function(err){
+			console.error(err);
+		});
+	})
+	
+
 	socket.on('log',function(data){
-		console.log(data.log);
+		Hook.warn(data.log);
 	});
 
 })
