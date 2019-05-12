@@ -139,7 +139,7 @@ height: 5vh;
                     
                         if (data.ip == null){data.ip = "0.0.0.0"};
                         if(!submit_error){
-                            //socket.emit("submit",{data:submitdata,ip:data.ip})
+                            socket.emit("submit",{data:submitdata,ip:data.ip})
                         }else{
                             var errormessg = "<div id=\"errormessg\"style=\"text-align: center; margin-top: 10px; width: 100%\">Preenche todos os campos, por favor</div>";
 
