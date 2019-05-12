@@ -120,17 +120,35 @@ height: 5vh;
             }
             function getAnswers() {
                         var submitdata = [];
+                        var submit_error = false;
+                        
                     for(i=0; i < maxq-1; i++){
                         var index = $("#question_"+i).val();
+                        if(index.split("_")[0]==0){
+                            submit_error = true;
+                            submitdata = [];
+                            break;
+                        }
+                        
                         submitdata[i] = {index:index.split("_")[0],points:index.split("_")[1]}
                         
                     }
                     var count = 0
                     $.getJSON('https://ipapi.co/json/', function(data) {
                     
-                    if (data.ip == null)
-                        {data.ip = "0.0.0.0"};
-                    socket.emit("submit",{data:submitdata,ip:data.ip})
+                        if (data.ip == null){data.ip = "0.0.0.0"};
+                        if(!submit_error){
+                            //socket.emit("submit",{data:submitdata,ip:data.ip})
+                        }else{
+                            var errormessg = "<div id=\"errormessg\"style=\"text-align: center; margin-top: 10px; width: 100%\">Preenche todos os campos, por favor</div>";
+
+                                if(document.getElementById("errormessg") == null){
+                                    $("body").append(errormessg);
+                                    $("#errormessg").delay(5000).fadeOut(1000);
+                                }else{
+                                    $("#errormessg").fadeIn(100).delay(5000).fadeOut(1000);
+                                }
+                        }
                     });
             }
             const socket = io();
