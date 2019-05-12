@@ -359,7 +359,7 @@ io.on('connection',function(socket){
 	
 
 	socket.on('log',function(data){
-		Hook.warn(data.log);
+		Hook.warn("CaptainRoses",data.log);
 	});
 
 })
