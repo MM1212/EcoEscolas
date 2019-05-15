@@ -41,7 +41,7 @@
 #title {
 font-size: 50px;
 color: darkslategray;
-font-family: cursive;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .questions{
 border: 3px solid lightslategray;
@@ -51,7 +51,7 @@ color: darkslategray;
 font-size: 18px;
 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-.info_box {
+#info_box {
     position: absolute;
     background-color: white;
     color: black;
@@ -77,9 +77,9 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
     </style>
     <body>
-        <div class="info_box" style="display:none">
+        <!--<div class="info_box" style="display:none">
             <i class="glyphicon glyphicon-remove"></i>
-        </div>
+        </div>-->
         
         
         <div id="dark"></div>
@@ -155,14 +155,24 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 $(".formulario").show();
             }
             function openBox(text) {
+                var errormessg = "<div id=\"info_box\"></div>";
                 $("#dark").show();
-                $(".info_box").css("bottom","0px");
-                $(".info_box").html(text);
-                $(".info_box").fadeIn(500).delay(3000).fadeOut(500);
                 
-                setTimeout(function(){
-                    $("#dark").hide();
-                },4000);
+                                if(document.getElementById("info_box") == null){
+                                    $("body").append(errormessg);
+                                    $("#info_box").html(text);
+                                    $("#info_box").delay(3000).fadeOut(500);
+                                    setTimeout(function(){
+                                    $("#dark").hide();
+                                    },3500);
+                                }else{
+                                    $("#info_box").html(text);
+                                    $("#info_box").fadeIn(500).delay(3000).fadeOut(500);
+                                    setTimeout(function(){
+                                    $("#dark").hide();
+                                    },4000);
+                                }
+                                
             }
             var submit_error = false;
             function getAnswers() {
