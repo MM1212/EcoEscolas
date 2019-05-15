@@ -154,14 +154,13 @@ font-family: cursive;
                 $(".formulario").show();
             }
             function openBox(text) {
-                
+                $("#dark").show()
                 $(".info_box").html(text);
                 $(".info_box").fadeIn(500).delay(3000).fadeOut(500);
+                
                 setTimeout(function(){
-                    let bool = "ola";
-                    console.log(bool)
-                    return bool;
-                },4010);
+                    $("#dark").hide();
+                },4000);
             }
             var submit_error = false;
             function getAnswers() {
@@ -211,7 +210,7 @@ font-family: cursive;
                 var a = $("#nick").val();
                 var b = $("#password").val();
                 if (a == "" || b == "") {
-                    initM("Valores Invalidos","Inicio de Sessão");
+                    openBox("Valores de Log In inválidos, tente novamente.")
                 }else{
                     socket.emit('checkI',{a:a,b:b})
                     
@@ -222,7 +221,7 @@ font-family: cursive;
                 if (data.bool == true) {
                     enter();
                 }else{
-                    initM("Credenciais Incorretas<br>Tente novamente.","Inicio de Sessão")
+                    openBox("Credenciais Incorretas, tente novamente.")
                 }
                 
             })
