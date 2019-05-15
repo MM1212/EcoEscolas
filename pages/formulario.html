@@ -4,7 +4,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Felicidade no Trabalho</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="/socket.io/socket.io.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
     <style>
         body{
@@ -13,6 +14,7 @@
 	        margin: 5vh 0vw 0vh 0vw;
         }
         .login,#regist_form {
+
             position:relative;
             top: 40%;
             text-align: center;
@@ -49,9 +51,38 @@ color: darkslategray;
 font-size: 25px;
 font-family: cursive;
 }
+.info_box {
+    position: absolute;
+    background-color: white;
+    color: black;
+    top:0%;
+    text-align: center;
+    font-size: 1.5vw;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 100%;
+    min-height: 10%;
+    z-index: 2;
+    border-bottom: 5px solid darkslategray;
+    border-radius: 2px;
+}
+#dark {
+	display: none;
+	position: absolute;
+	top:0%;
+	left:0%;
+	width: 100%;
+	min-height: 100%;
+	background-color: rgba(0,0,0,0.50);
+    z-index: 1;
+}
     </style>
     <body>
+        <div class="info_box" style="display:none">
+            <i class="glyphicon glyphicon-remove"></i>
+        </div>
         <br><br>
+        
+        <div id="dark"></div>
         <div class="login_div">
             <span class="login" id="title" style="border:none;background-color:lightblue;text-align:center;color:lightslategray;-webkit-text-stroke: 0.5px rgb(50,50,50);font-family: arial">Inicio de Sessão</span><br>
             <input class="login" id="nick" placeholder="nickname" type="password"><br>
@@ -122,6 +153,16 @@ font-family: cursive;
                 $(".formulario").append("<button id=\"regist_form\" onclick=\"getAnswers()\">Participar</button>");
                 $(".formulario").show();
             }
+            function openBox(text) {
+                
+                $(".info_box").html(text);
+                $(".info_box").fadeIn(500).delay(3000).fadeOut(500);
+                setTimeout(function(){
+                    let bool = "ola";
+                    console.log(bool)
+                    return bool;
+                },4010);
+            }
             var submit_error = false;
             function getAnswers() {
                         var submitdata = [];
@@ -144,15 +185,24 @@ font-family: cursive;
                         if (data.ip == null){data.ip = "0.0.0.0"};
                         if(!submit_error){
                             socket.emit("submit",{data:submitdata,ip:data.ip})
+                            
+                                openBox("Obrigado por participares")
+                                setTimeout(function(){
+                                    location.reload();
+                                },4010);
+                                    
+                            
                         }else{
-                            var errormessg = "<div id=\"errormessg\"style=\"text-align: center; margin-top: 10px; width: 100%\">Preenche todos os campos, por favor</div>";
+                           openBox("Preenche todos os campos, por favor.")
+                            
+                            /*var errormessg = "<div id=\"errormessg\"style=\"text-align: center; margin-top: 10px; width: 100%\">Preenche todos os campos, por favor</div>";
 
                                 if(document.getElementById("errormessg") == null){
                                     $("body").append(errormessg);
                                     $("#errormessg").delay(5000).fadeOut(1000);
                                 }else{
                                     $("#errormessg").fadeIn(100).delay(5000).fadeOut(1000);
-                                }
+                                }*/
                         }
                     });
             }
