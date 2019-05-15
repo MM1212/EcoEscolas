@@ -55,7 +55,6 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     position: absolute;
     background-color: white;
     color: black;
-    bottom:0%;
     text-align: center;
     font-size: 5vw;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -219,7 +218,8 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 $(".formulario").show();
             }
             var infoBoxOpenned = false
-            function openBox(text) {
+            function openBox(text,side) {
+                if (side == null) {side="bottom"}
                 if (!infoBoxOpenned) {
                     var errormessg = "<div id=\"info_box\"></div>";
                     infoBoxOpenned = true;
@@ -229,6 +229,7 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                                 if(document.getElementById("info_box") == null){
                                     $("body").append(errormessg);
                                     $("#info_box").html(text);
+                                    $("#info_box").css(side,"0px");
                                     $("#info_box").delay(3000).fadeOut(500);
                                     setTimeout(function(){
                                     $("#dark").hide();
@@ -236,6 +237,7 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                                     $("body").css("overflow-y","auto");
                                     },3500);
                                 }else{
+                                    $("#info_box").css(side,"0px");
                                     $("#info_box").html(text);
                                     $("#info_box").fadeIn(500).delay(3000).fadeOut(500);
                                     setTimeout(function(){
@@ -271,14 +273,14 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                         if(!submit_error){
                             socket.emit("submit",{data:submitdata,ip:data.ip})
                             
-                                openBox("Obrigado por participares")
+                                openBox("Obrigado por participares","top")
                                 setTimeout(function(){
                                     location.reload();
                                 },4010);
                                     
                             
                         }else{
-                           openBox("Preenche todos os campos, por favor.")
+                           openBox("Preenche todos os campos, por favor.","top")
                             
                             /*var errormessg = "<div id=\"errormessg\"style=\"text-align: center; margin-top: 10px; width: 100%\">Preenche todos os campos, por favor</div>";
 
