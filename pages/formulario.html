@@ -39,7 +39,7 @@
             height: 10vh;
         }
 #title {
-font-size: 50px;
+font-size: 25px;
 color: darkslategray;
 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -114,6 +114,70 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                         {label:"sim",points:10},
                         {label:"nao",points:0}
                     ]
+                },
+                [2] : {
+                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    options:[
+                        {label:"",points:0},
+                        {label:"sim",points:10},
+                        {label:"nao",points:0}
+                    ]
+                },
+                [3] : {
+                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    options:[
+                        {label:"",points:0},
+                        {label:"sim",points:10},
+                        {label:"nao",points:0}
+                    ]
+                },
+                [4] : {
+                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    options:[
+                        {label:"",points:0},
+                        {label:"sim",points:10},
+                        {label:"nao",points:0}
+                    ]
+                },
+                [5] : {
+                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    options:[
+                        {label:"",points:0},
+                        {label:"sim",points:10},
+                        {label:"nao",points:0}
+                    ]
+                },
+                [6] : {
+                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    options:[
+                        {label:"",points:0},
+                        {label:"sim",points:10},
+                        {label:"nao",points:0}
+                    ]
+                },
+                [7] : {
+                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    options:[
+                        {label:"",points:0},
+                        {label:"sim",points:10},
+                        {label:"nao",points:0}
+                    ]
+                },
+                [8] : {
+                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    options:[
+                        {label:"",points:0},
+                        {label:"sim",points:10},
+                        {label:"nao",points:0}
+                    ]
+                },
+                [9] : {
+                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    options:[
+                        {label:"",points:0},
+                        {label:"sim",points:10},
+                        {label:"nao",points:0}
+                    ]
                 }
             }
             function initM (newm,initm) {
@@ -154,25 +218,35 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 $(".formulario").append("<button id=\"regist_form\" onclick=\"getAnswers()\">Participar</button>");
                 $(".formulario").show();
             }
+            var infoBoxOpenned = false
             function openBox(text) {
-                var errormessg = "<div id=\"info_box\"></div>";
+                if (!infoBoxOpenned) {
+                    var errormessg = "<div id=\"info_box\"></div>";
+                    infoBoxOpenned = true;
                 $("#dark").show();
-                
+                window.scrollTo(0,0);
+                $("body").css("overflow-y","hidden");
                                 if(document.getElementById("info_box") == null){
                                     $("body").append(errormessg);
                                     $("#info_box").html(text);
                                     $("#info_box").delay(3000).fadeOut(500);
                                     setTimeout(function(){
                                     $("#dark").hide();
+                                    infoBoxOpenned = false;
+                                    $("body").css("overflow-y","auto");
                                     },3500);
                                 }else{
                                     $("#info_box").html(text);
                                     $("#info_box").fadeIn(500).delay(3000).fadeOut(500);
                                     setTimeout(function(){
                                     $("#dark").hide();
+                                    infoBoxOpenned = false;
+                                    $("body").css("overflow-y","auto");
                                     },4000);
                                 }
                                 
+                }
+                
             }
             var submit_error = false;
             function getAnswers() {
