@@ -39,7 +39,7 @@ const Hook = new webhook.Webhook("https://discordapp.com/api/webhooks/5771278827
  
 
 var port = process.env.PORT || 3000;
-var maxQ = 2
+var maxQ = 11
 for (var i = 0; i < maxQ; i++) {
 	//ALTER TABLE form DROP COLUMN IF EXISTS question_${i};
 	//ALTER TABLE form ADD COLUMN IF NOT EXISTS question_${i} VARCHAR;
@@ -164,7 +164,7 @@ io.on('connection', function (socket) {
 			
 			con.query("INSERT INTO form(ip,points,"+columns+") VALUES('"+ip+"','"+points+"',"+answers+")")
 		}else{
-			Hook.warn("Tentando adicionar respostas para colunas que n existem | tentando adicionar "+indexes.length+" respostas para "+maxQ+" colunas")
+			console.warn("Tentando adicionar respostas para colunas que n existem | tentando adicionar "+indexes.length+" respostas para "+maxQ+" colunas")
 		}
 		
 	}

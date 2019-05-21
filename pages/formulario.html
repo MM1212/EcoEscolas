@@ -74,6 +74,13 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	background-color: rgba(0,0,0,0.50);
     z-index: 1;
 }
+.dot {
+    height: 8px;
+  width: 8px;
+  background-color: darkslategray;
+  border-radius: 50%;
+  display: inline-block;
+}
     </style>
     <body>
         <!--<div class="info_box" style="display:none">
@@ -85,9 +92,9 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         <div class="login_div">
                 <br><br>
             <span class="login" id="title" style="border:none;background-color:lightblue;text-align:center;color:lightslategray;-webkit-text-stroke: 0.5px rgb(50,50,50);font-family: arial">Inicio de Sessão</span><br>
-            <input class="login" id="nick" placeholder="nickname" type="password"><br>
-            <input class="login" id="password"placeholder="palavra-passe" type="password"><br>
-            <button class="login" id="initiate">Entrar</button><br>
+            <!--<input class="login" id="nick" placeholder="nickname" type="password"><br>
+            <input class="login" id="password"placeholder="palavra-passe" type="password"><br>-->
+            <button class="login" id="initiate">Participar</button><br>
         </div>
         <div class="formulario" style="display:none;">
 
@@ -97,85 +104,121 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             var maxq = 0
             table2 = {
                 [0] : {
-                    title:"felicidade no trabalho",
+                    title:"<b>A que estabelecimento pertence?",
                     options:[
-                        {label:"",points:0},
-                        {label:"muito feliz",points:10},
-                        {label:"feliz",points:0},
-                        {label:"menos feliz",points:0},
-                        {label:"infeliz",points:0}
+                        {label:"Colegio Bartolomeu Dias",points:0},
+                        {label:"a",points:0},
+                        {label:"outro",points:0}
                     ]
                 },
                 [1] : {
-                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    title:"<b>Como classificas a tua felicidade enquanto ao:</b> <br>&#9634; Estabelecimento",
                     options:[
-                        {label:"",points:0},
-                        {label:"sim",points:10},
-                        {label:"nao",points:0}
+                        {label:"5",points:0},
+                        {label:"4",points:0},
+                        {label:"3",points:0},
+                        {label:"2",points:0},
+                        {label:"1",points:0},
+                        {label:"0",points:0}
                     ]
                 },
                 [2] : {
-                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    title:"&#9634; Salário",
                     options:[
-                        {label:"",points:0},
-                        {label:"sim",points:10},
-                        {label:"nao",points:0}
+                        {label:"5",points:0},
+                        {label:"4",points:0},
+                        {label:"3",points:0},
+                        {label:"2",points:0},
+                        {label:"1",points:0},
+                        {label:"0",points:0}
                     ]
                 },
                 [3] : {
-                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    title:"&#9634; Horário",
                     options:[
-                        {label:"",points:0},
-                        {label:"sim",points:10},
-                        {label:"nao",points:0}
+                        {label:"5",points:0},
+                        {label:"4",points:0},
+                        {label:"3",points:0},
+                        {label:"2",points:0},
+                        {label:"1",points:0},
+                        {label:"0",points:0}
                     ]
                 },
                 [4] : {
-                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    title:"<b>Relações de trabalho:</b><br>&#9634; Entre Colegas",
                     options:[
-                        {label:"",points:0},
-                        {label:"sim",points:10},
-                        {label:"nao",points:0}
+                        {label:"5",points:0},
+                        {label:"4",points:0},
+                        {label:"3",points:0},
+                        {label:"2",points:0},
+                        {label:"1",points:0},
+                        {label:"0",points:0}
                     ]
                 },
                 [5] : {
-                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    title:"&#9634; Superior-Trabalhador",
                     options:[
-                        {label:"",points:0},
-                        {label:"sim",points:10},
-                        {label:"nao",points:0}
+                        {label:"5",points:0},
+                        {label:"4",points:0},
+                        {label:"3",points:0},
+                        {label:"2",points:0},
+                        {label:"1",points:0},
+                        {label:"0",points:0}
                     ]
                 },
                 [6] : {
-                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    title:"<b>Classifica as motivações de trabalho.",
                     options:[
-                        {label:"",points:0},
-                        {label:"sim",points:10},
-                        {label:"nao",points:0}
+                        {label:"5",points:0},
+                        {label:"4",points:0},
+                        {label:"3",points:0},
+                        {label:"2",points:0},
+                        {label:"1",points:0},
+                        {label:"0",points:0}
                     ]
                 },
                 [7] : {
-                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    title:"<b>Quão eficazes são as estratégias de motivação?",
                     options:[
-                        {label:"",points:0},
-                        {label:"sim",points:10},
-                        {label:"nao",points:0}
+                        {label:"5",points:0},
+                        {label:"4",points:0},
+                        {label:"3",points:0},
+                        {label:"2",points:0},
+                        {label:"1",points:0},
+                        {label:"0",points:0}
                     ]
                 },
                 [8] : {
-                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    title:"<b>Quando acordas sentes-te motivado para ir trabalhar?",
                     options:[
-                        {label:"",points:0},
-                        {label:"sim",points:10},
-                        {label:"nao",points:0}
+                        {label:"5",points:0},
+                        {label:"4",points:0},
+                        {label:"3",points:0},
+                        {label:"2",points:0},
+                        {label:"1",points:0},
+                        {label:"0",points:0}
                     ]
                 },
                 [9] : {
-                    title:"Ha algum metodo de descanço para promover a felicidade?",
+                    title:"<b>Gostas do que estás a fazer/do que fazes?",
                     options:[
-                        {label:"",points:0},
-                        {label:"sim",points:10},
-                        {label:"nao",points:0}
+                        {label:"5",points:0},
+                        {label:"4",points:0},
+                        {label:"3",points:0},
+                        {label:"2",points:0},
+                        {label:"1",points:0},
+                        {label:"0",points:0}
+                    ]
+                },
+                [10] : {
+                    title:"<b>Sentes que as tuas opiniões são ouvidas?",
+                    options:[
+                        {label:"5",points:0},
+                        {label:"4",points:0},
+                        {label:"3",points:0},
+                        {label:"2",points:0},
+                        {label:"1",points:0},
+                        {label:"0",points:0}
                     ]
                 }
             }
@@ -195,26 +238,41 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                             count ++;
                         }
                     }
-                    
+                    //console.log(count)
                 for (var i = 0; i < count; i++) {
                     var options = ""
                     
                     var count2 = 0
-                    for (var o = 0; o < 10; o++) {
-                        if (table2[i].options[o] != null){
+                    //console.log(table2[i].length)
+                    for (var o = 0; o < 6; o++) {
+                        if (table2[i].options[o]){
                             count2 ++;
+                            
                         }
                     }
-                    maxq = count2;
+                    
+                    maxq = count;
                     for (var k = 0; k < count2; k++){
-                        options = options + "<option value="+k+"_"+table2[i].options[k].points+">"+table2[i].options[k].label+"</option>"
+                        if (k == 0) {
+                            options = options + "<option value=\"null\"></option>"
+                            options = options + "<option value="+k+"_"+table2[i].options[k].points+">"+table2[i].options[k].label+"</option>"
+                        }else{
+                            options = options + "<option value="+k+"_"+table2[i].options[k].points+">"+table2[i].options[k].label+"</option>"
+                        }
+                        
                     }
                    
                     var txt = "<p id=\"title\" >"+table2[i].title+"</p><select class=\"questions\" id=\"question_"+i+"\">"+options+"</select><br><br>"
+                    
                     //console.log(txt);
                     $(".formulario").append(txt);
+            
+                        $("#question_"+i).change(function(){
+                            $(this).css("border-color","lightslategray");
+                        })
+            
                 }
-                $(".formulario").append("<button id=\"regist_form\" onclick=\"getAnswers()\">Participar</button>");
+                $(".formulario").append("<button id=\"regist_form\" onclick=\"getAnswers()\">Submeter</button>");
                 $(".formulario").show();
             }
             var infoBoxOpenned = false
@@ -255,15 +313,22 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                         var submitdata = [];
                         var submit_error = false;
                         
-                    for(i=0; i < maxq-1; i++){
+                    for(i=0; i < maxq; i++){
                         var index = $("#question_"+i).val();
-                        if(index.split("_")[0]==0){
+                        var label = $("#question_"+i+" > option[value='"+index+"']").html();
+                        console.log("#question_"+i,index);
+                        if(index =="null"){
                             submit_error = true;
                             submitdata = [];
+                            for(k=0; k < maxq; k++){
+                                if($("#question_"+k).val() =="null"){
+                                $("#question_"+k).css("border-color","rgba(225,0,0,0.5)");
+                                }
+                            }
                             break;
                         }
                         
-                        submitdata[i] = {index:index.split("_")[0],points:index.split("_")[1]}
+                        submitdata[i] = {index:label,points:index.split("_")[1]}
                         
                     }
                     var count = 0
@@ -295,16 +360,9 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             }
             const socket = io();
             $("#initiate").click(function(){
-                var a = $("#nick").val();
-                var b = $("#password").val();
-                if (a == "" || b == "") {
-                    openBox("Valores de Log In inválidos, tente novamente.")
-                }else{
-                    socket.emit('checkI',{a:a,b:b})
-                    
-                    
-                }
+                enter();
             })
+            
             socket.on('checkedI',function(data){
                 if (data.bool == true) {
                     enter();
@@ -317,6 +375,7 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 $.getJSON('https://ipapi.co/json/', function(data) {
                     socket.emit("newCInfo",{data:data});
                 });
+                
             };
         </script>
     </body>
