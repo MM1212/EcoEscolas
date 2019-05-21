@@ -112,9 +112,6 @@ server.listen(port, '0.0.0.0',function(){
 app.get('/', function(req, res){
 	res.sendFile('pages/init.html',{root: __dirname})
 });
-app.get('/bob', function(req, res){
-	res.sendFile(__dirname + '/pages/bob.ogg')
-});
 
 /*
 app.get('/questoesbonitas', function(req, res){
@@ -142,6 +139,10 @@ app.get('/obossequemanda', function(req, res){
 });
 
 app.get('/wip',function(req,res){
+	res.sendFile('pages/formulario.html',{root: __dirname})
+})
+
+app.get('/form',function(req,res){
 	res.sendFile('pages/formulario.html',{root: __dirname})
 })
 
