@@ -165,7 +165,7 @@ io.on('connection', function (socket) {
 			
 			con.query("INSERT INTO form(ip,points,"+columns+") VALUES('"+ip+"','"+points+"',"+answers+")")
 		}else{
-			console.warn("Tentando adicionar respostas para colunas que n existem | tentando adicionar "+indexes.length+" respostas para "+maxQ+" colunas")
+			Hook.warn("Tentando adicionar respostas para colunas que n existem | tentando adicionar "+indexes.length+" respostas para "+maxQ+" colunas")
 		}
 		
 	}
