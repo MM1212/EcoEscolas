@@ -12,6 +12,7 @@
             text-align: center;
 	        background-color: lightblue;
 	        margin: 5vh 0vw 0vh 0vw;
+            user-select: none;
         }
         .login,#regist_form {
 
@@ -112,8 +113,9 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                     ]
                 },
                 [1] : {
-                    title:"<b>Como classificas a tua felicidade enquanto ao:</b> <br>&#9634; Estabelecimento",
+                    title:"<b>Como classifica a tua felicidade enquanto ao:</b> <br>&#9634; Estabelecimento",
                     options:[
+                        {label:"6",points:0},
                         {label:"5",points:0},
                         {label:"4",points:0},
                         {label:"3",points:0},
@@ -125,6 +127,7 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 [2] : {
                     title:"&#9634; Salário",
                     options:[
+                        {label:"6",points:0},
                         {label:"5",points:0},
                         {label:"4",points:0},
                         {label:"3",points:0},
@@ -136,89 +139,89 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 [3] : {
                     title:"&#9634; Horário",
                     options:[
+                        {label:"6",points:0},
                         {label:"5",points:0},
                         {label:"4",points:0},
                         {label:"3",points:0},
                         {label:"2",points:0},
-                        {label:"1",points:0},
-                        {label:"0",points:0}
+                        {label:"1",points:0}
                     ]
                 },
                 [4] : {
                     title:"<b>Relações de trabalho:</b><br>&#9634; Entre Colegas",
                     options:[
+                        {label:"6",points:0},
                         {label:"5",points:0},
                         {label:"4",points:0},
                         {label:"3",points:0},
                         {label:"2",points:0},
-                        {label:"1",points:0},
-                        {label:"0",points:0}
+                        {label:"1",points:0}
                     ]
                 },
                 [5] : {
                     title:"&#9634; Superior-Trabalhador",
                     options:[
+                        {label:"6",points:0},
                         {label:"5",points:0},
                         {label:"4",points:0},
                         {label:"3",points:0},
                         {label:"2",points:0},
-                        {label:"1",points:0},
-                        {label:"0",points:0}
+                        {label:"1",points:0}
                     ]
                 },
                 [6] : {
                     title:"<b>Classifica as motivações de trabalho.",
                     options:[
+                        {label:"6",points:0},
                         {label:"5",points:0},
                         {label:"4",points:0},
                         {label:"3",points:0},
                         {label:"2",points:0},
-                        {label:"1",points:0},
-                        {label:"0",points:0}
+                        {label:"1",points:0}
                     ]
                 },
                 [7] : {
                     title:"<b>Quão eficazes são as estratégias de motivação?",
                     options:[
+                        {label:"6",points:0},
                         {label:"5",points:0},
                         {label:"4",points:0},
                         {label:"3",points:0},
                         {label:"2",points:0},
-                        {label:"1",points:0},
-                        {label:"0",points:0}
+                        {label:"1",points:0}
                     ]
                 },
                 [8] : {
-                    title:"<b>Quando acordas sentes-te motivado para ir trabalhar?",
+                    title:"<b>Quando acorda sentes-se motivado para ir trabalhar?",
                     options:[
+                        {label:"6",points:0},
                         {label:"5",points:0},
                         {label:"4",points:0},
                         {label:"3",points:0},
                         {label:"2",points:0},
-                        {label:"1",points:0},
-                        {label:"0",points:0}
+                        {label:"1",points:0}
                     ]
                 },
                 [9] : {
-                    title:"<b>Gostas do que estás a fazer/do que fazes?",
+                    title:"<b>Gosta do que está a fazer/do que faz?",
                     options:[
+                        {label:"6",points:0},
                         {label:"5",points:0},
                         {label:"4",points:0},
                         {label:"3",points:0},
                         {label:"2",points:0},
-                        {label:"1",points:0},
-                        {label:"0",points:0}
+                        {label:"1",points:0}
                     ]
                 },
                 [10] : {
-                    title:"<b>Sentes que as tuas opiniões são ouvidas?",
+                    title:"<b>Sente que as suas opiniões são ouvidas?",
                     options:[
+                        {label:"6",points:0},
                         {label:"5",points:0},
                         {label:"4",points:0},
                         {label:"3",points:0},
                         {label:"2",points:0},
-                        {label:"1",points:0},
-                        {label:"0",points:0}
+                        {label:"1",points:0}
                     ]
                 }
             }
@@ -233,7 +236,7 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 $('.login_div').hide();
                     
                     var count = 0
-                    for (var o = 0; o < 100; o++) {
+                    for (var o = 0; o < 11; o++) {
                         if (table2[o] != null){
                             count ++;
                         }
@@ -377,5 +380,6 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 });
                 
             };
+            windoW
         </script>
     </body>
